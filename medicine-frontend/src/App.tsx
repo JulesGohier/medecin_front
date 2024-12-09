@@ -1,17 +1,14 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {Button} from "@/components/ui/button.tsx";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div className="bg-amber-600">
-          test
-      </div>
-    </>
+      <Button onClick={() => {setCount(count + 1)}}>
+          {count + 1} test
+      </Button>
   )
 }
 
