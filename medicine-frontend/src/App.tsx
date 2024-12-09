@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import './App.css'
 import {Button} from "@/components/ui/button.tsx";
+import { Camera } from 'lucide-react';
+
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
       <Button onClick={() => {setCount(count + 1)}}>
-          {count + 1} test
+          <Camera /> {count + 1}
       </Button>
   )
 }

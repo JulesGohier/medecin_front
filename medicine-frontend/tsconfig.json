@@ -11,7 +11,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "lucide-react": ["node_modules/lucide-react"],
       "@/*": ["./src/*"]
-    }
+    },
+
   }
 }
