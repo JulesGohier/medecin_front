@@ -9,7 +9,7 @@ function App() {
 
   return (
       <Button onClick={() => {setCount(count + 1)}}>
-          <Camera /> {count + 1}
+          <Camera /> {count + 1} testdedzd
       </Button>
   )
 }
