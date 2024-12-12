@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            rm -r /var/www/medecine.brilliant-lab.fr/*
+            rm -rf /var/www/medecine.brilliant-lab.fr/*
 
       - name: Copy files to VPS
         uses: appleboy/scp-action@v0.1.7
@@ -40,4 +40,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             mv /var/www/medecine.brilliant-lab.fr/medicine-frontend/dist/* /var/www/medecine.brilliant-lab.fr/
-            rm -r /var/www/medecine.brilliant-lab.fr/medicine-frontend/
+            rm -rf /var/www/medecine.brilliant-lab.fr/medicine-frontend/
