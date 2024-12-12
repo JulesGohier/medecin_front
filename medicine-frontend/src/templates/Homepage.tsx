@@ -1,17 +1,12 @@
-import {SidebarLayout} from "@/components/features/layout/SidebarLayout.tsx";
-import {Button} from "@/components/ui/button.tsx";
-
+import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
+import { Button } from "@/components/ui/button.tsx";
 
 const Homepage = () => {
-    return (
-        <SidebarLayout>
-           <Button
-               variant={"themed"}
-           >
-               Patient
-           </Button>
-        </SidebarLayout>
-    );
+  return (
+    <DashboardWrapper>
+      <Button variant={"themed"}>Patient</Button>
+    </DashboardWrapper>
+  );
 };
 
 export default Homepage;
