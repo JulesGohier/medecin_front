@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar.tsx";
-import { LayoutDashboard } from "lucide-react";
+import {Calendar, CircleHelp, LayoutDashboard, Settings, UsersRound} from "lucide-react";
 
 export const SidebarComponent = () => {
   const items = [
@@ -21,10 +21,38 @@ export const SidebarComponent = () => {
     },
   ];
 
+  const medecine_items = [
+    {
+      title: "Patients",
+      url: "/patients",
+      icon: UsersRound,
+    },
+    {
+      title: "Rendez-vous",
+      url: "/appointments",
+      icon: Calendar,
+    },
+
+  ]
+
+  const tools = [
+    {
+      title: "Paramètres",
+      url: "/settings",
+      icon: Settings,
+    },
+    {
+      title: "Assistance",
+      url: "/help",
+      icon: CircleHelp,
+    },
+
+  ]
+
   return (
-    <Sidebar>
+    <Sidebar variant={"sidebar"} >
       <SidebarHeader>
-        <div className={"flex items-center py-2 px-2"}>
+        <div className={"flex items-center py-2 mb-16"}>
           <img
             width={75}
             height={75}
@@ -43,9 +71,12 @@ export const SidebarComponent = () => {
             Principal
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="py-1 px-1">
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem
+                    key={item.title}
+                    className={"py-3"}
+                >
                   <SidebarMenuButton asChild>
                     <SidebarLink
                       href={item.url}
@@ -54,6 +85,41 @@ export const SidebarComponent = () => {
                     />
                   </SidebarMenuButton>
                 </SidebarMenuItem>
+              ))}
+              {medecine_items.map((item) => (
+                  <SidebarMenuItem
+                      key={item.title}
+                      className={"py-3"}
+                  >
+                    <SidebarMenuButton asChild>
+                      <SidebarLink
+                          href={item.url}
+                          icon={item.icon}
+                          label={item.title}
+                      />
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+          <SidebarGroupLabel className={"uppercase text-[#929DAC] text-lg mt-16"}>
+            Outils
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {tools.map((item) => (
+                  <SidebarMenuItem
+                      key={item.title}
+                      className={"py-3"}
+                  >
+                    <SidebarMenuButton asChild>
+                      <SidebarLink
+                          href={item.url}
+                          icon={item.icon}
+                          label={item.title}
+                          />
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>

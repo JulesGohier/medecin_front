@@ -5,12 +5,11 @@ import {Button} from "@/components/ui/button.tsx";
 const Homepage = () => {
     return (
         <SidebarLayout>
-           <Button
-               variant={"themed"}
-           >
-               Button
-           </Button>
-            Commit de test
+            <Button
+                variant={"themed"}
+            >
+                Button
+            </Button>
         </SidebarLayout>
     );
 };
