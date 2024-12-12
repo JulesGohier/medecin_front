@@ -8,7 +8,7 @@ const Homepage = () => {
            <Button
                variant={"themed"}
            >
-               Button
+               Patient
            </Button>
         </SidebarLayout>
     );
