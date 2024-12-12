@@ -1,6 +1,6 @@
 import React from "react";
 import { Bell } from "lucide-react";
-import waveLogo from '@/assets/icons/waving-hand.svg';
+import waveLogo from '@/assets/icons/waving-hand.png';
 
 const Header = () => {
     return (
