@@ -4,7 +4,7 @@ import PatientsCard from "@/medecin/components/cards/PatientsCard.tsx";
 import AppointmentsCard from "@/medecin/components/cards/AppointmentsCard.tsx";
 
 
-const Homepage = () => {
+const MedecinDashboard = () => {
     return (
         <DashboardWrapper>
             <div className={"mt-12"}>
@@ -21,4 +21,4 @@ const Homepage = () => {
     );
 };
 
-export default Homepage;
+export default MedecinDashboard;
