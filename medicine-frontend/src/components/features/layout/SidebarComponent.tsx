@@ -50,7 +50,7 @@ export const SidebarComponent = () => {
   ]
 
   return (
-    <Sidebar variant={"sidebar"} >
+    <Sidebar variant={"sidebar"}>
       <SidebarHeader>
         <div className={"flex items-center py-2 mb-16"}>
           <img

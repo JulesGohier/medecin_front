@@ -1,12 +1,13 @@
 import React from 'react';
-import {SidebarLayout} from "@/components/features/layout/SidebarLayout.tsx";
-import {Button} from "@/components/ui/button.tsx";
+import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
 
 const MedecinPatients = () => {
     return (
-        <SidebarLayout>
-            Medecin Patients
-        </SidebarLayout>
+        <DashboardWrapper>
+            <div className={"mt-12"}>
+                Medecin Patients
+            </div>
+        </DashboardWrapper>
     );
 };
 

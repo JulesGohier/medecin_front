@@ -1,12 +1,14 @@
-import {SidebarLayout} from "@/components/features/layout/SidebarLayout.tsx";
-import {Button} from "@/components/ui/button.tsx";
+import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
+import React from "react";
 
 
 const Homepage = () => {
     return (
-        <SidebarLayout>
-            Medecin Dashboard
-        </SidebarLayout>
+        <DashboardWrapper>
+            <div className={"mt-12"}>
+                Medecin Dashboard
+            </div>
+        </DashboardWrapper>
     );
 };
 
