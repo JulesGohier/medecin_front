@@ -1,13 +1,13 @@
+import React from 'react';
 import {SidebarLayout} from "@/components/features/layout/SidebarLayout.tsx";
 import {Button} from "@/components/ui/button.tsx";
 
-
-const Homepage = () => {
+const MedecinPatients = () => {
     return (
         <SidebarLayout>
-            Medecin Dashboard
+            Medecin Patients
         </SidebarLayout>
     );
 };
 
-export default Homepage;
+export default MedecinPatients;
