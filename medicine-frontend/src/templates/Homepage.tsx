@@ -4,13 +4,7 @@ import {Button} from "@/components/ui/button.tsx";
 
 const Homepage = () => {
     return (
-        <SidebarLayout>
-           <Button
-               variant={"themed"}
-           >
-               Button
-           </Button>
-        </SidebarLayout>
+        <h1></h1>>
     );
 };
 
