@@ -13,6 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Execute commands on VPS
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            rm -r /var/www/medecine.brilliant-lab.fr/*
+
       - name: Copy files to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -21,3 +30,14 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: ./medicine-frontend/dist/
           target: /var/www/medecine.brilliant-lab.fr/
+          debug: true
+
+      - name: Execute commands on VPS
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            mv /var/www/medecine.brilliant-lab.fr/medicine-frontend/dist/* /var/www/medecine.brilliant-lab.fr/
+            rm -r /var/www/medecine.brilliant-lab.fr/medicine-frontend/
