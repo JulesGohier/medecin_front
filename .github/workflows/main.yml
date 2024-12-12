@@ -41,3 +41,4 @@ jobs:
           script: |
             mv /var/www/medecine.brilliant-lab.fr/medicine-frontend/dist/* /var/www/medecine.brilliant-lab.fr/
             rm -rf /var/www/medecine.brilliant-lab.fr/medicine-frontend/
+
