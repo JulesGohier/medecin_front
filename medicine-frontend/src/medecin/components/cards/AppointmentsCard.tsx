@@ -5,21 +5,21 @@ import {Link} from "react-router";
 
 const AppointmentsCard = () => {
     return (
-        <Card className="w-1/3 mr-96 border-2 border-gray-200">
+        <Card className="w-[470px] mr-6 border-2 border-gray-200">
             <CardHeader>
-                <CardTitle className="text-right w-full">+3%</CardTitle>
+                <CardTitle className="text-right w-full text-sm">+3%</CardTitle>
             </CardHeader>
-            <CardContent className="py-11 flex flex-row items-center px-20 -mt-12">
-                <CalendarCheck size={60} className={"text-gray-400 p-2 border-2 border-gray-200 rounded-lg"} />
-                <div className={"flex flex-col ml-44"}>
-                    <h2 className={"text-gray-400 text-3xl"}>Rendez-vous</h2>
-                    <span className={"text-3xl text-black font-bold"}>27</span>
+            <CardContent className="py-6 flex flex-row items-center px-12 -mt-8">
+                <CalendarCheck size={40} className={"text-gray-400 p-1 border-2 border-gray-200 rounded-lg"} />
+                <div className={"flex flex-col ml-32"}>
+                    <h2 className={"text-gray-400 text-xl"}>Rendez-Vous</h2>
+                    <span className={"text-xl text-black font-bold"}>300</span>
                 </div>
             </CardContent>
-            <CardFooter className="bg-[#FBFBFB] py-5 border-2 border-gray-200 rounded-b-lg">
+            <CardFooter className="bg-[#FBFBFB] py-3 border-2 border-gray-200 rounded-b-lg">
                 <div className="flex flex-row items-center">
-                    <Link to={"/appointments"} className="text-red-800">Voir les détails</Link>
-                    <ArrowRight size={14} className="text-red-800 ml-6" />
+                    <Link to={"/patients"} className="text-red-800 text-sm">Voir les détails</Link>
+                    <ArrowRight size={12} className="text-red-800 ml-4" />
                 </div>
             </CardFooter>
         </Card>
