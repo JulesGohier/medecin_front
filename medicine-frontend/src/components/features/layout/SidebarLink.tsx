@@ -1,5 +1,6 @@
-import React from 'react';
-import {Icon, LucideIcon} from "lucide-react";
+import {
+    LucideIcon
+} from "lucide-react";
 import {Link} from "react-router";
 
 interface SidebarLinkProps {
@@ -11,11 +12,11 @@ interface SidebarLinkProps {
 export const SidebarLink = ({ href, icon: Icon, label }: SidebarLinkProps) => {
 
     return (
-        <Link to={href} className={"text-[12px] group"}>
-            <div className="cursor-pointer flex items-center rounded-lg justify-start px-4 py-2 hover:bg-gray-100 gap-3 transition-colors">
-                <Icon className={"h-5 w-5 transition-colors text-gray-700 group-hover:text-red-600"} />
+        <Link to={href} className={"text-xl"}>
+            <div className="cursor-pointer flex items-center  rounded-lg justify-start px-4 py-2 hover:bg-gray-100 hover:border-gray-700 gap-3 transition-colors">
+                <Icon className={"h-5 w-5 transition-colors text-gray-700"} />
                 <span
-                    className="block font-medium transition-colors text-gray-700 group-hover:text-red-600"
+                    className="block font-medium transition-colors text-gray-700"
                 >
                     {label}
                 </span>
