@@ -10,10 +10,10 @@ const AppointmentsCard = () => {
                 <CardTitle className="text-right w-full text-sm">+3%</CardTitle>
             </CardHeader>
             <CardContent className="py-6 flex flex-row items-center px-12 -mt-8">
-                <CalendarCheck size={40} className={"text-gray-400 p-1 border-2 border-gray-200 rounded-lg"} />
+                <CalendarCheck size={50} className={"text-gray-400 p-1 border-2 border-gray-200 rounded-lg"} />
                 <div className={"flex flex-col ml-32"}>
-                    <h2 className={"text-gray-400 text-xl"}>Rendez-Vous</h2>
-                    <span className={"text-xl text-black font-bold"}>300</span>
+                    <h2 className={"text-gray-400 text-2xl"}>Rendez-Vous</h2>
+                    <span className={"text-2xl text-black font-bold"}>300</span>
                 </div>
             </CardContent>
             <CardFooter className="bg-[#FBFBFB] py-3 border-2 border-gray-200 rounded-b-lg">

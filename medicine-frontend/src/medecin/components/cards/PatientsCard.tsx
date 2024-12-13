@@ -12,10 +12,10 @@ const PatientsCard = () => {
                 <CardTitle className="text-right w-full text-sm">+3%</CardTitle>
             </CardHeader>
             <CardContent className="py-6 flex flex-row items-center px-12 -mt-8">
-                <User size={40} className={"text-gray-400 p-1 border-2 border-gray-200 rounded-lg"} />
+                <User size={50} className={"text-gray-400 p-1 border-2 border-gray-200 rounded-lg"} />
                 <div className={"flex flex-col ml-32"}>
-                    <h2 className={"text-gray-400 text-xl"}>Patients</h2>
-                    <span className={"text-xl text-black font-bold"}>296</span>
+                    <h2 className={"text-gray-400 text-2xl"}>Patients</h2>
+                    <span className={"text-2xl text-black font-bold"}>296</span>
                 </div>
             </CardContent>
             <CardFooter className="bg-[#FBFBFB] py-3 border-2 border-gray-200 rounded-b-lg">
