@@ -1,12 +1,12 @@
 import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
 import { Button } from "@/components/ui/button.tsx";
 
-const Homepage = () => {
+const PatientDashboard = () => {
   return (
     <DashboardWrapper>
-      <Button variant={"themed"}>Patient</Button>
+      <Button variant={"themed"}>Dashboard</Button>
     </DashboardWrapper>
   );
 };
 
-export default Homepage;
+export default PatientDashboard;
