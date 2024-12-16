@@ -40,8 +40,7 @@ const MedecinDashboard = () => {
                         )
                     })}
                 </div>
-                <div className={"flex flex-row mt-5 "}>
-                    <PatientsAreaChart/>
+                <div className={"mt-5"}>
                     <PatientsAreaChart/>
                 </div>
             </div>
