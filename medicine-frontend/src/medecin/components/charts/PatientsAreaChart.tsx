@@ -40,19 +40,20 @@ const chartConfig = {
 
 export const PatientsAreaChart = () => {
     return (
-        <Card className="w-1/2 mx-auto mr-0 md:mr-6 border-2 border-gray-200">
+        <Card className="w-1/2 block mx-auto mr-0 md:mr-6 border-2 border-gray-200 max-h-[900px]">
             <CardHeader>
                 <CardTitle>Statistiques Patients</CardTitle>
                 <CardDescription>Janvier - Décembre 2024</CardDescription>
             </CardHeader>
             <CardContent>
-                <ChartContainer config={chartConfig}>
+                <ChartContainer config={chartConfig} className="max-h-[700px] flex flex-col justify-center items-center w-full">
                     <BarChart
                         accessibilityLayer
                         data={chartData}
                         margin={{
                             top: 20,
                         }}
+
                     >
                         <CartesianGrid vertical={false} />
                         <XAxis

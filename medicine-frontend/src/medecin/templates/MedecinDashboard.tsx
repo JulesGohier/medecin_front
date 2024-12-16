@@ -43,7 +43,7 @@ const MedecinDashboard = () => {
                     })}
                 </div>
 
-                <div className={"flex w-full items-center mt-10 p-3 mr-8"}>
+                <div className={"flex flex-row mt-5 "}>
                     <PatientsAreaChart/>
                     <PatientsAreaChart/>
                 </div>
