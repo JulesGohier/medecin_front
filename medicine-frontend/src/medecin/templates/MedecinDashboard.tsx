@@ -1,14 +1,9 @@
-import StatCard, {StatCardProps} from "@/medecin/components/cards/StatsCard.tsx";
-import {useQuery} from "@tanstack/react-query";
-import {CalendarCheck, Users} from "lucide-react";
 import React from "react";
+import StatCard, {StatCardProps} from "@/medecin/components/cards/StatsCard.tsx";
 import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
 import {PatientsAreaChart} from "@/medecin/components/charts/PatientsAreaChart.tsx";
+import {CalendarCheck, Users} from "lucide-react";
 
-const fetchPosts = async () => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-    return response.json();
-};
 
 const MedecinDashboard = () => {
     const statsCards: StatCardProps[] = [
