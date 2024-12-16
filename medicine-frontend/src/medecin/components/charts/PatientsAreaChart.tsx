@@ -45,7 +45,7 @@ export const PatientsAreaChart = () => {
                 <CardTitle>Statistiques Patients</CardTitle>
                 <CardDescription>Janvier - Décembre 2024</CardDescription>
             </CardHeader>
-            <CardContent className={"py-6 flex flex-col sm:flex-row items-center px-6 sm:px-12 -mt-4"}>
+            <CardContent>
                 <ChartContainer config={chartConfig}>
                     <BarChart
                         accessibilityLayer
