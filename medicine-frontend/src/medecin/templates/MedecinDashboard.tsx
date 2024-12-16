@@ -28,7 +28,7 @@ const MedecinDashboard = () => {
     return (
         <DashboardWrapper>
             <div className={"mt-12 w-full"}>
-                <div className={"flex flex-col text-2xl text-black"}>
+                <div className={"flex flex-col text-2xl text-black mb-14"}>
                     <h2 className={"font-semibold "}>Tableau de Bord</h2>
                     <p className={"font-medium"}>Vos statistiques globales de vos données.</p>
                 </div>
@@ -43,7 +43,8 @@ const MedecinDashboard = () => {
                     })}
                 </div>
 
-                <div className={"flex w-full items-center mt-3"}>
+                <div className={"flex w-full items-center mt-10 p-3 mr-8"}>
+                    <PatientsAreaChart/>
                     <PatientsAreaChart/>
                 </div>
             </div>

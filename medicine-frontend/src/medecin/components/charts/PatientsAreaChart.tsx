@@ -40,12 +40,12 @@ const chartConfig = {
 
 export const PatientsAreaChart = () => {
     return (
-        <Card className="border-2 w-[450px]">
+        <Card className="w-1/2 mx-auto mr-0 md:mr-6 border-2 border-gray-200">
             <CardHeader>
                 <CardTitle>Statistiques Patients</CardTitle>
                 <CardDescription>Janvier - Décembre 2024</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className={"py-6 flex flex-col sm:flex-row items-center px-6 sm:px-12 -mt-4"}>
                 <ChartContainer config={chartConfig}>
                     <BarChart
                         accessibilityLayer
