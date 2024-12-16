@@ -35,7 +35,7 @@ const MedecinDashboard = () => {
                     <h2 className={"text-xl font-semibold"}>Tableau de Bord</h2>
                     <p className={"text-lg font-medium"}>Vos statistiques globales de vos données.</p>
                 </div>
-                <div className={"flex flex-row mt-5"}>
+                <div className={"flex flex-row mt-2"}>
                     {statsCards.map((item, key) => {
                         return (
                             <StatCard
