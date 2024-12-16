@@ -1,13 +1,11 @@
 "use client"
 
-import { TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts"
 
 import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -42,7 +40,7 @@ const chartConfig = {
 
 export const PatientsAreaChart = () => {
     return (
-        <Card className="border-2 w-1/2">
+        <Card className="border-2 w-[450px]">
             <CardHeader>
                 <CardTitle>Statistiques Patients</CardTitle>
                 <CardDescription>Janvier - Décembre 2024</CardDescription>
