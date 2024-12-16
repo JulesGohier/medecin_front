@@ -1,7 +1,7 @@
 import React from "react";
 import { Separator } from "@/components/ui/separator.tsx";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import {ArrowDown, ArrowRight, ArrowUp, LucideIcon} from "lucide-react";
+import { ArrowRight, LucideIcon} from "lucide-react";
 import { Link } from "react-router";
 
 export type StatCardProps = {

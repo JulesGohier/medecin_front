@@ -1,9 +1,14 @@
 import StatCard, {StatCardProps} from "@/medecin/components/cards/StatsCard.tsx";
+import {useQuery} from "@tanstack/react-query";
 import {CalendarCheck, Users} from "lucide-react";
 import React from "react";
 import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
 import {PatientsAreaChart} from "@/medecin/components/charts/PatientsAreaChart.tsx";
 
+const fetchPosts = async () => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    return response.json();
+};
 
 const MedecinDashboard = () => {
     const statsCards: StatCardProps[] = [
@@ -40,7 +45,6 @@ const MedecinDashboard = () => {
                         )
                     })}
                 </div>
-
                 <div className={"flex flex-row mt-5 "}>
                     <PatientsAreaChart/>
                     <PatientsAreaChart/>
@@ -48,6 +52,6 @@ const MedecinDashboard = () => {
             </div>
         </DashboardWrapper>
     );
-};
-
-export default MedecinDashboard;
+    }
+    
+    export default MedecinDashboard;
