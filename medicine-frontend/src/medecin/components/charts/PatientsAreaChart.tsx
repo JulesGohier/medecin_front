@@ -78,5 +78,5 @@ export const PatientsAreaChart = () => {
                 </ChartContainer>
             </CardContent>
         </Card>
-    )
+    );
 }
