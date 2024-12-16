@@ -19,9 +19,7 @@ const MedecinDashboard = () => {
                 </div>
 
                 <div className={"flex w-full items-center mt-3"}>
-                    <div className={"w-[965px] h-[300px]"}>
-                        <PatientsAreaChart/>
-                    </div>
+                    <PatientsAreaChart/>
                 </div>
             </div>
         </DashboardWrapper>

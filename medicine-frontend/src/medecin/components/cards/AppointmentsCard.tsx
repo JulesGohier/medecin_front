@@ -1,3 +1,4 @@
+import {Separator} from "@/components/ui/separator.tsx";
 import React from 'react';
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {ArrowRight, CalendarCheck, User} from "lucide-react";
@@ -16,7 +17,8 @@ const AppointmentsCard = () => {
                     <span className={"text-2xl text-black font-bold"}>300</span>
                 </div>
             </CardContent>
-            <CardFooter className="bg-[#FBFBFB] py-3 border-2 border-gray-200 rounded-b-lg">
+            <Separator className="border bg-gray-200" />
+            <CardFooter className="bg-[#FBFBFB] py-4 rounded-b-lg">
                 <div className="flex flex-row items-center">
                     <Link to={"/patients"} className="text-red-800 text-sm">Voir les détails</Link>
                     <ArrowRight size={12} className="text-red-800 ml-4" />
