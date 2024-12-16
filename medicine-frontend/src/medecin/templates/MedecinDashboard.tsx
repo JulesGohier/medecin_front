@@ -1,6 +1,6 @@
+import PatientsCard from "@/medecin/components/cards/PatientsCard.tsx";
 import React from "react";
 import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
-import PatientsCard from "@/medecin/components/cards/PatientsCard.tsx";
 import AppointmentsCard from "@/medecin/components/cards/AppointmentsCard.tsx";
 import {PatientsAreaChart} from "@/medecin/components/charts/PatientsAreaChart.tsx";
 

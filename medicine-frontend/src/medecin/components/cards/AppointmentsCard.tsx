@@ -9,7 +9,7 @@ const AppointmentsCard = ({ className }: { className?: string }) => {
     return (
         <Card
             className={cn(
-                "w-full sm:w-[80%] md:w-[60%] lg:w-[470px] xl:w-[500px] mx-auto mr-0 md:mr-6 border-2 border-gray-200",
+                "w-1/2 mx-auto mr-0 md:mr-6 border-2 border-gray-200",
                 className
             )}
         >
