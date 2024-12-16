@@ -12,7 +12,6 @@ const MedecinDashboard = () => {
             title: "Vos Patients",
             value: 312,
             percentage: "+10",
-            linkText: "Voir les détails",
             linkTo: "/patients"
         },
         {
@@ -20,7 +19,6 @@ const MedecinDashboard = () => {
             title: "Rendez-Vous",
             value: 3,
             percentage: "+10",
-            linkText: "Voir les détails",
             linkTo: "/appointments"
         },
     ]
@@ -29,8 +27,8 @@ const MedecinDashboard = () => {
         <DashboardWrapper>
             <div className={"mt-2 w-full"}>
                 <div className={"flex flex-col text-2xl text-black"}>
-                    <h2 className={"font-semibold "}>Tableau de Bord</h2>
-                    <p className={"font-medium"}>Vos statistiques globales de vos données.</p>
+                    <h2 className={"text-xl font-semibold"}>Tableau de Bord</h2>
+                    <p className={"text-lg font-medium"}>Vos statistiques globales de vos données.</p>
                 </div>
                 <div className={"flex flex-row mt-5"}>
                     {statsCards.map((item, key) => {

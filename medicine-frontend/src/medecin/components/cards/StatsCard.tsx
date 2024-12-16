@@ -1,7 +1,7 @@
 import React from "react";
 import { Separator } from "@/components/ui/separator.tsx";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { LucideIcon } from "lucide-react";
+import {ArrowDown, ArrowRight, ArrowUp, LucideIcon} from "lucide-react";
 import { Link } from "react-router";
 
 export type StatCardProps = {
@@ -13,7 +13,7 @@ export type StatCardProps = {
     linkTo: string;
 };
 
-const StatCard = ({icon: Icon, title, value, percentage, linkText, linkTo}: StatCardProps) => {
+const StatCard = ({icon: Icon, title, value, percentage, linkTo}: StatCardProps) => {
     return (
         <Card className="w-1/2 mx-auto mr-0 md:mr-6 border-2 border-gray-200">
             <CardHeader>
@@ -33,9 +33,9 @@ const StatCard = ({icon: Icon, title, value, percentage, linkText, linkTo}: Stat
             <CardFooter className="bg-[#FBFBFB] py-4 rounded-b-lg">
                 <div className="flex flex-row justify-between sm:justify-start items-center">
                     <Link to={linkTo} className="text-red-800 text-sm">
-                        {linkText}
+                        Voir les détails
                     </Link>
-                    <Icon size={12} className="text-red-800 ml-4" />
+                    <ArrowRight size={12} className="text-red-800 ml-4" />
                 </div>
             </CardFooter>
         </Card>
