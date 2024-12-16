@@ -53,7 +53,6 @@ export const PatientsAreaChart = () => {
                         margin={{
                             top: 20,
                         }}
-
                     >
                         <CartesianGrid vertical={false} />
                         <XAxis
