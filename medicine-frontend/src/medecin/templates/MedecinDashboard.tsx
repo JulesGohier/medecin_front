@@ -33,15 +33,13 @@ const MedecinDashboard = () => {
                     <p className={"font-medium"}>Vos statistiques globales de vos données.</p>
                 </div>
                 <div className={"flex flex-row mt-5"}>
-                    {statsCards.map((item) => {
-                        return (<StatCard
-                            icon={item.icon}
-                            title={item.title}
-                            value={item.value}
-                            percentage={item.percentage}
-                            linkText={item.linkText}
-                            linkTo={item.linkTo}
-                        />)
+                    {statsCards.map((item, key) => {
+                        return (
+                            <StatCard
+                                key={key}
+                                {...item}
+                            />
+                        )
                     })}
                 </div>
 
