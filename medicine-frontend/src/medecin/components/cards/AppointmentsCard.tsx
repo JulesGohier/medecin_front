@@ -1,12 +1,13 @@
 import {Separator} from "@/components/ui/separator.tsx";
+import {cn} from "@/lib/utils.ts";
 import React from 'react';
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {ArrowRight, CalendarCheck, User} from "lucide-react";
 import {Link} from "react-router";
 
-const AppointmentsCard = () => {
+const AppointmentsCard = ({ className }: { className?: string }) => {
     return (
-        <Card className="w-[470px] mr-6 border-2 border-gray-200">
+        <Card className={cn("w-1/2 mr-6 border-2 border-gray-200", className)}>
             <CardHeader>
                 <CardTitle className="text-right w-full text-sm">+3%</CardTitle>
             </CardHeader>

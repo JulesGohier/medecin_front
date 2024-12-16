@@ -6,7 +6,7 @@ import {Link} from "react-router";
 
 const PatientsCard = () => {
     return (
-        <Card className="w-[470px] mr-6 border-2 border-gray-200">
+        <Card className="w-1/2 mr-6 border-2 border-gray-200">
             <CardHeader>
                 <CardTitle className="text-right w-full text-sm">+3%</CardTitle>
             </CardHeader>

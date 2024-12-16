@@ -15,7 +15,7 @@ const MedecinDashboard = () => {
                 </div>
                 <div className={"flex flex-row mt-5"}>
                     <PatientsCard/>
-                    <AppointmentsCard/>
+                    <AppointmentsCard />
                 </div>
 
                 <div className={"flex w-full items-center mt-3"}>
