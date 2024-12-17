@@ -43,7 +43,7 @@ export const NextAppointmentCard = () => {
     ];
     
     return (
-        <Card className={"w-full mx-auto md:w-1/2 md:mr-6 border-2 border-gray-200"}>
+        <Card className={"w-full mx-auto md:w-1/2 md:mr-6 border-2 border-gray-200 max-h-[400px]"}>
             <CardHeader>
                 <CardTitle>Vos prochains rendez-vous</CardTitle>
             </CardHeader>

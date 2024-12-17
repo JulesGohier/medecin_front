@@ -24,17 +24,6 @@ const MedecinDashboard = () => {
         },
     ]
     
-    const nextAppointments = [
-        {
-        
-        },
-        {
-        
-        },
-        {
-        
-        },
-    ]
     
     return (
         <DashboardWrapper>

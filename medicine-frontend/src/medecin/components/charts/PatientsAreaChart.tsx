@@ -38,7 +38,7 @@ const chartConfig = {
 
 export const PatientsAreaChart = () => {
     return (
-        <Card className="w-1/2 block mr-0 md:mr-6 border-2 border-gray-200 max-h-[800px]">
+        <Card className="w-1/2 block mr-0 md:mr-6 border-2 border-gray-200 max-h-[400px]">
             <CardHeader>
                 <CardTitle>Statistiques Patients</CardTitle>
                 <CardDescription>Janvier - Décembre 2024</CardDescription>
