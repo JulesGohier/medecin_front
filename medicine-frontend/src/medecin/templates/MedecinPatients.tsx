@@ -1,4 +1,3 @@
-import React from 'react';
 import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
 
 const MedecinPatients = () => {

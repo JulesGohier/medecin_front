@@ -1,4 +1,3 @@
-import React from "react";
 import { CalendarCheck, Users } from "lucide-react";
 import { NextAppointmentCard } from "@/medecin/components/cards/NextAppointmentCard.tsx";
 import StatCard, { StatCardProps } from "@/medecin/components/cards/StatsCard.tsx";
@@ -14,7 +13,7 @@ const MedecinDashboard = () => {
         {
             icon: Users,
             title: "Patients",
-            value: formatNumber(43130),
+            value: formatNumber(4330),
             percentage: "+10",
             linkTo: "/patients"
         },

@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.tsx";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {Separator} from "@/components/ui/separator.tsx";
 
 interface PatientsAppointment {
@@ -48,7 +48,7 @@ export const NextAppointmentCard = () => {
                 <CardTitle>Vos prochains rendez-vous</CardTitle>
             </CardHeader>
             <CardContent className={"flex flex-col px-4 text-lg"}>
-                {nextAppointment.map((item, key) => {
+                {nextAppointment.length > 0 ? nextAppointment.map((item, key) => {
                     return (
                         <div key={key} className="flex flex-col py-2">
                             <div className={"flex flex-row flex-wrap items-center ml-3"}>
@@ -72,7 +72,11 @@ export const NextAppointmentCard = () => {
                             )}
                         </div>
                     );
-                })}
+                }) : (
+                    <div>
+                        Aucun prochain rendez-vous
+                    </div>
+                )}
             </CardContent>
         </Card>
     );
