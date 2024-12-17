@@ -16,7 +16,7 @@ const Header = () => {
             <div className="relative inline-flex p-2.5 hover:bg-gray-100 transition-all duration-200 rounded-full ml-auto">
                 <Bell size={20} />
                 <span
-                    className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full"
+                    className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-800 rounded-full"
                 >
                     0
                 </span>
