@@ -54,7 +54,7 @@ export const NextAppointmentCard = () => {
                             <div className={"flex flex-row flex-wrap items-center ml-3"}>
                                 <Avatar className={"mr-6"}>
                                     <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                                    <AvatarFallback>JG</AvatarFallback>
+                                    <AvatarFallback>{item.firstName[0]} {item.lastName[0]}</AvatarFallback>
                                 </Avatar>
                                 <div className={"flex flex-col min-w-0"}>
                                     <h1 className={"truncate"}>
