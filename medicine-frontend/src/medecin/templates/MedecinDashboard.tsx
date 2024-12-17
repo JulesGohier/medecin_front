@@ -10,14 +10,14 @@ const MedecinDashboard = () => {
     const statsCards: StatCardProps[] = [
         {
             icon: Users,
-            title: "Vos Patients",
+            title: "Patients",
             value: 312,
             percentage: "+10",
             linkTo: "/patients"
         },
         {
             icon: CalendarCheck,
-            title: "Rendez-Vous",
+            title: "Rendez Vous",
             value: 3,
             percentage: "+10",
             linkTo: "/appointments"
