@@ -14,6 +14,7 @@ export type StatCardProps = {
 };
 
 const StatCard = ({icon: Icon, title, value, percentage, linkTo}: StatCardProps) => {
+    
     return (
         <Card className="w-1/2 mx-auto mr-0 md:mr-6 border-2 border-gray-200">
             <CardHeader>

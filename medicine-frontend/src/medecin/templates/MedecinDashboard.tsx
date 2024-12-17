@@ -1,3 +1,4 @@
+import {NextAppointmentCard} from "@/medecin/components/cards/NextAppointmentCard.tsx";
 import React from "react";
 import StatCard, {StatCardProps} from "@/medecin/components/cards/StatsCard.tsx";
 import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
@@ -23,6 +24,18 @@ const MedecinDashboard = () => {
         },
     ]
     
+    const nextAppointments = [
+        {
+        
+        },
+        {
+        
+        },
+        {
+        
+        },
+    ]
+    
     return (
         <DashboardWrapper>
             <div className={"mt-2 w-full"}>
@@ -40,8 +53,9 @@ const MedecinDashboard = () => {
                         )
                     })}
                 </div>
-                <div className={"mt-5"}>
+                <div className={"flex flex-row mt-5 "}>
                     <PatientsAreaChart/>
+                    <NextAppointmentCard />
                 </div>
             </div>
         </DashboardWrapper>
