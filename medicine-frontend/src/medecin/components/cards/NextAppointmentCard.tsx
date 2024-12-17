@@ -1,9 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.tsx";
-import {Button} from "@/components/ui/button.tsx";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
+import {NextAppointmentModal} from "@/medecin/components/modals/NextAppointmentModal.tsx";
 
-interface PatientsAppointment {
+export interface PatientsAppointment {
     firstName: string;
     lastName: string;
     email: string;
@@ -12,6 +12,7 @@ interface PatientsAppointment {
 }
 
 export const NextAppointmentCard = () => {
+    
     const nextAppointment: PatientsAppointment[] = [
         {
             firstName: "Julien",
@@ -63,16 +64,15 @@ export const NextAppointmentCard = () => {
                                     <h2>{item.email}</h2>
                                 </div>
                                 
-                                <div className={"flex flex-col  text-center w-24 min-w-0 text-lg"}>
-                                    <div className="hidden xl:block xl:ml-12">
-                                        <h2 className={"font-semibold text-gray-300"}>{item.day}</h2>
-                                        <h2 className={"font-bold"}>{item.hours}</h2>
-                                    </div>
-                                    
-                                    <div className="xl:hidden ml-2 flex-col items-center justify-center mt-2">
-                                        <Button className="bg-red-800 hover:bg-red-600/90 rounded-lg text-white text-sm">
-                                            Voir
-                                        </Button>
+                                <div className={"flex ml-0 xl:ml-auto flex-col text-center w-24 min-w-0 text-lg"}>
+                                    <div className="flex-col items-center justify-center mt-2">
+                                        <NextAppointmentModal
+                                            firstName={item.firstName}
+                                            lastName={item.lastName}
+                                            email={item.email}
+                                            day={item.day}
+                                            hours={item.hours}
+                                        />
                                     </div>
                                 </div>
                             </div>
