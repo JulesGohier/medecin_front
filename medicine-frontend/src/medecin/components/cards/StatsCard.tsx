@@ -8,7 +8,6 @@ export type StatCardProps = {
     title: string;
     value: number | string;
     percentage?: string;
-    linkText: string;
     linkTo: string;
 };
 

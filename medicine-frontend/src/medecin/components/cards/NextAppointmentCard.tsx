@@ -2,7 +2,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.tsx"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { Separator } from "@/components/ui/separator.tsx";
 import {NextAppointmentModal} from "@/medecin/components/modals/NextAppointmentModal.tsx";
-import {useTransitionStore} from "@/medecin/stores/TransitionStore.tsx";
 
 export interface PatientsAppointment {
     firstName: string;
