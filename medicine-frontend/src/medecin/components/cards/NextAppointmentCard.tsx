@@ -66,13 +66,7 @@ export const NextAppointmentCard = () => {
                                 
                                 <div className={"flex ml-0 xl:ml-auto flex-col text-center w-24 min-w-0 text-lg"}>
                                     <div className="flex-col items-center justify-center mt-2">
-                                        <NextAppointmentModal
-                                            firstName={item.firstName}
-                                            lastName={item.lastName}
-                                            email={item.email}
-                                            day={item.day}
-                                            hours={item.hours}
-                                        />
+                                        <NextAppointmentModal{...item} />
                                     </div>
                                 </div>
                             </div>
