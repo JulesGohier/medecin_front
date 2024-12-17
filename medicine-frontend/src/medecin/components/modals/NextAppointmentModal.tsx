@@ -1,10 +1,11 @@
 import {Button} from "@/components/ui/button.tsx";
 import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
 import {DialogTrigger} from "@radix-ui/react-dialog";
-import {Calendar} from "lucide-react";
+import {Calendar, Mail} from "lucide-react";
 import {useState} from "react";
+import {Link} from "react-router";
 
-export const NextAppointmentModal = ({ firstName, lastName, day, hours }: { firstName: string, lastName: string, day: string, hours: string }) => {
+export const NextAppointmentModal = ({ firstName, lastName, email, day, hours }: { firstName: string, lastName: string, email: string, day: string, hours: string }) => {
     const [isOpen, setIsOpen] = useState(false);
     
     const handleClick = () => {
@@ -22,12 +23,17 @@ export const NextAppointmentModal = ({ firstName, lastName, day, hours }: { firs
                 <DialogHeader>
                     <DialogTitle>Rendez vous de {firstName} {lastName}</DialogTitle>
                 </DialogHeader>
-                <div className="mt-5 mb-5 flex">
-                    <Calendar size={20} className={"mr-2"} />
+                <div className="my-2 flex items-center">
+                    <Calendar size={20} className={"mr-2"}/>
                     <p>Heure programmé : {day} à {hours}</p>
                 </div>
+                <div className="my-2 flex items-center">
+                    <Mail size={20} className={"mr-2"}/>
+                    <p>Contacter le patient : <Link to={`mailto:${email}`} className={"underline text-red-800 hover:text-red-700"}>{email}</Link></p>
+                </div>
                 <DialogFooter>
-                    <Button type="submit" onClick={handleClick} className={"bg-red-800 hover:bg-red-700 w-full flex items-center gap-2"}>
+                    <Button type="submit" onClick={handleClick}
+                            className={"bg-red-800 hover:bg-red-700 w-full flex items-center gap-2"}>
                         Quitter
                     </Button>
                 </DialogFooter>
