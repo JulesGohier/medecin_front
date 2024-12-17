@@ -19,7 +19,7 @@ const MedecinDashboard = () => {
         },
         {
             icon: CalendarCheck,
-            title: "Rendez Vous",
+            title: "RDV",
             value: formatNumber(12),
             percentage: "+10",
             linkTo: "/appointments"
@@ -34,7 +34,7 @@ const MedecinDashboard = () => {
                     <p className={"text-lg font-medium"}>Vos statistiques globales de vos données.</p>
                 </div>
                 
-                <div className={"flex flex-row mt-2"}>
+                <div className={"flex flex-col sm:flex-row md:flex-row mt-2"}>
                     {statsCards.map((item, key) => (
                         <StatCard
                             key={key}
@@ -43,7 +43,7 @@ const MedecinDashboard = () => {
                     ))}
                 </div>
                 
-                <div className={"flex flex-row mt-5"}>
+                <div className={"flex flex-col mt-4 sm:flex-row md:flex-row"}>
                     <PatientsAreaChart />
                     <NextAppointmentCard />
                 </div>

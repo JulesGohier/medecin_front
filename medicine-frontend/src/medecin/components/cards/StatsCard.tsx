@@ -12,17 +12,18 @@ export type StatCardProps = {
     linkTo: string;
 };
 
-const StatCard = ({icon: Icon, title, value, percentage, linkTo}: StatCardProps) => {
+const StatCard = ({ icon: Icon, title, value, percentage, linkTo }: StatCardProps) => {
     return (
-        <Card className="w-1/2 mx-auto mr-0 md:mr-6 border-2 border-gray-200">
+        <Card className="w-full sm:w-1/2 mx-auto mr-0 sm:mr-6 border-2 border-gray-200  mt-5 sm:mt-0 md:mt-0">
             <CardHeader>
                 <CardTitle className="text-right w-full text-sm">{percentage}%</CardTitle>
             </CardHeader>
             
-            <CardContent className="py-6 flex flex-col sm:flex-row items-center px-6 sm:px-20 -mt-4">
-                <Icon size={50} className="text-gray-400 p-1 border-2 border-gray-200 rounded-lg" />
-                <div className="flex flex-col mt-4 sm:mt-0 sm:ml-12 md:ml-24">
-                    <h2 className="text-gray-400 text-xl sm:text-3xl">{title}</h2>
+            <CardContent className="py-6 flex flex-col sm:flex-row  items-center -mt-4">
+                <Icon size={40} className="text-gray-400 mr-0 ml-0 sm:ml-12  sm:mr-12 md:ml-24 md:mr-24" />
+                
+                <div className="flex flex-col mt-4 sm:mt-0">
+                    <h2 className="text-gray-400 text-xl w-18">{title}</h2>
                     <span className="text-xl sm:text-2xl text-black font-bold">{value}</span>
                 </div>
             </CardContent>

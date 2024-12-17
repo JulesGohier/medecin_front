@@ -1,6 +1,7 @@
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.tsx";
-import {Separator} from "@/components/ui/separator.tsx";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.tsx";
+import {Button} from "@/components/ui/button.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Separator } from "@/components/ui/separator.tsx";
 
 interface PatientsAppointment {
     firstName: string;
@@ -43,7 +44,7 @@ export const NextAppointmentCard = () => {
     ];
     
     return (
-        <Card className={"w-full mx-auto md:w-1/2 md:mr-6 border-2 border-gray-200 max-h-[400px]"}>
+        <Card className={"w-full sm:w-1/2 mx-0 sm:mx-6 border-2 border-gray-200  mt-5 sm:mt-0 md:mt-0 md:max-h-[1000px] xl:max-h-[400px]"}>
             <CardHeader>
                 <CardTitle>Vos prochains rendez-vous</CardTitle>
             </CardHeader>
@@ -56,19 +57,29 @@ export const NextAppointmentCard = () => {
                                     <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                                     <AvatarFallback>{item.firstName[0]} {item.lastName[0]}</AvatarFallback>
                                 </Avatar>
-                                <div className={"flex flex-col min-w-0"}>
-                                    <h1 className={"truncate"}>
-                                        {item.firstName} {item.lastName}
-                                    </h1>
-                                    <h2 className={"truncate"}>{item.email}</h2>
+                                
+                                <div className={"flex flex-col min-w-0 text-sm sm:text-md md:text-lg"}>
+                                    <h1>{item.firstName} {item.lastName}</h1>
+                                    <h2>{item.email}</h2>
                                 </div>
-                                <div className={"flex flex-col ml-auto text-center w-24 items-center justify-center min-w-0"}>
-                                    <h2 className={"font-semibold text-gray-300"}>{item.day}</h2>
-                                    <h2 className={"font-bold"}>{item.hours}</h2>
+                                
+                                <div className={"flex flex-col  text-center w-24 min-w-0 text-lg"}>
+                                    <div className="hidden xl:block xl:ml-12">
+                                        <h2 className={"font-semibold text-gray-300"}>{item.day}</h2>
+                                        <h2 className={"font-bold"}>{item.hours}</h2>
+                                    </div>
+                                    
+                                    <div className="xl:hidden ml-2 flex-col items-center justify-center mt-2">
+                                        <Button className="bg-red-800 hover:bg-red-600/90 rounded-lg text-white text-sm">
+                                            Voir
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
+                            
+                            {/* Separator */}
                             {key < nextAppointment.length - 1 && (
-                                <Separator className={"mt-2 border-gray-300"} />
+                                <Separator className={"mt-2 border-gray-300 md:flex"} />
                             )}
                         </div>
                     );

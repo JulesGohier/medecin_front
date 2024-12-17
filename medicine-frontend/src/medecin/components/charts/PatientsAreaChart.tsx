@@ -38,13 +38,13 @@ const chartConfig = {
 
 export const PatientsAreaChart = () => {
     return (
-        <Card className="w-1/2 block mr-0 md:mr-6 border-2 border-gray-200 max-h-[400px]">
+        <Card className="w-full sm:w-1/2 sm:mr-0 border-2 border-gray-200 md:max-h-[1000px] xl:max-h-[400px] mt-5 sm:mt-0 md:mt-0">
             <CardHeader>
                 <CardTitle>Statistiques Patients</CardTitle>
                 <CardDescription>Janvier - Décembre 2024</CardDescription>
             </CardHeader>
             <CardContent>
-                <ChartContainer config={chartConfig} className="max-h-[250px] flex flex-col justify-center items-center w-full">
+                <ChartContainer config={chartConfig} className="max-h-[300px] flex flex-col justify-center items-center w-full">
                     <BarChart
                         accessibilityLayer
                         data={chartData}
