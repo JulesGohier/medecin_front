@@ -76,8 +76,6 @@ export const NextAppointmentCard = () => {
                                     </div>
                                 </div>
                             </div>
-                            
-                            {/* Separator */}
                             {key < nextAppointment.length - 1 && (
                                 <Separator className={"mt-2 border-gray-300 md:flex"} />
                             )}
