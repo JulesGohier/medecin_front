@@ -1,5 +1,5 @@
-import { CalendarCheck, Users } from "lucide-react";
 import React from "react";
+import { CalendarCheck, Users } from "lucide-react";
 import { NextAppointmentCard } from "@/medecin/components/cards/NextAppointmentCard.tsx";
 import StatCard, { StatCardProps } from "@/medecin/components/cards/StatsCard.tsx";
 import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
@@ -8,7 +8,6 @@ import { PatientsAreaChart } from "@/medecin/components/charts/PatientsAreaChart
 const formatNumber = (num: number) => {
     return new Intl.NumberFormat('en-US').format(num);
 };
-
 
 const MedecinDashboard = () => {
     const statsCards: StatCardProps[] = [
