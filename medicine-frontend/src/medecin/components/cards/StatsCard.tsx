@@ -1,3 +1,4 @@
+import {LoaderSpinner} from "@/medecin/components/LoaderSpinner.tsx";
 import React from "react";
 import { Separator } from "@/components/ui/separator.tsx";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
