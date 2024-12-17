@@ -1,11 +1,12 @@
-import {Button} from "@/components/ui/button.tsx";
-import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
-import {DialogTrigger} from "@radix-ui/react-dialog";
-import {Calendar, Mail} from "lucide-react";
 import {useState} from "react";
 import {Link} from "react-router";
+import {Button} from "@/components/ui/button.tsx";
+import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
+import {PatientsAppointment} from "@/medecin/components/cards/NextAppointmentCard.tsx";
+import {DialogTrigger} from "@radix-ui/react-dialog";
+import {Calendar, Mail} from "lucide-react";
 
-export const NextAppointmentModal = ({ firstName, lastName, email, day, hours }: { firstName: string, lastName: string, email: string, day: string, hours: string }) => {
+export const NextAppointmentModal = ({ firstName, lastName, email, day, hours }: PatientsAppointment) => {
     const [isOpen, setIsOpen] = useState(false);
     
     const handleClick = () => {
