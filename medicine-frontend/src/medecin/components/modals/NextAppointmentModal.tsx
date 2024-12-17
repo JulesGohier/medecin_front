@@ -2,24 +2,17 @@ import {Button} from "@/components/ui/button.tsx";
 import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
 import {PatientsAppointment} from "@/medecin/components/cards/NextAppointmentCard.tsx";
 import {LoaderSpinner} from "@/medecin/components/LoaderSpinner.tsx";
-import {useTransitionStore} from "@/medecin/stores/TransitionStore.tsx";
 import {DialogTrigger} from "@radix-ui/react-dialog";
 import {Calendar, Mail} from "lucide-react";
-import {useState} from "react";
+import {useState, useTransition} from "react";
 import {Link} from "react-router";
 
 export const NextAppointmentModal = ({ firstName, lastName, email, day, hours }: PatientsAppointment) => {
     const [isOpen, setIsOpen] = useState(false);
-    const { isPending, startTransition } = useTransitionStore();
+    const [isPending, startTransition] = useTransition();
     
     const handleClick = () => {
-        startTransition(() => {
-            console.log("Transition started");
-            setTimeout(() => {
-                console.log("Transition finished after delay");
-                setIsOpen(false);
-            }, 2000);
-        });
+        setIsOpen(false);
     };
     
     return (
@@ -47,7 +40,11 @@ export const NextAppointmentModal = ({ firstName, lastName, email, day, hours }:
                     <Button
                         type="submit"
                         className={"bg-red-800 hover:bg-red-700 w-full flex items-center gap-2"}
-                        onClick={handleClick}
+                        onClick={() => {
+                            startTransition(() => {
+                                handleClick();
+                            });
+                        }}
                     >
                         {isPending ? <LoaderSpinner /> : <>Quitter</>}
                     </Button>
