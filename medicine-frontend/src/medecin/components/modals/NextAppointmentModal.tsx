@@ -25,7 +25,7 @@ export const NextAppointmentModal = ({ firstName, lastName, email, day, hours }:
                 </DialogHeader>
                 <div className="my-2 flex items-center">
                     <Calendar size={20} className={"mr-2"}/>
-                    <p>Heure programmé : {day} à {hours}</p>
+                    <p>Heure programmé : {day} à {hours.replace(":", 'h')}</p>
                 </div>
                 <div className="my-2 flex items-center">
                     <Mail size={20} className={"mr-2"}/>
