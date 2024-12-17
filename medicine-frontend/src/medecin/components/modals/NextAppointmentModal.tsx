@@ -12,14 +12,24 @@ export const NextAppointmentModal = ({ firstName, lastName, email, day, hours }:
     const [isOpen, setIsOpen] = useState(false);
     const { isPending, startTransition } = useTransitionStore();
     
+    
     const handleClick = () => {
-        setIsOpen(false);
-    }
+        console.log("Transition started");
+        startTransition(() => {
+            setIsOpen(!isOpen);
+            console.log("Transition finished");
+        });
+    };
     
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button className="bg-red-800 hover:bg-red-700 rounded-lg text-white text-sm">
+                <Button
+                    className="bg-red-800 hover:bg-red-700 rounded-lg text-white text-sm"
+                    onClick={() => {
+                        startTransition(handleClick);
+                    }}
+                >
                     Voir
                 </Button>
             </DialogTrigger>
