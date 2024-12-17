@@ -1,9 +1,13 @@
-import {NextAppointmentCard} from "@/medecin/components/cards/NextAppointmentCard.tsx";
+import { CalendarCheck, Users } from "lucide-react";
 import React from "react";
-import StatCard, {StatCardProps} from "@/medecin/components/cards/StatsCard.tsx";
-import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
-import {PatientsAreaChart} from "@/medecin/components/charts/PatientsAreaChart.tsx";
-import {CalendarCheck, Users} from "lucide-react";
+import { NextAppointmentCard } from "@/medecin/components/cards/NextAppointmentCard.tsx";
+import StatCard, { StatCardProps } from "@/medecin/components/cards/StatsCard.tsx";
+import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
+import { PatientsAreaChart } from "@/medecin/components/charts/PatientsAreaChart.tsx";
+
+const formatNumber = (num: number) => {
+    return new Intl.NumberFormat('en-US').format(num);
+};
 
 
 const MedecinDashboard = () => {
@@ -11,19 +15,18 @@ const MedecinDashboard = () => {
         {
             icon: Users,
             title: "Patients",
-            value: 312,
+            value: formatNumber(43130),
             percentage: "+10",
             linkTo: "/patients"
         },
         {
             icon: CalendarCheck,
             title: "Rendez Vous",
-            value: 3,
+            value: formatNumber(12),
             percentage: "+10",
             linkTo: "/appointments"
         },
-    ]
-    
+    ];
     
     return (
         <DashboardWrapper>
@@ -32,23 +35,23 @@ const MedecinDashboard = () => {
                     <h2 className={"text-xl font-semibold"}>Tableau de Bord</h2>
                     <p className={"text-lg font-medium"}>Vos statistiques globales de vos données.</p>
                 </div>
+                
                 <div className={"flex flex-row mt-2"}>
-                    {statsCards.map((item, key) => {
-                        return (
-                            <StatCard
-                                key={key}
-                                {...item}
-                            />
-                        )
-                    })}
+                    {statsCards.map((item, key) => (
+                        <StatCard
+                            key={key}
+                            {...item}
+                        />
+                    ))}
                 </div>
-                <div className={"flex flex-row mt-5 "}>
-                    <PatientsAreaChart/>
+                
+                <div className={"flex flex-row mt-5"}>
+                    <PatientsAreaChart />
                     <NextAppointmentCard />
                 </div>
             </div>
         </DashboardWrapper>
     );
-    }
-    
-    export default MedecinDashboard;
+};
+
+export default MedecinDashboard;

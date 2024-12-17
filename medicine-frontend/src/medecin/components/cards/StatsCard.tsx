@@ -24,7 +24,7 @@ const StatCard = ({icon: Icon, title, value, percentage, linkTo}: StatCardProps)
             <CardContent className="py-6 flex flex-col sm:flex-row items-center px-6 sm:px-20 -mt-4">
                 <Icon size={50} className="text-gray-400 p-1 border-2 border-gray-200 rounded-lg" />
                 <div className="flex flex-col mt-4 sm:mt-0 sm:ml-12 md:ml-24">
-                    <h2 className="text-gray-400 text-2xl sm:text-3xl">{title}</h2>
+                    <h2 className="text-gray-400 text-xl sm:text-3xl">{title}</h2>
                     <span className="text-xl sm:text-2xl text-black font-bold">{value}</span>
                 </div>
             </CardContent>
