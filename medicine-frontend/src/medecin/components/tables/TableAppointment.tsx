@@ -1,13 +1,21 @@
 import {TableCell, TableRow} from "@/components/ui/table.tsx";
+import {TableActions} from "@/medecin/components/tables/TableActions.tsx";
 import {TableLayout} from "@/medecin/components/tables/TableLayout.tsx";
-import {Edit, Eye, Trash} from "lucide-react";
-
-type TableAppointmentProps = {
-    data: string[][];
-}
+import {TableActionsProps, TableAppointmentProps} from "@/medecin/components/tables/table-type.ts";
+import {Edit, Trash} from "lucide-react";
 
 export const TableAppointment = ({ data } : TableAppointmentProps) => {
-    const tableHeader = ["Prénom", "Nom", "Sexe", "Numéro de sécurité social", "Numéro d'identification", "Actions"]
+    const tableHeader = ["Prénom", "Nom", "Sexe", "Date du rendez-vous", "État", "Actions"]
+    const tableActions: TableActionsProps[] = [
+        {
+            icon: Edit,
+            className: "text-gray-500 hover:text-gray-700"
+        },
+        {
+            icon: Trash,
+            className: "text-red-500 hover:text-red-700"
+        },
+    ]
     
     return (
         <TableLayout header={tableHeader}>
@@ -23,9 +31,13 @@ export const TableAppointment = ({ data } : TableAppointmentProps) => {
                     ))}
                     <TableCell className="text-center">
                         <div className="flex justify-center space-x-2">
-                            <Eye className="cursor-pointer text-green-500 hover:text-green-700" size={20} />
-                            <Edit className="cursor-pointer text-gray-500 hover:text-gray-700" size={20} />
-                            <Trash className="cursor-pointer text-red-500 hover:text-red-700" size={20} />
+                            {tableActions.map((action, key) => (
+                                <TableActions
+                                    key={key}
+                                    icon={action.icon}
+                                    className={action.className}
+                                />
+                            ))}
                         </div>
                     </TableCell>
                 </TableRow>
