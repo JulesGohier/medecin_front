@@ -17,7 +17,7 @@ interface TableAppointmentProps {
 }
 
 export const TableAppointment = ({ data } : TableAppointmentProps) => {
-    const tableHeader = ["Prénom", "Nom", "Sexe", "Date du rendez-vous", "État", "Actions"]
+    const tableHeader = ["Prénom", "Nom", "Sexe", "Date rdv", "État", "Actions"]
     const tableActions: TableActionsProps[] = [
         {
             icon: Edit,
