@@ -3,16 +3,17 @@ import {TableAppointment} from "@/medecin/components/tables/TableAppointment.tsx
 
 const MedecinAppointments = () => {
     const data = [
-        ["Lilian", "Caffier", "Homme", "Mercredi 18 Décembre", "En cours"],
-        ["Lilian", "Caffier", "Homme", "Mercredi 18 Décembre", "En cours"],
-        ["Lilian", "Caffier", "Homme", "Mercredi 18 Décembre", "En cours"],
-        ["Lilian", "Caffier", "Homme", "Mercredi 18 Décembre", "En cours"],
-        ["Lilian", "Caffier", "Homme", "Mercredi 18 Décembre", "En cours"],
-        ["Lilian", "Caffier", "Homme", "Mercredi 18 Décembre", "En cours"],
-        ["Lilian", "Caffier", "Homme", "Mercredi 18 Décembre", "En cours"],
-        ["Lilian", "Caffier", "Homme", "Mercredi 18 Décembre", "En cours"],
-        ["Lilian", "Caffier", "Homme", "Mercredi 18 Décembre", "En cours"],
-    ]
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", date_rdv: "Vendredi 15 Décembre", state: "En cours" },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", date_rdv: "Vendredi 15 Décembre", state: "En cours" },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", date_rdv: "Vendredi 15 Décembre", state: "En cours" },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", date_rdv: "Vendredi 15 Décembre", state: "En cours" },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", date_rdv: "Vendredi 15 Décembre", state: "En cours" },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", date_rdv: "Vendredi 15 Décembre", state: "En cours" },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", date_rdv: "Vendredi 15 Décembre", state: "En cours" },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", date_rdv: "Vendredi 15 Décembre", state: "En cours" },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", date_rdv: "Vendredi 15 Décembre", state: "En cours" },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", date_rdv: "Vendredi 15 Décembre", state: "En cours" },
+    ];
     
     return (
         <DashboardWrapper>
@@ -22,7 +23,7 @@ const MedecinAppointments = () => {
                     <p className={"text-lg font-medium"}>Tableau de vos rendez-vous.</p>
                 </div>
                 <div className={"flex flex-col sm:flex-row md:flex-row mt-16"}>
-                    <TableAppointment data={data}/>
+                    <TableAppointment data={data} />
                 </div>
             </div>
         </DashboardWrapper>

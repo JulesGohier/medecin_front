@@ -3,15 +3,16 @@ import {TablePatients} from "@/medecin/components/tables/TablePatients.tsx";
 
 const MedecinPatients = () => {
     const data = [
-        ["Lilian", "Caffier", "Homme", "213098765432109", "1"],
-        ["Lilian", "Caffier", "Homme", "213098765432109", "1"],
-        ["Lilian", "Caffier", "Homme", "213098765432109", "1"],
-        ["Lilian", "Caffier", "Homme", "213098765432109", "1"],
-        ["Lilian", "Caffier", "Homme", "213098765432109", "1"],
-        ["Lilian", "Caffier", "Homme", "213098765432109", "1"],
-        ["Lilian", "Caffier", "Homme", "213098765432109", "1"],
-        ["Lilian", "Caffier", "Homme", "213098765432109", "1"],
-        ["Lilian", "Caffier", "Homme", "213098765432109", "1"]
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
     ]
     
     return (

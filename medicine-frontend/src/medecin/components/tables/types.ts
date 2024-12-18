@@ -5,8 +5,3 @@ export type TableActionsProps = {
     size?: number,
     className?: string
 };
-
-
-export type TableDataProps = {
-    data: string[][]
-};
