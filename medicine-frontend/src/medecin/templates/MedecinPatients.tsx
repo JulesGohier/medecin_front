@@ -1,9 +1,7 @@
 import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
-import {TableComponent} from "@/medecin/components/TableComponent.tsx";
+import {TablePatients} from "@/medecin/components/tables/TablePatients.tsx";
 
 const MedecinPatients = () => {
-    const header = ["Prénom", "Nom", "Sexe", "Numéro de sécurité social", "Numéro d'identification", "Actions"]
-    
     const data = [
         ["Lilian", "Caffier", "Homme", "213098765432109", "1"],
         ["Lilian", "Caffier", "Homme", "213098765432109", "1"],
@@ -23,12 +21,8 @@ const MedecinPatients = () => {
                     <h2 className={"text-xl font-semibold"}>Patients</h2>
                     <p className={"text-lg font-medium"}>Tableau de vos patients.</p>
                 </div>
-                <div className={"flex flex-col sm:flex-row md:flex-row mt-2"}>
-                    <TableComponent
-                        title="Liste de vos patients"
-                        tableHeaders={header}
-                        data={data}
-                    />
+                <div className={"flex flex-col sm:flex-row md:flex-row mt-16"}>
+                    <TablePatients data={data} />
                 </div>
             </div>
         </DashboardWrapper>
