@@ -4,13 +4,9 @@ export type TableActionsProps = {
     icon: LucideIcon,
     size?: number,
     className?: string
-}
-
-export type TableAppointmentProps = {
-    data: string[][];
-}
+};
 
 
-export type TablePatientsProps = {
+export type TableDataProps = {
     data: string[][]
-}
+};

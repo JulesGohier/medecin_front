@@ -1,10 +1,10 @@
 import {TableCell, TableRow} from "@/components/ui/table.tsx";
-import {TableActionsProps, TablePatientsProps} from "@/medecin/components/tables/table-type.ts";
+import {TableActionsProps, TableDataProps} from "@/medecin/components/tables/types.ts";
 import {TableActions} from "@/medecin/components/tables/TableActions.tsx";
 import {TableLayout} from "@/medecin/components/tables/TableLayout.tsx";
 import {Edit, Eye, Trash} from "lucide-react";
 
-export const TablePatients = ({ data }: TablePatientsProps) => {
+export const TablePatients = ({ data }: TableDataProps) => {
     const tableHeader = ["Prénom", "Nom", "Numéro de sécurité social", "Date du rendez-vous","État",  "Actions"]
     
     const tableActions: TableActionsProps[] = [
