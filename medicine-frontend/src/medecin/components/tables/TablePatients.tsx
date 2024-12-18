@@ -5,7 +5,7 @@ import {TableLayout} from "@/medecin/components/tables/TableLayout.tsx";
 import {Edit, Eye, Trash} from "lucide-react";
 
 export const TablePatients = ({ data }: TableDataProps) => {
-    const tableHeader = ["Prénom", "Nom", "Numéro de sécurité social", "Date du rendez-vous","État",  "Actions"]
+    const tableHeader = ["Prénom", "Nom", "Sexe", "Numéro de sécurité social","Numéro d'identification",  "Actions"]
     
     const tableActions: TableActionsProps[] = [
         {
