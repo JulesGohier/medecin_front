@@ -1,3 +1,4 @@
+import {Separator} from "@/components/ui/separator.tsx";
 import React from "react";
 import { SidebarComponent } from "@/components/features/layout/SidebarComponent.tsx";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar.tsx";
@@ -12,6 +13,7 @@ export const DashboardWrapper = ({ children }: { children: React.ReactNode }) =>
                     <SidebarTrigger className="text-sm text-gray-500 hover:text-gray-900 mr-12 mt-1" />
                     <Header />
                 </div>
+                <Separator className="w-full bg-gray-200 mb-4" />
                 {children}
             </main>
         </SidebarProvider>

@@ -41,7 +41,7 @@ export const TablePatients = ({ data }: TablePatientProps) => {
                     <TableCell>{row.lastName}</TableCell>
                     <TableCell>{row.sexe}</TableCell>
                     <TableCell>{row.num_secu}</TableCell>
-                    <TableCell>{row.num_id}</TableCell>
+                    <TableCell>#{row.num_id}</TableCell>
                     <TableCell className="text-center">
                         <div className="flex justify-center space-x-2">
                             {tableActions.map((action, key) => (
