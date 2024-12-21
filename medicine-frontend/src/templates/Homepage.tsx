@@ -153,7 +153,7 @@ const Homepage = () => {
             <div className="w-40 text-center">
                 <div className="w-40 h-40 bg-gray-300 rounded-full mb-2">
                     <img
-                    src={""}
+                    src={"https://avatars.githubusercontent.com/u/112930218?v=4"}
                     alt="TIRBOIS Romain"
                     className="w-40 h-40 rounded-full object-cover"
                     />
@@ -162,7 +162,7 @@ const Homepage = () => {
                 <p className="text-xs text-red-500">romain.tirbois@etud.univ-angers.fr</p>
 
                 <div className="flex justify-center gap-4 mt-2">
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/RomainTrbs" target="_blank" rel="noopener noreferrer">
                         <Github size={32} className="text-gray-800 hover:text-gray-600" />
                     </a>
                     <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
