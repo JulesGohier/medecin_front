@@ -1,6 +1,7 @@
 import React from "react";
-import { FaGithub, FaTwitter, FaDiscord } from 'react-icons/fa';
+import DiscordIcon from "@/assets/discord-icon-svgrepo-com.svg";
 import logo from "@/assets/icon-medicine.png";
+import { Twitter, Github } from "lucide-react";
 import imageSectionProjet from "@/assets/Medecin.png";
 import imageSectionMedecin from "@/assets/hide-the-pain-harold-meme.png";
 import imageSectionPatient from "@/assets/Patient-Journey-Mapping-cvr.jpg";
@@ -39,14 +40,16 @@ const Homepage = () => {
 
 
         {/* Section Projet */}
-        <section id="SectionProjet" className="flex flex-col-reverse lg:flex-row items-center p-20 bg-grey-500">
+        <section id="SectionProjet" className="flex flex-col-reverse lg:flex-row items-center p-20 bg-grey">
 
             <div className="w-full lg:w-1/2">
-                    <p className="text-lg font-bold text-red-600 mb-4 mr-auto pr-16">La gestion d'un cabinet médical</p>
-                    <p> Desciption du projet </p>
+                    <p className="text-lg font-bold text-red-600 mb-4 mr-auto pr-16">application de gestion de cabinet médical</p>
+                    <p> Cette application permettra : <br></br>
+                            - Aux patients de consulter les créneaux disponibles et de réserver un rendez-vous. <br></br>
+                            - Au médecin de visualiser la liste des rendez-vous programmés pour la journée.</p>
             </div>
-            <div>
-                <img className="w-100 h-80 rounded-md ml-auto pr-16" src={imageSectionProjet} alt="imageSectionProjet"/>
+            <div w-full className="lg:w-1/2 flex justify-end">
+                <img className="h-300 items-right rounded-md" src={imageSectionProjet} alt="imageSectionProjet"/>
             </div>
         </section>
         <div>
@@ -58,12 +61,16 @@ const Homepage = () => {
 
 
         {/* Section Médecin */}
-        <section id="SectionMedecin" className="flex flex-col lg:flex-row items-center p-20 bg-gray-50">
+        <section id="SectionMedecin" className="flex flex-col lg:flex-row items-center p-20 bg-gray-200">
 
             <img className="w-100 h-80 rounded-md mr-auto pr-16" src={imageSectionMedecin} alt="imageSectionMedecin"/>
-            <div className="w-full lg:w-1/2 text-right ml-auto pr-16">
+            <div className="w-full lg:w-1/2 text-right ml-auto">
                 <p className="text-lg font-bold text-red-600 mb-4">Nos Médecins</p>
-                <p className="text-lg">Ils sont qualifié</p>
+                <p className="text-lg">
+                    Ils sont qualifié<br></br>
+                    - Visualiser la liste des rendez-vous du jour (nom du patient, horaire, état). <br></br>
+                    - Créer manuellement les créneaux disponibles avec une durée de 20 minutes
+                </p>
             </div>
         </section>
         <div>
@@ -75,12 +82,15 @@ const Homepage = () => {
 
 
         {/* Section Patient */}
-        <section id="SectionPatient" className="flex flex-col-reverse lg:flex-row items-center p-8 bg-white">
+        <section id="SectionPatient" className="flex flex-col-reverse lg:flex-row items-center p-8 bg-grey">
             <div className="w-full lg:w-1/2 mr-auto pr-16">
                 <p className="text-lg font-bold text-red-600 mb-16">Les patients</p>
-                <p className="text-lg">Vous avez le droit d'être malade </p>
+                <p className="text-lg">
+                    - Réserver un créneau parmi les disponibilités proposées. <br></br>
+                    - Annuler un rendez-vous existant (pas de modification)
+                </p>
             </div>
-            <img className="w-100 h-80 rounded-md ml-auto pr-4" src={imageSectionPatient} alt="imageSectionPatient"/>
+            <img className="w-100 h-80 rounded-md ml-auto" src={imageSectionPatient} alt="imageSectionPatient"/>
         </section>
         <div>
             <hr className="border-t-2 border-gray-500 w-3/4 mx-auto" />
@@ -90,8 +100,7 @@ const Homepage = () => {
 
         {/* Section Équipe */}
 
-
-        <section id="SectionEquipe" className="p-8 bg-gray-50">
+        <section id="SectionEquipe" className="p-8 bg-gray-200">
             <h2 className="text-center text-2xl font-bold mb-6">Équipe</h2>
 
             <div className="flex justify-center gap-12">
@@ -101,7 +110,7 @@ const Homepage = () => {
                 <div className="w-40 h-40 bg-gray-300 rounded-full mb-2">
                 <img
                     src={"https://avatars.githubusercontent.com/u/117635603?v=4"}
-                    alt="Nom 1"
+                    alt="CAFFIER Lilian"
                     className="w-40 h-40 rounded-full object-cover"
                 />
                 </div>
@@ -110,13 +119,10 @@ const Homepage = () => {
 
                 <div className="flex justify-center gap-4 mt-2">
                     <a href="https://github.com/LilianCAFFIER" target="_blank" rel="noopener noreferrer">
-                        <FaGithub className="text-gray-600 hover:text-black" />
+                        <Github size={32} className="text-gray-800 hover:text-gray-600" />
                     </a>
                     <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                        <FaTwitter className="text-gray-600 hover:text-black" />
-                    </a>
-                    <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
-                        <FaDiscord className="text-gray-600 hover:text-black" />
+                        <Twitter size={32} className="text-sky-500 hover:text-sky-700" />
                     </a>
                 </div>
             </div>
@@ -126,7 +132,7 @@ const Homepage = () => {
                 <div className="w-40 h-40 bg-gray-300 rounded-full mb-2">
                     <img
                     src={"https://avatars.githubusercontent.com/u/100484696?v=4"}
-                    alt="Nom 2"
+                    alt="GOHIER Jules"
                     className="w-40 h-40 rounded-full object-cover"
                 />
                 </div>
@@ -135,13 +141,10 @@ const Homepage = () => {
 
                 <div className="flex justify-center gap-4 mt-2">
                     <a href="https://github.com/JulesGohier" target="_blank" rel="noopener noreferrer">
-                        <FaGithub className="text-gray-600 hover:text-black" />
+                        <Github size={32} className="text-gray-800 hover:text-gray-600" />
                     </a>
                     <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                        <FaTwitter className="text-gray-600 hover:text-black" />
-                    </a>
-                    <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
-                        <FaDiscord className="text-gray-600 hover:text-black" />
+                        <Twitter size={32} className="text-sky-500 hover:text-sky-700" />
                     </a>
                 </div>
             </div>
@@ -151,7 +154,7 @@ const Homepage = () => {
                 <div className="w-40 h-40 bg-gray-300 rounded-full mb-2">
                     <img
                     src={""}
-                    alt="Nom 3"
+                    alt="TIRBOIS Romain"
                     className="w-40 h-40 rounded-full object-cover"
                     />
                 </div>
@@ -160,13 +163,10 @@ const Homepage = () => {
 
                 <div className="flex justify-center gap-4 mt-2">
                     <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-                        <FaGithub className="text-gray-600 hover:text-black" />
+                        <Github size={32} className="text-gray-800 hover:text-gray-600" />
                     </a>
                     <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                        <FaTwitter className="text-gray-600 hover:text-black" />
-                    </a>
-                    <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
-                        <FaDiscord className="text-gray-600 hover:text-black" />
+                        <Twitter size={32} className="text-sky-500 hover:text-sky-700" />
                     </a>
                 </div>
             </div>
@@ -176,7 +176,7 @@ const Homepage = () => {
                 <div className="w-40 h-40 bg-gray-300 rounded-full mb-2">
                     <img
                     src={"https://avatars.githubusercontent.com/u/104348335?v=4"}
-                    alt="Nom 4"
+                    alt="KERHERVE Thomas"
                     className="w-40 h-40 rounded-full object-cover"
                     />
                 </div>
@@ -185,13 +185,10 @@ const Homepage = () => {
 
                 <div className="flex justify-center gap-4 mt-2">
                     <a href="https://github.com/ThomasKERHERVE" target="_blank" rel="noopener noreferrer">
-                        <FaGithub className="text-gray-600 hover:text-black" />
+                        <Github size={32} className="text-gray-800 hover:text-gray-600" />
                     </a>
                     <a href="https://x.com/PouletBlanc00" target="_blank" rel="noopener noreferrer">
-                        <FaTwitter className="text-gray-600 hover:text-black" />
-                    </a>
-                    <a  title="poulet_blanc" target="_blank" rel="noopener noreferrer">
-                        <FaDiscord className="text-gray-600 hover:text-black" />
+                        <Twitter size={32} className="text-sky-500 hover:text-sky-700" />
                     </a>
                 </div>
             </div>
