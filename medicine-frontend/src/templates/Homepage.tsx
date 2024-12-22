@@ -19,7 +19,9 @@ const Homepage = () => {
         <header className="flex items-center justify-between p-4 bg-grey shadow-lg">
 
             <div className="flex items-center text-2xl font-bold text-red-600">
-                <img className="font-bold w-11 h-11" src={logo} alt="Logo"/>Médecine
+
+                <img className="font-bold w-11 h-11" src={logo} alt="Logo"/> Médecine
+                
             </div>
         
             <nav className="flex gap-4">
@@ -32,8 +34,8 @@ const Homepage = () => {
                 <a href="#SectionEquipe" className="text-gray-600 hover:text-black">Notre Équipe</a>
             </nav>
             <div className="flex gap-2">
-                <button className="px-4 py-1 text-white bg-red-500 rounded-md">Connexion</button>
-                <button className="px-4 py-1 text-white bg-red-500 rounded-md">Inscription</button>
+                <button className="px-6 py-2 bg-red-500 text-white rounded-lg shadow-lg hover:bg-red-600 transition duration-300"> Connexion </button>
+                <button className="px-6 py-2 bg-red-500 text-white rounded-lg shadow-lg hover:bg-red-600 transition duration-300"> Inscription </button>
             </div>
         </header>
 
@@ -43,13 +45,13 @@ const Homepage = () => {
         <section id="SectionProjet" className="flex flex-col-reverse lg:flex-row items-center p-20 bg-grey">
 
             <div className="w-full lg:w-1/2">
-                    <p className="text-lg font-bold text-red-600 mb-4 mr-auto pr-16">application de gestion de cabinet médical</p>
+                    <p className="w-100 h-150 text-lg font-bold text-red-600 mb-4 mr-auto pr-16">application de gestion de cabinet médical</p>
                     <p> Cette application permettra : <br></br>
                             - Aux patients de consulter les créneaux disponibles et de réserver un rendez-vous. <br></br>
                             - Au médecin de visualiser la liste des rendez-vous programmés pour la journée.</p>
             </div>
             <div w-full className="lg:w-1/2 flex justify-end">
-                <img className="h-300 items-right rounded-md" src={imageSectionProjet} alt="imageSectionProjet"/>
+                <img className="h-300 items-right rounded-md shadow-sm" src={imageSectionProjet} alt="imageSectionProjet"/>
             </div>
         </section>
         <div>
@@ -63,7 +65,7 @@ const Homepage = () => {
         {/* Section Médecin */}
         <section id="SectionMedecin" className="flex flex-col lg:flex-row items-center p-20 bg-gray-200">
 
-            <img className="w-100 h-80 rounded-md mr-auto pr-16" src={imageSectionMedecin} alt="imageSectionMedecin"/>
+            <img className="w-100 h-150 rounded-md mr-auto pr-16 shadow-md" src={imageSectionMedecin} alt="imageSectionMedecin"/>
             <div className="w-full lg:w-1/2 text-right ml-auto">
                 <p className="text-lg font-bold text-red-600 mb-4">Nos Médecins</p>
                 <p className="text-lg">
@@ -87,10 +89,10 @@ const Homepage = () => {
                 <p className="text-lg font-bold text-red-600 mb-16">Les patients</p>
                 <p className="text-lg">
                     - Réserver un créneau parmi les disponibilités proposées. <br></br>
-                    - Annuler un rendez-vous existant (pas de modification)
+                    - Annuler un rendez-vous existant
                 </p>
             </div>
-            <img className="w-100 h-80 rounded-md ml-auto" src={imageSectionPatient} alt="imageSectionPatient"/>
+            <img className="w-100 h-150 rounded-md ml-auto shadow-sm" src={imageSectionPatient} alt="imageSectionPatient"/>
         </section>
         <div>
             <hr className="border-t-2 border-gray-500 w-3/4 mx-auto" />
@@ -195,9 +197,13 @@ const Homepage = () => {
 
             </div>
         </section>
-        <div>
-            <hr className="border-t-2 border-gray-500 w-3/4 mx-auto" />
-        </div>
+
+
+        {/* footer */}
+
+        <footer className="p-4 bg-gray-800 text-white text-center">
+            <p>© 2024 Médecine. Tous droits réservés.</p>
+        </footer>
 
 
 
