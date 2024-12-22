@@ -1,37 +1,51 @@
-import {
-    Pagination,
-    PaginationContent, PaginationEllipsis,
-    PaginationItem,
-    PaginationLink, PaginationNext,
-    PaginationPrevious
-} from "@/components/ui/pagination.tsx";
+import {Pagination, PaginationLink, PaginationNext, PaginationPrevious} from "@/components/ui/pagination.tsx";
+import React from "react";
+import { cn } from "@/lib/utils";
 
-export const PaginationComponent = () => {
+interface PaginationProps {
+    currentPage: number;
+    totalPages: number;
+    onPageChange: (page: number) => void;
+}
+
+export const PaginationComponent = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
+    const handlePrevious = () => {
+        if (currentPage > 1) onPageChange(currentPage - 1);
+    };
+    
+    const handleNext = () => {
+        if (currentPage < totalPages) onPageChange(currentPage + 1);
+    };
+    
     return (
-        <Pagination>
-            <PaginationContent>
-                <PaginationItem>
-                    <PaginationPrevious href="#" />
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#">1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#" isActive>
-                        2
-                    </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#">3</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationEllipsis />
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationNext href="#" />
-                </PaginationItem>
-            </PaginationContent>
+        <Pagination className="flex justify-center items-center space-x-2 mt-4">
+            <PaginationPrevious
+                aria-labelledby={"test"}
+                onClick={handlePrevious}
+                disabled={currentPage === 1}
+                className="flex items-center cursor-pointer border border-gray-200 bg-gray-200"
+            >
+                Précédent
+            </PaginationPrevious>
+            {Array.from({ length: totalPages }, (_, index) => (
+                <PaginationLink
+                    key={index}
+                    onClick={() => onPageChange(index + 1)}
+                    className={cn(
+                        "px-3 py-1.5 cursor-pointer border border-gray-200",
+                        currentPage === index + 1 && "bg-gray-200"
+                    )}
+                >
+                    {index + 1}
+                </PaginationLink>
+            ))}
+            <PaginationNext
+                onClick={handleNext}
+                disabled={currentPage === totalPages}
+                className="flex items-center cursor-pointer border border-gray-200 bg-gray-200"
+            >
+                Suivant
+            </PaginationNext>
         </Pagination>
     );
 };
-

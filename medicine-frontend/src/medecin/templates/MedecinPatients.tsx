@@ -13,6 +13,16 @@ const MedecinPatients = () => {
         { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
         { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
         { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Romain", lastName: "Tirbois", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Jules", lastName: "Gohier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
+        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
     ]
     
     return (
