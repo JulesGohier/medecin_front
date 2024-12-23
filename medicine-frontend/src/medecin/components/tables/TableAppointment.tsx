@@ -24,7 +24,7 @@ export const TableAppointment = ({ data }: TableAppointmentProps) => {
     const [sortedData, setSortedData] = useState(data);
     const itemsPerPage = 12;
     
-    const tableHeader = ["Prénom", "Nom", "Sexe", "Date rdv", "État", "Actions"];
+    const tableHeader = ["Prénom", "Nom", "Sexe", "Date Rendez-Vous", "État", "Actions"];
     const tableActions: TableActionsProps[] = [
         { icon: Edit, className: "text-gray-500 hover:text-gray-700" },
         { icon: Trash, className: "text-red-500 hover:text-red-700" },
@@ -32,11 +32,14 @@ export const TableAppointment = ({ data }: TableAppointmentProps) => {
     
     const handleSortChange = (sortBy: string) => {
         const sorted = [...data].sort((a, b) => {
-            if (sortBy === "Date") {
-                return new Date(a.date_rdv).getTime() - new Date(b.date_rdv).getTime();
-            }
             if (sortBy === "Nom") {
                 return a.lastName.localeCompare(b.lastName);
+            }
+            if (sortBy === "Récent") {
+                return new Date(b.date_rdv).getTime() - new Date(a.date_rdv).getTime();
+            }
+            if (sortBy === "Ancien") {
+                return new Date(a.date_rdv).getTime() - new Date(b.date_rdv).getTime();
             }
         });
         setSortedData(sorted);
@@ -74,11 +77,11 @@ export const TableAppointment = ({ data }: TableAppointmentProps) => {
                         key={rowIndex}
                         className={`text-center ${rowIndex % 2 === 1 ? "bg-gray-100" : "bg-white"}`}
                     >
-                        <TableCell>{row.firstName}</TableCell>
-                        <TableCell>{row.lastName}</TableCell>
-                        <TableCell>{row.sexe}</TableCell>
+                        <TableCell className={"capitalize"}>{row.firstName}</TableCell>
+                        <TableCell className={"capitalize"}>{row.lastName}</TableCell>
+                        <TableCell className={"capitalize"}>{row.sexe}</TableCell>
                         <TableCell className={"capitalize"}>{formatDate(row.date_rdv)}</TableCell>
-                        <TableCell>{row.state}</TableCell>
+                        <TableCell className={"capitalize"}>{row.state}</TableCell>
                         <TableCell className="text-center">
                             <div className="flex justify-center space-x-2">
                                 {tableActions.map((action, key) => (
