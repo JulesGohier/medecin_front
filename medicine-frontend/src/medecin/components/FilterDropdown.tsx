@@ -1,5 +1,10 @@
-
 import { Button } from "@/components/ui/button";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu.tsx";
 import { useState } from "react";
 
 interface FilterDropdownProps {
@@ -7,7 +12,7 @@ interface FilterDropdownProps {
 }
 
 export const FilterDropdown = ({ onSortChange }: FilterDropdownProps) => {
-    const [selectedSort, setSelectedSort] = useState("Date");
+    const [selectedSort, setSelectedSort] = useState();
     
     const handleSortChange = (sortBy: string) => {
         setSelectedSort(sortBy);
@@ -15,18 +20,16 @@ export const FilterDropdown = ({ onSortChange }: FilterDropdownProps) => {
     };
     
     return (
-        <Dropdown>
+        <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="w-40">
-                    Trier par: {selectedSort}
+                <Button variant="themed" className="w-40">
+                    Trier par: {selectedSort ?? "Aucun"}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => handleSortChange("Date")}>Date</DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleSortChange("Nom")}>Nom</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleSortChange("Sexe")}>Sexe</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleSortChange("État")}>État</DropdownMenuItem>
             </DropdownMenuContent>
-        </Dropdown>
+        </DropdownMenu>
     );
 };

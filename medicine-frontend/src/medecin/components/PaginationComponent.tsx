@@ -20,7 +20,6 @@ export const PaginationComponent = ({ currentPage, totalPages, onPageChange }: P
     return (
         <Pagination className="flex justify-center items-center space-x-2 mt-4">
             <PaginationPrevious
-                aria-labelledby={"test"}
                 onClick={handlePrevious}
                 disabled={currentPage === 1}
                 className="flex items-center cursor-pointer border border-gray-200 bg-gray-200"
@@ -42,7 +41,7 @@ export const PaginationComponent = ({ currentPage, totalPages, onPageChange }: P
             <PaginationNext
                 onClick={handleNext}
                 disabled={currentPage === totalPages}
-                className="flex items-center cursor-pointer border border-gray-200 bg-gray-200"
+                className="flex items-center cursor-pointer border border-gray-200 bg-gray-200 disabled:bg-green-500"
             >
                 Suivant
             </PaginationNext>
