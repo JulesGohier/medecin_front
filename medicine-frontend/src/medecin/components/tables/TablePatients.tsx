@@ -48,7 +48,6 @@ export const TablePatients = ({ data }: TablePatientProps) => {
     
     return (
         <div className="w-full">
-            {/* Tableau */}
             <TableLayout header={tableHeader}>
                 {currentData.map((row, rowIndex) => (
                     <TableRow

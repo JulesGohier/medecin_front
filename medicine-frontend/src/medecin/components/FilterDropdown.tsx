@@ -27,8 +27,16 @@ export const FilterDropdown = ({ onSortChange }: FilterDropdownProps) => {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => handleSortChange("Date")}>Date</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleSortChange("Nom")}>Nom</DropdownMenuItem>
+                <DropdownMenuItem
+                    onClick={() => handleSortChange("Date")}
+                >
+                    Date
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                    onClick={() => handleSortChange("Nom")}
+                >
+                    Nom
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     );
