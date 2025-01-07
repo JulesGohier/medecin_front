@@ -28,7 +28,7 @@ export const SelectAppointment = ({heure, date}: {heure: string, date: string})=
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline" className={"bg-red-500 hover:bg-red-600 hover:text-white text-white w-1/5"}> {heure}</Button>
+                <Button variant="outline" className={"bg-red-500 hover:bg-red-600 hover:text-white text-white w-1/7"}> {heure}</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
