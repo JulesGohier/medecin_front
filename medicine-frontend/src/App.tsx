@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router";
-import Homepage from "@/templates/Homepage.tsx";
+import Homepage from "@/templates/Homepage";
 
 function App() {
   return (
