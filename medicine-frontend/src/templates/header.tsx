@@ -106,7 +106,7 @@ const Header: React.FC = () => {
             <h2 className="text-2xl font-semibold mb-4">Connexion</h2>
             <form onSubmit={seConnecter}>
 
-              {/* Bouton pour le nom d'utilisateur */}
+              {/* Le nom d'utilisateur */}
               <div>
                 <label htmlFor="username" className="block text-sm mb-2">Nom d'utilisateur</label>
                 <input
@@ -118,7 +118,7 @@ const Header: React.FC = () => {
                 />
               </div>
 
-              {/* Bouton pour le mot de passe */}
+              {/* Le mot de passe */}
               <div>
                 <label htmlFor="password" className="block text-sm mb-2">Mot de passe</label>
                 <input
@@ -140,7 +140,7 @@ const Header: React.FC = () => {
                   Fermer
                 </button>
 
-                {/* Bouton pour submit */}
+                {/* Le bouton submit */}
                 <button
                   type="submit"
                   className="px-6 py-2 bg-red-500 text-white rounded-lg"
@@ -160,7 +160,7 @@ const Header: React.FC = () => {
             <h2 className="text-2xl font-semibold mb-4">Inscription</h2>
             <form onSubmit={inscription}>
 
-              {/* Bouton pour le nom d'utilisateur */}
+              {/* Le nom d'utilisateur */}
               <div>
                 <label htmlFor="signupUsername" className="block text-sm mb-2">Nom d'utilisateur</label>
                 <input
@@ -172,7 +172,7 @@ const Header: React.FC = () => {
                 />
               </div>
 
-              {/* Bouton pour le mot de passe */}
+              {/* Le mot de passe */}
               <div>
                 <label htmlFor="signupPassword" className="block text-sm mb-2">Mot de passe</label>
                 <input
@@ -184,7 +184,7 @@ const Header: React.FC = () => {
                 />
               </div>
 
-              {/* Bouton pour le second mot de passe */}
+              {/* Confirmer le mot de passe */}
               <div>
                 <label htmlFor="confirmPassword" className="block text-sm mb-2">Confirmer le mot de passe</label>
                 <input

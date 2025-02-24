@@ -7,8 +7,8 @@ import {SidebarLayout} from "@/components/features/layout/SidebarLayout.tsx";
 import {Button} from "@/components/ui/button.tsx";
 
 import Header from "./Header";
-import Footer from "./footer";
-import LesBox from "./boxLandingPage";
+import Footer from "./Footer";
+import LesBox from "./BoxLandingPage";
 
 const Homepage = () => {
     return (
