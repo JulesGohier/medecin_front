@@ -8,6 +8,7 @@ const Inscription: React.FC = () => {
   const [formData, setFormData] = useState<any>({
     username: "",
     password: "",
+    rpps_medecin: "",
     nom: "",
     prenom: "",
     sexe: "",
@@ -78,6 +79,15 @@ const Inscription: React.FC = () => {
                   name="password"
                   placeholder="Mot de passe"
                   value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                  className="p-2 w-full border border-gray-300 rounded"
+                />
+                <input
+                  type="rpps_medecin"
+                  name="rpps_medecin"
+                  placeholder="rpps_medecin"
+                  value={formData.rpps_medecin}
                   onChange={handleInputChange}
                   required
                   className="p-2 w-full border border-gray-300 rounded"
