@@ -1,10 +1,5 @@
-import React from "react";
-import DiscordIcon from "@/assets/discord-icon-svgrepo-com.svg";
-import logo from "@/assets/icon-medicine.png";
-import { Twitter, Github } from "lucide-react";
+import React from 'react';
 import imageSectionPatient from "@/assets/Patient-Journey-Mapping-cvr.jpg";
-import {SidebarLayout} from "@/components/features/layout/SidebarLayout.tsx";
-import {Button} from "@/components/ui/button.tsx";
 
 import Header from "./Header";
 import Footer from "./Footer";
