@@ -1,29 +1,33 @@
 import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
+import {authenticateMedecin, fetchMedecinByRpps} from "@/medecin/actions/medecin-action.ts";
+import {LoaderSpinner} from "@/medecin/components/LoaderSpinner.tsx";
 import {TablePatients} from "@/medecin/components/tables/TablePatients.tsx";
+import {useQuery} from "@tanstack/react-query";
+
 
 const MedecinPatients = () => {
-    const data = [
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Romain", lastName: "Tirbois", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Jules", lastName: "Gohier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", num_secu: 213098765432109, num_id: 1 },
-    ]
+    //A changer paprès le merge
+    const exampleRpps = 112233445566;
+    
+    const { data: medecin, isLoading } = useQuery({
+        queryKey: ["medecin"],
+        queryFn: async () => {
+            let token = localStorage.getItem("token");
+            if (!token) {
+                token = await authenticateMedecin();
+            }
+            return fetchMedecinByRpps(exampleRpps);
+        },
+    });
+    
+    if (isLoading) {
+        return (
+            <div className={"flex w-full h-screen items-center justify-center"}>
+                <LoaderSpinner />
+            </div>
+        );
+    }
+    
     
     return (
         <DashboardWrapper>
@@ -33,11 +37,11 @@ const MedecinPatients = () => {
                     <p className={"text-lg font-medium"}>Tableau de vos patients.</p>
                 </div>
                 <div className={"flex flex-col sm:flex-row md:flex-row mt-16"}>
-                    <TablePatients data={data} />
+                    <TablePatients patients={medecin?.patients} />
                 </div>
             </div>
         </DashboardWrapper>
-);
+    );
 };
 
 export default MedecinPatients;

@@ -1,13 +1,31 @@
 import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
+import {authenticateMedecin, fetchMedecinByRpps} from "@/medecin/actions/medecin-action.ts";
+import {LoaderSpinner} from "@/medecin/components/LoaderSpinner.tsx";
 import {TableAppointment} from "@/medecin/components/tables/TableAppointment.tsx";
+import {useQuery} from "@tanstack/react-query";
+
 
 const MedecinAppointments = () => {
-    const data = [
-        { firstName: "Lilian", lastName: "Caffier", sexe: "Homme", date_rdv: "2023-12-15", state: "En cours" },
-        { firstName: "Jules", lastName: "Gohier", sexe: "Homme", date_rdv: "2024-01-12", state: "En cours" },
-        { firstName: "Romain", lastName: "Tirbois", sexe: "Homme", date_rdv: "2023-12-17", state: "En cours" },
-        { firstName: "Thomas", lastName: "Kerhervé", sexe: "Homme", date_rdv: "2023-12-14", state: "En cours" },
-    ];
+    const exampleRpps = 112233445566;
+    
+    const { data: medecin, isLoading } = useQuery({
+        queryKey: ["medecin"],
+        queryFn: async () => {
+            let token = localStorage.getItem("token");
+            if (!token) {
+                token = await authenticateMedecin();
+            }
+            return fetchMedecinByRpps(exampleRpps);
+        },
+    });
+    
+    if (isLoading) {
+        return (
+            <div className={"flex w-full h-screen items-center justify-center"}>
+                <LoaderSpinner />
+            </div>
+        )
+    }
     
     return (
         <DashboardWrapper>
@@ -17,7 +35,7 @@ const MedecinAppointments = () => {
                     <p className={"text-lg font-medium"}>Tableau de vos rendez-vous.</p>
                 </div>
                 <div className={"flex flex-col sm:flex-row md:flex-row mt-16"}>
-                    <TableAppointment data={data} />
+                    <TableAppointment appointments={medecin?.rdv} />
                 </div>
             </div>
         </DashboardWrapper>

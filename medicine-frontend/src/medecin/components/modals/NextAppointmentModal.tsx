@@ -1,13 +1,12 @@
 import {Button} from "@/components/ui/button.tsx";
-import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
-import {PatientsAppointment} from "@/medecin/components/cards/NextAppointmentCard.tsx";
+import {Dialog, DialogContent, DialogFooter, DialogTrigger, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
+import {Patient} from "@/medecin/components/cards/NextAppointmentCard.tsx";
 import {LoaderSpinner} from "@/medecin/components/LoaderSpinner.tsx";
-import {DialogTrigger} from "@radix-ui/react-dialog";
-import {Calendar, Mail} from "lucide-react";
+import {formatDate, formatPhoneNumber} from "@/medecin/format/format.ts";
+import {Phone, Calendar} from "lucide-react";
 import {useState, useTransition} from "react";
-import {Link} from "react-router";
 
-export const NextAppointmentModal = ({ firstName, lastName, email, day, hours }: PatientsAppointment) => {
+export const NextAppointmentModal = ({  nom, prenom, num_tel, appointmentDate }: Patient & { appointmentDate: string }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isPending, startTransition] = useTransition();
     
@@ -26,15 +25,15 @@ export const NextAppointmentModal = ({ firstName, lastName, email, day, hours }:
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Rendez vous de {firstName} {lastName}</DialogTitle>
+                    <DialogTitle>Rendez-vous de {prenom} {nom}</DialogTitle>
                 </DialogHeader>
                 <div className="my-2 flex items-center">
                     <Calendar size={20} className={"mr-2"}/>
-                    <p>Heure programmé : {day} à {hours.replace(":", 'h')}</p>
+                    <p>Heure programmée : {formatDate(appointmentDate)}</p>
                 </div>
                 <div className="my-2 flex items-center">
-                    <Mail size={20} className={"mr-2"}/>
-                    <p>Contacter le patient : <Link to={`mailto:${email}`} className={"underline text-red-800 hover:text-red-700"}>{email}</Link></p>
+                    <Phone size={20} className={"mr-2"}/>
+                    <p>Contacter le patient: {formatPhoneNumber(num_tel)}</p>
                 </div>
                 <DialogFooter>
                     <Button
@@ -53,4 +52,3 @@ export const NextAppointmentModal = ({ firstName, lastName, email, day, hours }:
         </Dialog>
     );
 };
-

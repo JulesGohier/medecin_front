@@ -1,24 +1,17 @@
+import {Label} from "@/components/ui/label.tsx";
 import { TableCell, TableRow } from "@/components/ui/table.tsx";
+import {Patient} from "@/medecin/components/cards/NextAppointmentCard.tsx";
 import { PaginationComponent } from "@/medecin/components/PaginationComponent.tsx";
 import { TableActionsProps } from "@/medecin/components/tables/types.ts";
 import { TableActions } from "@/medecin/components/tables/TableActions.tsx";
 import { TableLayout } from "@/medecin/components/tables/TableLayout.tsx";
 import { Edit, Eye, Trash } from "lucide-react";
-import { useState } from "react";
+import  { useState } from "react";
 
-interface Patient {
-    firstName: string;
-    lastName: string;
-    sexe: string;
-    num_secu: number;
-    num_id: number;
-}
 
-interface TablePatientProps {
-    data: Patient[];
-}
 
-export const TablePatients = ({ data }: TablePatientProps) => {
+
+export const TablePatients = ({ patients }: {  patients: Patient[]  }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12;
     
@@ -27,7 +20,7 @@ export const TablePatients = ({ data }: TablePatientProps) => {
         "Nom",
         "Sexe",
         "Numéro de sécurité sociale",
-        "Numéro d'identification",
+        "Numéro de téléphone",
         "Actions",
     ];
     const tableActions: TableActionsProps[] = [
@@ -36,11 +29,7 @@ export const TablePatients = ({ data }: TablePatientProps) => {
         { icon: Trash, className: "text-red-500 hover:text-red-700" },
     ];
     
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
-    
-    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const totalPages = Math.ceil(patients.length / itemsPerPage);
     
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
@@ -49,16 +38,16 @@ export const TablePatients = ({ data }: TablePatientProps) => {
     return (
         <div className="w-full">
             <TableLayout header={tableHeader}>
-                {currentData.map((row, rowIndex) => (
+                {patients.length > 0 ? patients.map((row, rowIndex) => (
                     <TableRow
                         key={rowIndex}
                         className={`text-center ${rowIndex % 2 === 1 ? "bg-gray-100" : "bg-white"}`}
                     >
-                        <TableCell>{row.firstName}</TableCell>
-                        <TableCell>{row.lastName}</TableCell>
+                        <TableCell>{row.prenom}</TableCell>
+                        <TableCell>{row.nom}</TableCell>
                         <TableCell>{row.sexe}</TableCell>
-                        <TableCell>{row.num_secu}</TableCell>
-                        <TableCell>#{row.num_id}</TableCell>
+                        <TableCell>{row.num_secu_sociale}</TableCell>
+                        <TableCell>#{row.num_tel}</TableCell>
                         <TableCell className="text-center">
                             <div className="flex justify-center space-x-2">
                                 {tableActions.map((action, key) => (
@@ -67,7 +56,12 @@ export const TablePatients = ({ data }: TablePatientProps) => {
                             </div>
                         </TableCell>
                     </TableRow>
-                ))}
+                )) : (
+                    <div className="flex w-full h-full text-center mt-6 ml-64 items-center justify-center">
+                        <Label>Aucun Patients</Label>
+                    </div>
+                
+                )}
             </TableLayout>
             
             <div className="mt-4">

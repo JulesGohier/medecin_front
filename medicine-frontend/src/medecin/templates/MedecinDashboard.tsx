@@ -1,3 +1,6 @@
+import {authenticateMedecin, fetchMedecinByRpps} from "@/medecin/actions/medecin-action.ts";
+import { LoaderSpinner } from "@/medecin/components/LoaderSpinner.tsx";
+import {useQuery} from "@tanstack/react-query";
 import { CalendarCheck, Users } from "lucide-react";
 import { NextAppointmentCard } from "@/medecin/components/cards/NextAppointmentCard.tsx";
 import StatCard, { StatCardProps } from "@/medecin/components/cards/StatsCard.tsx";
@@ -8,19 +11,46 @@ const formatNumber = (num: number) => {
     return new Intl.NumberFormat('en-US').format(num);
 };
 
+
 const MedecinDashboard = () => {
+    
+    //A changer paprès le merge
+    const exampleRpps = 112233445566;
+    
+    const { data: medecin, isLoading } = useQuery({
+        queryKey: ["medecin"],
+        queryFn: async () => {
+            let token = localStorage.getItem("token");
+            if (!token) {
+                token = await authenticateMedecin();
+            }
+            return fetchMedecinByRpps(exampleRpps);
+        },
+    });
+    
+    if (isLoading) {
+        return (
+            <div className={"flex w-full h-screen items-center justify-center"}>
+                <LoaderSpinner />
+            </div>
+        );
+    }
+    
+    const patientsCount = medecin?.patients.length || 0;
+    const rdvCount = medecin?.rdv.length || 0;
+    
     const statsCards: StatCardProps[] = [
         {
             icon: Users,
             title: "Patients",
-            value: formatNumber(4330),
+            value: formatNumber(patientsCount),
             percentage: "+10",
             linkTo: "/patients"
         },
         {
             icon: CalendarCheck,
             title: "RDV",
-            value: formatNumber(12),
+            value: formatNumber(rdvCount),
             percentage: "+10",
             linkTo: "/appointments"
         },
@@ -45,7 +75,7 @@ const MedecinDashboard = () => {
                 
                 <div className={"flex flex-col mt-4 sm:flex-row md:flex-row"}>
                     <PatientsAreaChart />
-                    <NextAppointmentCard />
+                    <NextAppointmentCard appointments={medecin?.rdv} />
                 </div>
             </div>
         </DashboardWrapper>

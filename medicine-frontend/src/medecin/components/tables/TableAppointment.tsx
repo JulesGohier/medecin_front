@@ -1,27 +1,37 @@
+import {Label} from "@/components/ui/label.tsx";
 import { TableCell, TableRow } from "@/components/ui/table.tsx";
-import {FilterDropdown} from "@/medecin/components/FilterDropdown.tsx";
+import {fetchData} from "@/medecin/actions/medecin-action.ts";
+import {LoaderSpinner} from "@/medecin/components/LoaderSpinner.tsx";
 import { PaginationComponent } from "@/medecin/components/PaginationComponent.tsx";
-import { TableActions } from "@/medecin/components/tables/TableActions.tsx";
+import {TableActions} from "@/medecin/components/tables/TableActions.tsx";
 import { TableLayout } from "@/medecin/components/tables/TableLayout.tsx";
 import { TableActionsProps } from "@/medecin/components/tables/types.ts";
+import {formatDate} from "@/medecin/format/format.ts";
+import {useQueries} from "@tanstack/react-query";
 import { Edit, Trash } from "lucide-react";
-import { useState } from "react";
+import  { useState } from "react";
 
-interface Appointment {
-    firstName: string;
-    lastName: string;
-    sexe: string;
-    date_rdv: string;
-    state: string;
-}
 
-interface TableAppointmentProps {
-    data: Appointment[];
-}
-
-export const TableAppointment = ({ data }: TableAppointmentProps) => {
+export const TableAppointment = ({ appointments } :  { appointments: string[]  }) => {
+    const queriesAppointmentData = useQueries({
+        queries: appointments.map((appointment) => ({
+            queryKey: ['appointment', appointment],
+            queryFn: () => fetchData(appointment),
+        })),
+    });
+    
+    const queriesAppointmentPatientData = useQueries({
+        queries: queriesAppointmentData
+            .filter((appointment) => appointment.data?.idPatient)
+            .map((appointment) => ({
+                queryKey: ['patient', appointment.data.idPatient],
+                queryFn: () => fetchData(appointment.data.idPatient),
+            })),
+    });
+    
+    const isLoading = queriesAppointmentData.some(query => query.isLoading) || queriesAppointmentPatientData.some(query => query.isLoading);
+    
     const [currentPage, setCurrentPage] = useState(1);
-    const [sortedData, setSortedData] = useState(data);
     const itemsPerPage = 12;
     
     const tableHeader = ["Prénom", "Nom", "Sexe", "Date Rendez-Vous", "État", "Actions"];
@@ -30,73 +40,55 @@ export const TableAppointment = ({ data }: TableAppointmentProps) => {
         { icon: Trash, className: "text-red-500 hover:text-red-700" },
     ];
     
-    const handleSortChange = (sortBy: string) => {
-        const sorted = [...data].sort((a, b) => {
-            if (sortBy === "Nom") {
-                return a.lastName.localeCompare(b.lastName);
-            }
-            if (sortBy === "Récent") {
-                return new Date(b.date_rdv).getTime() - new Date(a.date_rdv).getTime();
-            }
-            if (sortBy === "Ancien") {
-                return new Date(a.date_rdv).getTime() - new Date(b.date_rdv).getTime();
-            }
-        });
-        setSortedData(sorted);
-        setCurrentPage(1);
-    };
     
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentData = sortedData.slice(indexOfFirstItem, indexOfLastItem);
-    
-    const totalPages = Math.ceil(sortedData.length / itemsPerPage);
+    const totalPages = Math.ceil(queriesAppointmentPatientData.length / itemsPerPage);
     
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
     
-    const formatDate = (dateString: string): string => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString("fr-FR", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        });
-    };
-    
     return (
         <div className="w-full">
-            <div className="flex justify-between items-center mb-4">
-                <FilterDropdown onSortChange={handleSortChange} />
-            </div>
-            <TableLayout header={tableHeader}>
-                {currentData.map((row, rowIndex) => (
-                    <TableRow
-                        key={rowIndex}
-                        className={`text-center ${rowIndex % 2 === 1 ? "bg-gray-100" : "bg-white"}`}
-                    >
-                        <TableCell className={"capitalize"}>{row.firstName}</TableCell>
-                        <TableCell className={"capitalize"}>{row.lastName}</TableCell>
-                        <TableCell className={"capitalize"}>{row.sexe}</TableCell>
-                        <TableCell className={"capitalize"}>{formatDate(row.date_rdv)}</TableCell>
-                        <TableCell className={"capitalize"}>{row.state}</TableCell>
-                        <TableCell className="text-center">
-                            <div className="flex justify-center space-x-2">
-                                {tableActions.map((action, key) => (
-                                    <TableActions
-                                        key={key}
-                                        icon={action.icon}
-                                        className={action.className}
-                                    />
-                                ))}
-                            </div>
-                        </TableCell>
-                    </TableRow>
-                ))}
-            </TableLayout>
-            
+            {isLoading ? (
+                <div className={"flex w-full h-full justify-center"}>
+                    <LoaderSpinner />
+                </div>
+            ) : (
+                <TableLayout header={tableHeader}>
+                    {queriesAppointmentData.length > 0 ? queriesAppointmentData.map((item, key) => {
+                        const patientData = queriesAppointmentPatientData[key]?.data;
+                        const appointmentDate = item.data?.date;
+                        const appointmentState = item.data?.state;
+                        return (
+                            <TableRow
+                                key={key}
+                                className={`text-center ${key % 2 === 1 ? "bg-gray-100" : "bg-white"}`}
+                            >
+                                <TableCell className={"capitalize"}>{patientData?.prenom}</TableCell>
+                                <TableCell className={"capitalize"}>{patientData?.nom}</TableCell>
+                                <TableCell className={"capitalize"}>{patientData?.sexe}</TableCell>
+                                <TableCell className={"capitalize"}>{formatDate(appointmentDate)}</TableCell>
+                                <TableCell className={"capitalize"}>{appointmentState}</TableCell>
+                                <TableCell className="text-center">
+                                    <div className="flex justify-center space-x-2">
+                                        {tableActions.map((action, key) => (
+                                            <TableActions
+                                                key={key}
+                                                icon={action.icon}
+                                                className={action.className}
+                                            />
+                                        ))}
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        );
+                    }) : (
+                        <div className={"flex w-full h-full mt-6 ml-64 items-center text-center justify-center"}>
+                            <Label>Aucun Rendez-Vous</Label>
+                        </div>
+                    )}
+                </TableLayout>
+            )}
             <div className="mt-4">
                 <PaginationComponent
                     currentPage={currentPage}
