@@ -20,17 +20,26 @@ const Connexion: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("api/login_token", formData, {
+      const reponse = await axios.post("http://localhost:9000/api/login_token", formData, {
         headers: {
           "Content-Type": "application/json",
         }
-      });
+      }); // requête a l'API
 
-      if (response.status === 200) {
-        
-        localStorage.setItem("authToken", response.data.token); // Sauvegarder le token d'authentification
+      if (reponse.status === 200) {
+        const token = reponse.data.token;
+        localStorage.setItem("authToken", reponse.data.token); // Sauvegarder le token d'authentification
 
-        // Ici pour rediriger vers une page !!!
+        const payload = JSON.parse(atob(token.split(".")[1])); // Vérifie que c'est bien un JWT
+        const role = payload.role;
+
+        if (role === "ROLE_MEDECIN") {
+          window.location.href = "/estMedecin.html";
+        } else if (role === "ROLE_PATIENT") {
+          window.location.href = "/estPatient.html";
+        } else {
+          console.error("Rôle inconnu");
+        }
         
       }
     } catch (error) {
