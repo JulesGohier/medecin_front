@@ -1,6 +1,5 @@
 import {
     Card,
-    CardContent,
     CardDescription,
     CardFooter,
     CardHeader,
@@ -12,7 +11,6 @@ import {
 } from "@/components/ui/avatar"
 import {Mails, Phone} from "lucide-react";
 import {ContactButton} from "@/patient/components/ContactButton.tsx";
-import {InfoSection} from "@/patient/components/InfoSection.tsx";
 
 
 export const MedecinCard = ({ className }: { className?: string }) => {
@@ -24,11 +22,6 @@ export const MedecinCard = ({ className }: { className?: string }) => {
         email: "jules.reihog5@gmail.com",
     };
 
-    const CabinetInfo = {
-        horaires: "Disponible du lundi au vendredi, de 9h à 18h",
-        adresse: {rue: "11 Rue Contrescarpe", ville: "44000 Nantes", complement: "1er étage sans ascenseur"},
-        paiement: ["Chèques", "espèces", "cartes bancaires"],
-    }
     const PhoneWithSpace = MedecinInfo.telephone.replace(/(\d{2})/g, '$1 ');
 
     return (
@@ -50,25 +43,6 @@ export const MedecinCard = ({ className }: { className?: string }) => {
                     <ContactButton Icon={Phone} href={"tel:+33" + MedecinInfo.telephone} label={PhoneWithSpace}/>
                     <ContactButton Icon={Mails} href={"mailto:" + MedecinInfo.email} label={MedecinInfo.email}/>
                 </CardFooter>
-            </Card>
-            <Card>
-                <CardTitle className={"text-black text-1xl flex justify-self-center m-2"}>Votre cabinet</CardTitle>
-                <hr/>
-                <CardContent className={"mt-3"}>
-                    <div className={"flex flex-col gap-5"}>
-                        <InfoSection title="Horaire :">
-                            <p>{CabinetInfo.horaires}</p>
-                        </InfoSection>
-                        <InfoSection title="Localisation du cabinet :">
-                            <p>{CabinetInfo.adresse.rue}</p>
-                            <p>{CabinetInfo.adresse.ville}</p>
-                            <p>{CabinetInfo.adresse.complement}</p>
-                        </InfoSection>
-                        <InfoSection title="Moyens de paiement :">
-                            <p>{CabinetInfo.paiement.join(", ")}</p>
-                        </InfoSection>
-                    </div>
-                </CardContent>
             </Card>
         </div>
     );
