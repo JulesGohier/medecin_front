@@ -2,6 +2,7 @@ import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.
 import {MedecinCard} from "@/patient/components/MedecinCard.tsx";
 import {BookingAppointment} from "@/patient/components/BookingAppointment.tsx";
 import {CabinetCard} from "@/patient/components/CabinetCard.tsx";
+import {Card, CardContent, CardTitle} from "@/components/ui/card.tsx";
 
 export const PatientDashboard = () => {
   return (
@@ -15,7 +16,13 @@ export const PatientDashboard = () => {
 
               <div className="flex flex-col gap-4 h-full">
                   <BookingAppointment className="w-full flex-1 min-h-[300px] md:min-h-[500px]" />
-                  <div className="w-full h-[170px] bg-red-700 rounded-b"></div>
+                  <Card className="w-full h-[160px] rounded-2xl">
+                      <CardTitle className={"text-black flex justify-self-center m-3"}>Votre prochain rendez-vous</CardTitle>
+                      <hr/>
+                      <CardContent className="flex flex-col">
+
+                      </CardContent>
+                  </Card>
               </div>
           </div>
       </DashboardWrapper>

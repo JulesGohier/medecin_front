@@ -17,7 +17,7 @@ export const CabinetCard = ({ className }: { className?: string }) => {
     return (
         <div className={className}>
             <Card>
-                <CardTitle className={"text-black text-1xl flex justify-self-center m-2"}>Votre cabinet</CardTitle>
+                <CardTitle className={"text-black flex justify-self-center m-3"}>Votre cabinet</CardTitle>
                 <hr/>
                 <CardContent className={"mt-3"}>
                     <div className={"flex flex-col gap-5"}>

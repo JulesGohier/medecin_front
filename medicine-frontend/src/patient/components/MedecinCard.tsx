@@ -27,7 +27,7 @@ export const MedecinCard = ({ className }: { className?: string }) => {
     return (
         <div className={className}>
             <Card >
-                <CardTitle className={"text-black text-1xl flex justify-self-center m-2"}>Votre médecin</CardTitle>
+                <CardTitle className={"text-black flex justify-self-center m-3"}>Votre médecin</CardTitle>
                 <hr/>
                 <CardHeader className={"flex flex-row items-center"}>
                     <Avatar className="w-1/3 h-1/3">

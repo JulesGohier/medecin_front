@@ -52,7 +52,7 @@ export const BookingAppointment = ({ className }: { className?: string }) => {
 
         return (
                 <Card className={className}>
-                    <CardTitle className={"text-black text-1xl flex justify-self-center m-2"}>Prendre un RDV</CardTitle>
+                    <CardTitle className={"text-black flex justify-self-center m-3"}>Prendre un rendez-vous</CardTitle>
                     <hr/>
                     <CardContent className="flex flex-col ">
                         <DatePicker onDateChange={setDate} className={"my-3"}/>
