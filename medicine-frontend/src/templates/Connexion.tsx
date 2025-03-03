@@ -31,11 +31,13 @@ const Connexion: React.FC = () => {
         localStorage.setItem("authToken", reponse.data.token); // Sauvegarder le token d'authentification
 
         const payload = JSON.parse(atob(token.split(".")[1])); // Vérifie que c'est bien un JWT
-        const role = payload.role;
+        const role = payload.roles;
 
-        if (role === "ROLE_MEDECIN") {
+        console.log(role[0]);
+
+        if (role[0] === "ROLE_MEDECIN") {
           window.location.href = "/estMedecin.html";
-        } else if (role === "ROLE_PATIENT") {
+        } else if (role[0] === "ROLE_PATIENT") {
           window.location.href = "/estPatient.html";
         } else {
           console.error("Rôle inconnu");

@@ -4,7 +4,6 @@ import Footer from "./Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 
 const Inscription: React.FC = () => {
-  const [type, setType] = useState<"patient" | "medecin">("patient"); // L'état pour choisir le type (patient ou médecin)
   const [formData, setFormData] = useState<any>({
     username: "",
     password: "",
@@ -30,34 +29,23 @@ const Inscription: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Préparer les données à envoyer en fonction du type d'utilisateur
     let dataToSend: any;
-
-    if (type === "patient") {
-      dataToSend = {
+    
+    dataToSend = {
         type: "patient",
         username: formData.username,
         password: formData.password,
         nom: formData.nom,
         prenom: formData.prenom,
-        sexe: formData.sexe,
+        sexe: formData.sexe.toLowerCase(),
         num_tel: formData.num_tel,
         date_naissance: formData.date_naissance,
         num_secu_sociale: formData.num_secu_sociale,
         email: formData.email,
       };
-    } else {
-      dataToSend = {
-        type: "medecin",
-        username: formData.username,
-        password: formData.password,
-        prenom: formData.prenom,
-        num_rpps: formData.num_rpps,
-        email: formData.email,
-      };
-    }
 
-    const url = "http://localhost:9000/api/register";
+    let url = "http://localhost:9000/api/register/patient";
+
     console.log("Données envoyées :", dataToSend);
 
     try {
@@ -65,7 +53,7 @@ const Inscription: React.FC = () => {
       console.log(response.data);
       window.location.href = "/Connexion"; // Envoie vers la page de connection si c'est bon
       } catch (error) {
-      console.error("Erreur lors de l'inscription:", error);
+      console.error("Erreur lors de l'inscription:");
     }
   };
 
@@ -75,16 +63,7 @@ const Inscription: React.FC = () => {
         <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-xl">
           <h1 className="text-2xl font-bold text-center mb-4">Inscription</h1>
 
-          <Tabs value={type} onValueChange={(value) => setType(value as "patient" | "medecin")}>
-            <TabsList className="flex justify-between mb-4">
-              <TabsTrigger value="patient" className="w-full py-2 text-center white text-bg-blue-500 rounded-t-lg hover:white">
-                Patient
-              </TabsTrigger>
-              <TabsTrigger value="medecin" className="w-full py-2 text-center white text-bg-blue-500 rounded-t-lg hover:white">
-                Médecin
-              </TabsTrigger>
-            </TabsList>
-
+          <Tabs>
             {/* Formulaire Patient */}
             <TabsContent value="patient">
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -164,60 +143,6 @@ const Inscription: React.FC = () => {
                   placeholder="Numéro de sécurité sociale"
                   value={formData.num_secu_sociale}
                   onChange={handleInputChange}
-                  className="p-2 w-full border border-gray-300 rounded"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="p-2 w-full border border-gray-300 rounded"
-                />
-                <button type="submit" className="p-2 w-full bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-                  S'inscrire
-                </button>
-              </form>
-            </TabsContent>
-
-            {/* Formulaire Médecin */}
-            <TabsContent value="medecin">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input
-                  type="text"
-                  name="username"
-                  placeholder="Nom d'utilisateur"
-                  value={formData.username}
-                  onChange={handleInputChange}
-                  required
-                  className="p-2 w-full border border-gray-300 rounded"
-                />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Mot de passe"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  required
-                  className="p-2 w-full border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  name="prenom"
-                  placeholder="Prénom"
-                  value={formData.prenom}
-                  onChange={handleInputChange}
-                  required
-                  className="p-2 w-full border border-gray-300 rounded"
-                />
-                <input
-                  type="text"
-                  name="num_rpps"
-                  placeholder="Numéro RPPS"
-                  value={formData.num_rpps}
-                  onChange={handleInputChange}
-                  required
                   className="p-2 w-full border border-gray-300 rounded"
                 />
                 <input
