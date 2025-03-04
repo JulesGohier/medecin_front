@@ -16,7 +16,6 @@ export const SelectAppointment = ({heure, date}: {heure: string, date: string})=
     const { toast } = useToast();
 
     const handClick = () =>{
-        console.log(`RDV le ${date} à ${heure}`);
         setIsOpen(false);
 
         toast({

@@ -14,7 +14,7 @@ type dayObject = {
     horaires: string[];
 };
 
-export const BookingAppointment = ({ className }: { className?: string }) => {
+export const BookingAppointment = ({ className }: { className?: string}) => {
         const [date, setDate] = useState<Date | any>(new Date())
         const [jourDeLaSemaine, setJourDeLaSemaine] = useState<
             { date: string; horaires: string[] }[]

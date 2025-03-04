@@ -11,10 +11,9 @@ import {
 } from "@/components/ui/avatar"
 import {Mails, Phone} from "lucide-react";
 import {ContactButton} from "@/patient/components/ContactButton.tsx";
-import {DialogBookingAppointment} from "@/patient/components/DialogBookingAppointment.tsx";
 
 
-export const MedecinCard = ({ className }: { className?: string }) => {
+export const YourMedecinCard = ({ className }: { className?: string }) => {
     const MedecinInfo = {
         image: "src/assets/medecin-300x300.jpg",
         nom: "Dr. Tirbois Romain",
@@ -28,6 +27,8 @@ export const MedecinCard = ({ className }: { className?: string }) => {
     return (
         <div className={className}>
             <Card >
+                <CardTitle className={"text-black flex justify-self-center m-3"}>Votre médecin</CardTitle>
+                <hr/>
                 <CardHeader className={"flex flex-row items-center"}>
                     <Avatar className="w-1/3 h-1/3">
                         <AvatarImage src={MedecinInfo.image} alt="Avatar"/>
@@ -41,7 +42,6 @@ export const MedecinCard = ({ className }: { className?: string }) => {
                 <CardFooter className={"flex flex-col mt-5 gap-3"}>
                     <ContactButton Icon={Phone} href={"tel:+33" + MedecinInfo.telephone} label={PhoneWithSpace}/>
                     <ContactButton Icon={Mails} href={"mailto:" + MedecinInfo.email} label={MedecinInfo.email}/>
-                    <DialogBookingAppointment/>
                 </CardFooter>
             </Card>
         </div>
