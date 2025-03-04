@@ -11,7 +11,6 @@ const Inscription: React.FC = () => {
   const [medecins, setMedecins] = useState<Medecin[]>([]);
   const [formData, setFormData] = useState({ num_rpps: "" });
 
-  // Charger la liste des médecins immédiatement
   (async () => {
     try {
       const res = await axios.get("http://localhost:9000/api/medecins");
