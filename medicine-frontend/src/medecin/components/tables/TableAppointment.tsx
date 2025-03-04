@@ -2,13 +2,13 @@ import {Label} from "@/components/ui/label.tsx";
 import { TableCell, TableRow } from "@/components/ui/table.tsx";
 import {fetchData} from "@/medecin/actions/medecin-action.ts";
 import {LoaderSpinner} from "@/medecin/components/LoaderSpinner.tsx";
+import {AppointmentModal} from "@/medecin/components/modals/AppointmentModal.tsx";
+import {DeleteAppointmentModal} from "@/medecin/components/modals/DeleteAppointmentModal.tsx";
 import { PaginationComponent } from "@/medecin/components/PaginationComponent.tsx";
-import {TableActions} from "@/medecin/components/tables/TableActions.tsx";
 import { TableLayout } from "@/medecin/components/tables/TableLayout.tsx";
-import { TableActionsProps } from "@/medecin/components/tables/types.ts";
 import {formatDate} from "@/medecin/format/format.ts";
 import {useQueries} from "@tanstack/react-query";
-import { Edit, Trash } from "lucide-react";
+import {Edit, Eye, Trash} from "lucide-react";
 import  { useState } from "react";
 
 
@@ -35,10 +35,7 @@ export const TableAppointment = ({ appointments } :  { appointments: string[]  }
     const itemsPerPage = 12;
     
     const tableHeader = ["Prénom", "Nom", "Sexe", "Date Rendez-Vous", "État", "Actions"];
-    const tableActions: TableActionsProps[] = [
-        { icon: Edit, className: "text-gray-500 hover:text-gray-700" },
-        { icon: Trash, className: "text-red-500 hover:text-red-700" },
-    ];
+    
     
     
     const totalPages = Math.ceil(queriesAppointmentPatientData.length / itemsPerPage);
@@ -71,13 +68,15 @@ export const TableAppointment = ({ appointments } :  { appointments: string[]  }
                                 <TableCell className={"capitalize"}>{appointmentState}</TableCell>
                                 <TableCell className="text-center">
                                     <div className="flex justify-center space-x-2">
-                                        {tableActions.map((action, key) => (
-                                            <TableActions
-                                                key={key}
-                                                icon={action.icon}
-                                                className={action.className}
-                                            />
-                                        ))}
+                                        <AppointmentModal patientData={patientData} appointment={{
+                                            appointmentDate: item.data?.date,
+                                            appointmentState: item.data?.state
+                                        }}>
+                                            <Eye size={20} className={"text-green-500 hover:text-green-700 cursor-pointer"} />
+                                        </AppointmentModal>
+                                        <DeleteAppointmentModal appointmentId={item.data?.id}>
+                                            <Trash size={20} className={"text-red-500 hover:text-red-700 cursor-pointer"} />
+                                        </DeleteAppointmentModal>
                                     </div>
                                 </TableCell>
                             </TableRow>

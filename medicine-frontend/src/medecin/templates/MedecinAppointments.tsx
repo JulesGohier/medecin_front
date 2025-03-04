@@ -28,7 +28,7 @@ const MedecinAppointments = () => {
     }
     
     return (
-        <DashboardWrapper>
+        <DashboardWrapper user={medecin}>
             <div className={"mt-2 w-full"}>
                 <div className={"flex flex-col text-2xl text-black"}>
                     <h2 className={"text-xl font-semibold"}>Rendez-vous</h2>
