@@ -9,12 +9,8 @@ export const authenticateMedecin = async () => {
             password: "password123"
         });
         
-        const token = response.data?.token;
-        if (token) {
-            localStorage.setItem("token", token);
-        }
-        
-        return token;
+        const data = response.data;
+        return data;
     } catch (error) {
         console.error("Erreur lors de l'authentification :", error);
         throw new Error("Impossible d'authentifier le médecin");

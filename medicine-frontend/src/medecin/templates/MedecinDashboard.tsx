@@ -13,18 +13,18 @@ const formatNumber = (num: number) => {
 
 
 const MedecinDashboard = () => {
-    
-    //A changer paprès le merge
-    const exampleRpps = 112233445566;
-    
     const { data: medecin, isLoading } = useQuery({
         queryKey: ["medecin"],
         queryFn: async () => {
             let token = localStorage.getItem("token");
             if (!token) {
-                token = await authenticateMedecin();
+                const data = await authenticateMedecin();
+                localStorage.setItem("token", data.token);
             }
-            return fetchMedecinByRpps(exampleRpps);
+            else {
+                const data = await authenticateMedecin();
+                return fetchMedecinByRpps(data.id);
+            }
         },
     });
     
