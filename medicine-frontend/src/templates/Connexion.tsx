@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Footer from "./Footer";
+import { Tabs } from "@/components/ui/tabs"
 
 const Connexion: React.FC = () => {
   const [formData, setFormData] = useState<any>({
@@ -54,7 +55,7 @@ const Connexion: React.FC = () => {
       <div className="flex justify-center items-center flex-grow bg-gray-100 py-6">
         <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-xl">
           <h1 className="text-2xl font-bold text-center mb-4">Connexion</h1>
-
+          <Tabs>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
@@ -86,6 +87,7 @@ const Connexion: React.FC = () => {
               Se connecter
             </button>
           </form>
+          </Tabs>
         </div>
       </div>
 

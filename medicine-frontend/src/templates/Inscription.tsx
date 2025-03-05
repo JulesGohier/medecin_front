@@ -1,8 +1,44 @@
 import { useState } from "react";
 import axios from "axios";
 import Footer from "./Footer";
-import SelectMedecin from "./SelectMedecin";
-import { Tabs } from "@radix-ui/react-tabs";
+import { Tabs  } from "@/components/ui/tabs";
+
+// Type medecin
+type Medecin = {
+  num_rpps: string;
+  nom: string;
+  prenom: string;
+};
+
+const SelectMedecin: React.FC<{ formData: any; handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void }> = ({ formData, handleInputChange }) => {
+  const [medecins, setMedecins] = useState<Medecin[]>([]);
+
+  // Récupérer les médecins depuis l'API
+  axios.get("http://localhost:9000/api/medecins")
+    .then((res) => {
+      setMedecins(Array.isArray(res.data.member) ? res.data.member : []);
+    })
+    .catch((err) => {
+      console.error("Erreur API :", err);
+    });
+
+  {/* Pour le menu déroulant des médecins */}
+  return (
+    <select
+      className="p-2 w-full border border-gray-300 rounded"
+      name="num_rpps"
+      value={formData.num_rpps}
+      onChange={handleInputChange}
+    >
+      <option value="">Sélectionnez un médecin</option>
+      {medecins.map((med) => (
+        <option key={med.num_rpps} value={med.num_rpps}>
+          {med.nom} {med.prenom}
+        </option>
+      ))}
+    </select>
+  );
+};
 
 const Inscription: React.FC = () => {
   const [formData, setFormData] = useState<any>({
@@ -34,6 +70,7 @@ const Inscription: React.FC = () => {
       type: "patient",
       username: formData.username,
       password: formData.password,
+      num_rpps: formData.num_rpps,
       nom: formData.nom,
       prenom: formData.prenom,
       sexe: formData.sexe.toLowerCase(),
@@ -83,7 +120,8 @@ const Inscription: React.FC = () => {
                 className="p-2 w-full border borer-gray-300 rounded"
               />
 
-              <SelectMedecin/>
+              {/* Sélecteur du médecin */}
+              <SelectMedecin formData={formData} handleInputChange={handleInputChange} />
 
               <input
                 type="text"
