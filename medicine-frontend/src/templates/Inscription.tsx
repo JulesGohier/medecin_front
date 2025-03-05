@@ -42,7 +42,6 @@ const SelectMedecin: React.FC<{ formData: any; handleInputChange: (e: React.Chan
 
 const Inscription: React.FC = () => {
   const [formData, setFormData] = useState<any>({
-    username: "",
     password: "",
     email: "",
     nom: "",
@@ -68,7 +67,6 @@ const Inscription: React.FC = () => {
 
     const dataToSend = {
       type: "patient",
-      username: formData.username,
       password: formData.password,
       num_rpps: formData.num_rpps,
       nom: formData.nom,
@@ -101,24 +99,6 @@ const Inscription: React.FC = () => {
 
           <Tabs>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="text"
-                name="username"
-                placeholder="Nom d'utilisateur"
-                value={formData.username}
-                onChange={handleInputChange}
-                required
-                className="p-2 w-full border border-gray-300 rounded"
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Mot de passe"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-                className="p-2 w-full border borer-gray-300 rounded"
-              />
 
               {/* Sélecteur du médecin */}
               <SelectMedecin formData={formData} handleInputChange={handleInputChange} />
@@ -182,6 +162,15 @@ const Inscription: React.FC = () => {
                 onChange={handleInputChange}
                 required
                 className="p-2 w-full border border-gray-300 rounded"
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Mot de passe"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+                className="p-2 w-full border borer-gray-300 rounded"
               />
               <button type="submit" className="p-2 w-full bg-blue-500 text-white rounded hover:bg-blue-600 transition">
                 S'inscrire

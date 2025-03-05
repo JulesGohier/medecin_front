@@ -5,7 +5,7 @@ import { Tabs } from "@/components/ui/tabs"
 
 const Connexion: React.FC = () => {
   const [formData, setFormData] = useState<any>({
-    username: "",
+    email: "",
     password: "",
   });
   const [errorMessage] = useState<string | null>(null);
@@ -21,6 +21,7 @@ const Connexion: React.FC = () => {
     e.preventDefault();
 
     try {
+      console.log(formData)
       const reponse = await axios.post("http://localhost:9000/api/login_token", formData, {
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +47,7 @@ const Connexion: React.FC = () => {
         
       }
     } catch (error) {
-      console.error("Nom d'utilisateur ou mot de passe incorrect.");
+      console.error("email ou mot de passe incorrect.");
     }
   };
 
@@ -59,9 +60,9 @@ const Connexion: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
-              name="username"
-              placeholder="Nom d'utilisateur"
-              value={formData.username}
+              name="email"
+              placeholder="email"
+              value={formData.email}
               onChange={handleInputChange}
               required
               className="p-2 w-full border border-gray-300 rounded"
