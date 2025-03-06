@@ -2,7 +2,7 @@ import {SidebarLayout} from "@/components/features/layout/SidebarLayout.tsx";
 import {Button} from "@/components/ui/button.tsx";
 
 
-const Homepage = () => {
+const DashboardAdmin = () => {
     return (
         <SidebarLayout>
            <Button
@@ -14,4 +14,4 @@ const Homepage = () => {
     );
 };
 
-export default Homepage;
+export default DashboardAdmin;

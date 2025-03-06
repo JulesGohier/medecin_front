@@ -1,11 +1,11 @@
 import "./App.css";
+import DashboardAdmin from "@/templates/DashboardAdmin.tsx";
 import { Route, Routes } from "react-router";
-import Homepage from "@/templates/Homepage.tsx";
 
 function App() {
   return (
     <Routes>
-      <Route path={"/"} element={<Homepage />} />
+      <Route path={"/"} element={<DashboardAdmin />} />
     </Routes>
   );
 }
