@@ -28,17 +28,14 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
         isLoading: isMedecinLoading,
         error: medecinError,
     } = useQuery({
-        queryKey: ["medicinAllRdv", numRpps],
+        queryKey: ["medicinAllRdv"],
         queryFn: async () => {
-            console.log("🔄 Fetching des rendez-vous...");
             return await fetchMedecinsRDV(numRpps);
         },
         staleTime: 0,
         refetchOnMount: true,
         refetchOnWindowFocus: true,
     });
-
-
 
     const generateHoraires = (): string[] => {
         const horaires = [];
@@ -52,7 +49,7 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
 
     useEffect(()=>{
         if(!medicinAllRdv) return;
-        console.log("🔄 Mise à jour des disponibilités...");
+
         const horairesBase = generateHoraires();
         const rdvsReserves = Array.from(medicinAllRdv).filter((rdv: any) => rdv.state == "réservé");
 
@@ -113,28 +110,49 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
 
 
     return (
-            <Card className={className}>
-                <CardTitle className={"text-black flex justify-self-center m-3"}>Prendre un rendez-vous</CardTitle>
-                <hr/>
-                <CardContent className="flex flex-col ">
-                    <DatePicker onDateChange={setDate} className={"my-3"}/>
-                    <Accordion type="single" collapsible>
-                        {jourDeLaSemaine.map(({ date, horaires }, index) => (
+        <Card className={className}>
+            <CardTitle className={"text-black flex justify-self-center m-3"}>Prendre un rendez-vous</CardTitle>
+            <hr />
+            <CardContent className="flex flex-col ">
+                <DatePicker onDateChange={setDate} className={"my-3"} />
+                <Accordion type="single" collapsible>
+                    {jourDeLaSemaine.map(({ date, horaires }, index) => {
+                        return (
                             <AccordionItem key={index} value={`item-${index + 1}`}>
                                 <AccordionTrigger>{date}</AccordionTrigger>
-                                <AccordionContent className={"flex flex-wrap gap-1"}>
+                                <AccordionContent className="flex flex-wrap gap-1">
                                     {horaires.length > 0 ? (
-                                        horaires.map((heure) => (
-                                            <SelectAppointment patient={patient} numRpps={numRpps} key={heure} heure={heure} date={date}/>
-                                        ))
+                                        (() => {
+                                            const validHoraires = horaires.filter((heure) => {
+                                                const rdvDateTime = new Date(`${date} ${heure}`);
+
+                                                return rdvDateTime >= new Date();;
+                                            });
+
+                                            if (validHoraires.length === 0) {
+                                                return <p>La date est passée, impossible de prendre un rendez-vous</p>;
+                                            }
+
+                                            return validHoraires.map((heure) => (
+                                                <SelectAppointment
+                                                    patient={patient}
+                                                    numRpps={numRpps}
+                                                    key={heure}
+                                                    heure={heure}
+                                                    date={date}
+                                                />
+                                            ));
+                                        })()
                                     ) : (
                                         <p>Aucun créneau disponible</p>
                                     )}
                                 </AccordionContent>
+
                             </AccordionItem>
-                        ))}
-                    </Accordion>
-                </CardContent>
-            </Card>
+                        );
+                    })}
+                </Accordion>
+            </CardContent>
+        </Card>
     );
 }

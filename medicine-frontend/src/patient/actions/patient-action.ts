@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const authenticateMedecin = async () => {
     const API_URL = import.meta.env.VITE_API_URL;
-    console.log(API_URL);
+
 
     try {
         const response = await axios.post(`${API_URL}/api/login_token`, {
@@ -23,7 +23,6 @@ export const authenticateMedecin = async () => {
         if (patient) {
             localStorage.setItem("patient", patient);
         }
-
         return { token, roles, patient };
     } catch (error) {
         console.error("Erreur lors de l'authentification :", error);
@@ -86,6 +85,24 @@ export const fetchRDVPatient = async (num_secu_sociale: string) => {
                 Authorization: `Bearer ${token}`,
             },
         });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+        throw new Error("Impossible de récupérer les informations.");
+    }
+};
+
+export const fetchProchainRDVPatient = async (num_secu_sociale: string) => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await axios.get(`${API_URL}/api/rendez_vouses/prochain/${num_secu_sociale}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
         return response.data;
     } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
@@ -109,9 +126,6 @@ export const createNewRDV = async (ObjectRDV: object) => {
         throw new Error("Impossible de récupérer les informations.");
     }
 };
-
-//Ajouter un médecin
-
 
 export const fetchData = async (route: string) => {
     const API_URL = import.meta.env.VITE_API_URL;

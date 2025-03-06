@@ -34,7 +34,7 @@ export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: strin
     const mutation = useMutation({
         mutationFn: async () => await createNewRDV(rdvObject),
         onSuccess: async () => {
-            await queryClient.invalidateQueries(["medicinAllRdv", numRpps]);
+            await queryClient.invalidateQueries(["medicinAllRdv","nextRDV"]);
 
             toast({
                 title: "Rendez-vous confirmé",

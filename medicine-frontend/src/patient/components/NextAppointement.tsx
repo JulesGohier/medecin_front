@@ -1,14 +1,8 @@
 import {Card, CardContent, CardTitle} from "@/components/ui/card.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 
-interface NextAppointementProps {
-    className: string;
-    medecin: { name: string; prenom: string; specialty: string; avatar: string };
-    date: string;
-    time: string;
-}
 
-export const NextAppointement = ({ className, medecin, date, time }: NextAppointementProps) => {
+export const NextAppointement = ({ className, medecin, date, time }: {className: string, medecin: any, date: string, time: string}) => {
 
     if(medecin == undefined){
         return <Card className={className}>
@@ -41,7 +35,6 @@ export const NextAppointement = ({ className, medecin, date, time }: NextAppoint
 
     let formattedDate = `${dateDay} ${dateMonth} ${dateYear}`;
 
-
     return (
         <Card className={className}>
             <CardTitle className="text-black flex justify-center m-3">
@@ -52,14 +45,14 @@ export const NextAppointement = ({ className, medecin, date, time }: NextAppoint
                 <div className="grid grid-cols-[auto_1fr_auto] items-center gap-6 w-full">
                     <Avatar className="w-16 h-16">
                         <AvatarImage src="https://github.com/shadcn.png"
-                                     alt={`${medecin.prenom} ${medecin.name}`}/>
-                        <AvatarFallback>{medecin.name.charAt(0)}</AvatarFallback>
+                                     alt={`${medecin.prenom} ${medecin.nom}`}/>
+                        <AvatarFallback>{medecin.nom}</AvatarFallback>
                     </Avatar>
 
                     <div className="flex flex-col min-w-0 text-center sm:text-left">
-                        <h1 className="text-lg font-semibold">{`Dr. ${medecin.name} ${medecin.prenom}`}</h1>
+                        <h1 className="text-lg font-semibold">{`Dr. ${medecin.nom} ${medecin.prenom}`}</h1>
                         <h2 className="text-muted-foreground text-sm sm:text-md">
-                            {medecin.specialty}
+                            {medecin?.specialite}
                         </h2>
                     </div>
 

@@ -6,10 +6,9 @@ import {NextAppointement} from "@/patient/components/NextAppointement.tsx";
 import { LoaderSpinner } from "@/patient/components/LoaderSpinner.tsx";
 import {
     authenticateMedecin,
-    fetchMedecinsId, fetchRDVPatient
+    fetchMedecinsId, fetchProchainRDVPatient
 } from "@/patient/actions/patient-action.ts";
 import {useQuery} from "@tanstack/react-query";
-
 
 
 export const PatientDashboard = () => {
@@ -32,7 +31,7 @@ export const PatientDashboard = () => {
         isLoading: isMedecinLoading,
         error: medecinError
     } = useQuery({
-        queryKey: ["medecinData", patientData?.medecin_perso],
+        queryKey: ["medecinData"],
         queryFn: async () => {
             const medecin = await fetchMedecinsId(patientData?.medecin_perso);
             return medecin;
@@ -41,136 +40,37 @@ export const PatientDashboard = () => {
     });
 
     const {
-        data: rdvPatient,
-        isLoading: isRDVLoading,
-        error: rdvError
+        data: nextRDV,
+        isLoading: isNextRDVLoading,
+        error: nextRDVError
     } = useQuery({
-        queryKey: ["rdvPatient", patientData?.num_secu_sociale],
+        queryKey: ["nextRDV"],
         queryFn: async () => {
-            const rdvs = await fetchRDVPatient(patientData?.num_secu_sociale);
-            let nextRDV;
-            if(rdvs.length != 0) {
-                const sortedRDV = rdvs.sort((a, b) => {
-                    const dateA = new Date(a.date).getDate();
-                    const dateB = new Date(b.date).getDate();
+            const data = await fetchProchainRDVPatient(patientData?.num_secu_sociale);
 
-                    if (dateA != dateB) {
-                        return dateA - dateB;
-                    }
+            if(data != null ){
+                const numRpps = data.idMedecin.split("/").pop();
 
-                    const timeA = new Date(a.date).getTime()
-                    const timeB = new Date(b.date).getTime()
+                const [date, time] = data.date.split("T");
 
-                    return timeA - timeB;
-                });
+                const timeWithoutTimezone = time.split("+")[0];
 
-                const upcomingRDV = sortedRDV[0];
-                const dateTime = upcomingRDV.date;
-                const currentDate = Date.now();
+                const nextRDVMedecin = await fetchMedecinsId(numRpps);
+                const medecin =  {
+                    nom: nextRDVMedecin.nom,
+                    prenom: nextRDVMedecin.prenom,
+                    specialite: nextRDVMedecin.specialite,
+                    avatar: nextRDVMedecin.avatar
+                };
 
-                if(new Date(dateTime).getTime() < currentDate ){
-                    nextRDV = null;
-                } else {
-                    const [date, time] = dateTime.split("T");
-                    const timeWithoutTimezone = time.split("+")[0];
-
-                    const numRpps = patientData.medecin_perso;
-                    const RDVMedecinData = await fetchMedecinsId(numRpps);
-                    const nextAppointment = {
-                        medecin: {
-                            name: RDVMedecinData.nom,
-                            prenom: RDVMedecinData.prenom,
-                            specialty: RDVMedecinData.specialite,
-                            avatar: RDVMedecinData.avatar,
-                        },
-                        date: date,
-                        time: timeWithoutTimezone,
-                    }
-
-                    nextRDV = nextAppointment;
-                }
+                return {medecin, date, timeWithoutTimezone};
             }
-            else{
-                nextRDV = null;
-            }
-            return {rdvs, nextRDV};
+            return null;
+
         },
         enabled: !!patientData,
     });
 
-    const nextRDV = rdvPatient?.nextRDV
-
-    // const [patient, setPatient] = useState<object | null>(null);
-    // const [medecin, setMedecin] = useState<object | null>(null);
-    //
-    // const [nextRDV, setNextRDV] = useState<object | null>(null);
-    //
-    // const [error, setError] = useState<string | null>(null);
-    // const [isLoading, setIsLoading] = useState<boolean>(true);
-    //
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const { patient } = await authenticateMedecin();
-    //             const yourMedecinData = await fetchMedecinsId(patient.medecin_perso);
-    //             const rdvPatient = await fetchRDVPatient(patient.num_secu_sociale);
-    //
-    //             console.log("Unsorted : ", rdvPatient);
-    //
-    //             if(rdvPatient.length != 0){
-    //                 const sortedRDV = rdvPatient.sort((a, b) => {
-    //                     const dateA = new Date(a.date).getDate();
-    //                     const dateB = new Date(b.date).getDate();
-    //
-    //                     if (dateA != dateB){
-    //                         return dateA - dateB;
-    //                     }
-    //
-    //                     const timeA = new Date(a.date).getTime()
-    //                     const timeB = new Date(b.date).getTime()
-    //
-    //                     return timeA - timeB;
-    //                 });
-    //
-    //                 const upcomingRDV = sortedRDV[0];
-    //
-    //                 const numRpps = patient.medecin_perso;
-    //                 const RDVMedecinData = await fetchMedecinsId(numRpps);
-    //
-    //                 const dateTime = upcomingRDV.date;
-    //
-    //                 const [date, time] = dateTime.split("T");
-    //                 const timeWithoutTimezone = time.split("+")[0];
-    //
-    //                 const nextAppointment = {
-    //                     medecin: {
-    //                         name: RDVMedecinData.nom,
-    //                         prenom: RDVMedecinData.prenom,
-    //                         specialty: RDVMedecinData.specialite,
-    //                         avatar: RDVMedecinData.avatar,
-    //                     },
-    //                     date: date,
-    //                     time: timeWithoutTimezone,
-    //                 };
-    //
-    //                 setNextRDV(nextAppointment);
-    //             }else {
-    //                 setNextRDV(null);
-    //             }
-    //
-    //
-    //             setPatient(patient)
-    //             setMedecin(yourMedecinData);
-    //
-    //         } catch (err) {
-    //             setError("Échec de l'authentification ou récupération des données.");
-    //         } finally {
-    //             setIsLoading(false);
-    //         }
-    //     };
-    //
-    //     fetchData();
-    // }, []);
 
     if (isAuthLoading) {
         return (
@@ -179,7 +79,8 @@ export const PatientDashboard = () => {
             </div>
         );
     }
-    if (isMedecinLoading || isRDVLoading) {
+
+    if (isMedecinLoading || isNextRDVLoading) {
         return (
             <DashboardWrapper user={patientData}>
                 <div className="flex w-full h-screen items-center justify-center">
@@ -188,7 +89,7 @@ export const PatientDashboard = () => {
             </DashboardWrapper>
         );
     }
-    if (authError || medecinError || rdvError) {
+    if (authError || medecinError || nextRDVError) {
         return <p className="text-red-500">Erreur lors de la récupération des données.</p>;
     }
 
@@ -209,7 +110,7 @@ export const PatientDashboard = () => {
                         className="w-full h-[160px] rounded-2xl flex flex-col justify-center"
                         medecin={nextRDV?.medecin}
                         date={nextRDV?.date}
-                        time={nextRDV?.time}
+                        time={nextRDV?.timeWithoutTimezone}
                     />
                 </div>
             </div>
