@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from "@/components/ui/button";
 import { BookingAppointment } from "@/patient/components/BookingAppointment";
 
-export const DialogBookingAppointment = () => {
+export const DialogBookingAppointment = ({patient, numRpps} : {patient :any, numRpps: string}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -16,7 +16,7 @@ export const DialogBookingAppointment = () => {
                     <DialogTitle></DialogTitle>
                 </DialogHeader>
 
-                <BookingAppointment />
+                <BookingAppointment patient={patient} numRpps={numRpps}/>
 
             </DialogContent>
         </Dialog>

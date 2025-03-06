@@ -11,18 +11,28 @@ import {useState} from "react";
 import { useToast } from "@/hooks/use-toast.ts";
 import {Toaster} from "@/components/ui/toaster.tsx";
 
-export const SelectAppointment = ({heure, date}: {heure: string, date: string})=> {
+
+export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: string, date: string, patient: any, numRpps: string})=> {
     const [isOpen, setIsOpen] = useState(false);
     const { toast } = useToast();
 
+    const rdvObject = {
+        date : `${new Date(date).toISOString().split('.')[0]}+00:00`,
+        idMedecin : numRpps,
+        idPatient : patient.num_secu_sociale,
+        state: "réservé"
+    }
+
     const handClick = () =>{
         setIsOpen(false);
-
+        console.log(rdvObject);
         toast({
             title: "Rendez-vous confirmé",
             description: `Votre rendez-vous pour le ${date} à ${heure} a été confirmé.`
         });
     }
+
+
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>

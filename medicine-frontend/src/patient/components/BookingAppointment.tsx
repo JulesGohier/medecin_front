@@ -14,7 +14,7 @@ type dayObject = {
     horaires: string[];
 };
 
-export const BookingAppointment = ({ className }: { className?: string}) => {
+export const BookingAppointment = ({ className, patient, numRpps }: { className?: string, patient: object,numRpps: string}) => {
         const [date, setDate] = useState<Date | any>(new Date())
         const [jourDeLaSemaine, setJourDeLaSemaine] = useState<
             { date: string; horaires: string[] }[]
@@ -63,7 +63,7 @@ export const BookingAppointment = ({ className }: { className?: string}) => {
                                     <AccordionContent className={"flex flex-wrap gap-3"}>
                                         {horaires.length > 0 ? (
                                             horaires.map((heure) => (
-                                                <SelectAppointment key={heure} heure={heure} date={date}/>
+                                                <SelectAppointment patient={patient} numRpps={numRpps} key={heure} heure={heure} date={date}/>
                                             ))
                                         ) : (
                                             <p>Aucun créneau disponible</p>

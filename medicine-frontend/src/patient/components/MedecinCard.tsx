@@ -14,16 +14,14 @@ import {ContactButton} from "@/patient/components/ContactButton.tsx";
 import {DialogBookingAppointment} from "@/patient/components/DialogBookingAppointment.tsx";
 
 
-export const MedecinCard = ({ className }: { className?: string }) => {
+
+export const MedecinCard = ({ className, medecin, patient }: {className?: string, medecin: any, patient: any}) => {
     const MedecinInfo = {
         image: "src/assets/medecin-300x300.jpg",
-        nom: "Dr. Tirbois Romain",
-        specialite: "Médecin généraliste",
-        telephone: "0651301290",
-        email: "jules.reihog5@gmail.com",
     };
 
-    const PhoneWithSpace = MedecinInfo.telephone.replace(/(\d{2})/g, '$1 ');
+    const PhoneWithSpace = medecin?.numTel.replace(/(\d{2})/g, '$1 ');
+
 
     return (
         <div className={className}>
@@ -33,15 +31,15 @@ export const MedecinCard = ({ className }: { className?: string }) => {
                         <AvatarImage src={MedecinInfo.image} alt="Avatar"/>
                     </Avatar>
                     <div className={"ml-8"}>
-                        <CardTitle className={"text-red-500 text-2xl"}>{MedecinInfo.nom}</CardTitle>
-                        <CardDescription>{MedecinInfo.specialite}</CardDescription>
+                        <CardTitle className={"text-red-500 text-2xl"}>{`Dr. ${medecin?.nom} ${medecin?.prenom}`}</CardTitle>
+                        <CardDescription>{medecin?.specialite}</CardDescription>
                     </div>
                 </CardHeader>
                 <hr/>
                 <CardFooter className={"flex flex-col mt-5 gap-3"}>
-                    <ContactButton Icon={Phone} href={"tel:+33" + MedecinInfo.telephone} label={PhoneWithSpace}/>
-                    <ContactButton Icon={Mails} href={"mailto:" + MedecinInfo.email} label={MedecinInfo.email}/>
-                    <DialogBookingAppointment/>
+                    <ContactButton Icon={Phone} href={"tel:+33" + PhoneWithSpace} label={PhoneWithSpace}/>
+                    <ContactButton Icon={Mails} href={"mailto:" + medecin?.email} label={medecin?.email}/>
+                    <DialogBookingAppointment patient={patient} numRpps={medecin.numRpps}/>
                 </CardFooter>
             </Card>
         </div>

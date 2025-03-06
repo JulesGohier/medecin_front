@@ -12,38 +12,42 @@ import {
 import {Mails, Phone} from "lucide-react";
 import {ContactButton} from "@/patient/components/ContactButton.tsx";
 
+interface MedecinCardProps {
+    className?: string;
+    nom: string;
+    prenom: string;
+    specialite: string;
+    telephone: string;
+    email: string;
+}
 
-export const YourMedecinCard = ({ className }: { className?: string }) => {
+export const YourMedecinCard: React.FC<MedecinCardProps> = ({ className = "", nom, prenom, specialite, telephone, email }) => {
     const MedecinInfo = {
         image: "src/assets/medecin-300x300.jpg",
-        nom: "Dr. Tirbois Romain",
-        specialite: "Médecin généraliste",
-        telephone: "0651301290",
-        email: "jules.reihog5@gmail.com",
     };
 
-    const PhoneWithSpace = MedecinInfo.telephone.replace(/(\d{2})/g, '$1 ');
+    const PhoneWithSpace = telephone.replace(/(\d{2})/g, '$1 ');
 
     return (
         <div className={className}>
-            <Card >
+            <Card>
                 <CardTitle className={"text-black flex justify-self-center m-3"}>Votre médecin</CardTitle>
-                <hr/>
+                <hr />
                 <CardHeader className={"flex flex-row items-center"}>
                     <Avatar className="w-1/3 h-1/3">
-                        <AvatarImage src={MedecinInfo.image} alt="Avatar"/>
+                        <AvatarImage src={MedecinInfo.image} alt="Avatar" />
                     </Avatar>
                     <div className={"ml-8"}>
-                        <CardTitle className={"text-red-500 text-2xl"}>{MedecinInfo.nom}</CardTitle>
-                        <CardDescription>{MedecinInfo.specialite}</CardDescription>
+                        <CardTitle className={"text-red-500 text-2xl"}>{`Dr. ${nom} ${prenom}`}</CardTitle>
+                        <CardDescription>{specialite}</CardDescription>
                     </div>
                 </CardHeader>
-                <hr/>
+                <hr />
                 <CardFooter className={"flex flex-col mt-5 gap-3"}>
-                    <ContactButton Icon={Phone} href={"tel:+33" + MedecinInfo.telephone} label={PhoneWithSpace}/>
-                    <ContactButton Icon={Mails} href={"mailto:" + MedecinInfo.email} label={MedecinInfo.email}/>
+                    <ContactButton Icon={Phone} href={"tel:+33" + telephone} label={PhoneWithSpace} />
+                    <ContactButton Icon={Mails} href={"mailto:" + email} label={email} />
                 </CardFooter>
             </Card>
         </div>
     );
-}
+};

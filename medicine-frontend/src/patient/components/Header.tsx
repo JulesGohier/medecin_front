@@ -1,10 +1,12 @@
 import { Bell } from "lucide-react";
 import waveLogo from '@/assets/icons/waving-hand.png';
 
-export const Header = () => {
+export const Header = ({user}: { user?: any }) => {
+
+
     return (
         <div className="flex items-center w-full">
-            <h1 className="text-3xl">Bonjour, Gohier Jules</h1>
+            <h1 className="text-3xl">{`Bonjour, ${user?.nom} ${user?.prenom}`}</h1>
             <img
                 src={waveLogo}
                 width={45}
