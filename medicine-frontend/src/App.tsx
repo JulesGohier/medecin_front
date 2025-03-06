@@ -1,5 +1,5 @@
 import "./App.css";
-import DashboardAdmin from "@/templates/DashboardAdmin.tsx";
+import DashboardAdmin from "@/admin/templates/DashboardAdmin.tsx";
 import { Route, Routes } from "react-router";
 
 function App() {
