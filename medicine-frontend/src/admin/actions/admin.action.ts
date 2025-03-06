@@ -68,3 +68,30 @@ export const getRendezVous = async () => {
         throw new Error("Impossible d'effectuer cette requête");
     }
 }
+
+//Ajouter un médecin
+export const postMedecin = async (medecin) => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const token = localStorage.getItem("token");
+    
+    try {
+        const formData = new FormData();
+        formData.append("email", medecin.email);
+        formData.append("nom", medecin.nom);
+        formData.append("prenom", medecin.prenom);
+        formData.append("password", medecin.password);
+        formData.append("num_rpps", medecin.num_rpps);
+        formData.append("num_tel", medecin.num_tel);
+        formData.append("specialite", medecin.specialite);
+        
+        await axios.post(`${API_URL}/api/register/medecin`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        console.error("Erreur lors d'ajout du médecin :", error.response.data.error);
+        throw error;
+    }
+}

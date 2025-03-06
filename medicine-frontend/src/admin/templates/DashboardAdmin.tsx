@@ -1,5 +1,7 @@
 import {authenticateAdministrator, getMedecin, getPatients, getRendezVous} from "@/admin/actions/admin.action.ts";
+import {AddDoctorForm, AddMedecinForm} from "@/admin/components/AddMedecinForm.tsx";
 import {LoaderSpinner} from "@/admin/components/LoaderSpinner.tsx";
+import MedecinTable from "@/admin/components/MedecinTable.tsx";
 import StatCard, {StatCardProps} from "@/admin/components/StatCard.tsx";
 import {DashboardWrapper} from "@/components/features/layout/DashboardWrapper.tsx";
 import {Skeleton} from "@/components/ui/skeleton.tsx";
@@ -86,6 +88,13 @@ const DashboardAdmin = () => {
                         />
                     ))}
                 </div>
+                
+                <h2 className={"py-4 text-3xl"}>
+                    Ajouter un médecin
+                </h2>
+                
+                <AddMedecinForm />
+                <MedecinTable medecins={medecin} />
             </div>
         </DashboardWrapper>
     );
