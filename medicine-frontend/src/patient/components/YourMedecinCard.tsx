@@ -12,21 +12,13 @@ import {
 import {Mails, Phone} from "lucide-react";
 import {ContactButton} from "@/patient/components/ContactButton.tsx";
 
-interface MedecinCardProps {
-    className?: string;
-    nom: string;
-    prenom: string;
-    specialite: string;
-    telephone: string;
-    email: string;
-}
 
-export const YourMedecinCard: React.FC<MedecinCardProps> = ({ className = "", nom, prenom, specialite, telephone, email }) => {
+export const YourMedecinCard = ({ className, medecin }: {className?: string, medecin: any}) => {
     const MedecinInfo = {
         image: "src/assets/medecin-300x300.jpg",
     };
 
-    const PhoneWithSpace = telephone.replace(/(\d{2})/g, '$1 ');
+    const PhoneWithSpace = medecin.numTel.replace(/(\d{2})/g, '$1 ');
 
     return (
         <div className={className}>
@@ -38,14 +30,14 @@ export const YourMedecinCard: React.FC<MedecinCardProps> = ({ className = "", no
                         <AvatarImage src={MedecinInfo.image} alt="Avatar" />
                     </Avatar>
                     <div className={"ml-8"}>
-                        <CardTitle className={"text-red-500 text-2xl"}>{`Dr. ${nom} ${prenom}`}</CardTitle>
-                        <CardDescription>{specialite}</CardDescription>
+                        <CardTitle className={"text-red-500 text-2xl"}>{`Dr. ${medecin.nom} ${medecin.prenom}`}</CardTitle>
+                        <CardDescription>{medecin.specialite}</CardDescription>
                     </div>
                 </CardHeader>
                 <hr />
                 <CardFooter className={"flex flex-col mt-5 gap-3"}>
-                    <ContactButton Icon={Phone} href={"tel:+33" + telephone} label={PhoneWithSpace} />
-                    <ContactButton Icon={Mails} href={"mailto:" + email} label={email} />
+                    <ContactButton Icon={Phone} href={"tel:+33" + medecin.numTel} label={PhoneWithSpace} />
+                    <ContactButton Icon={Mails} href={"mailto:" + medecin.email} label={medecin.email} />
                 </CardFooter>
             </Card>
         </div>
