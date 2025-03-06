@@ -6,6 +6,7 @@ type MedecinType = {
     prenom: string
     num_rpps: string
     num_tel: string
+    specialite: string
 }
 
 export default function MedecinTable({ medecins }: { medecins: MedecinType[] }) {
@@ -22,6 +23,7 @@ export default function MedecinTable({ medecins }: { medecins: MedecinType[] }) 
                         <TableHead>Prénom</TableHead>
                         <TableHead>Numéro RPPS</TableHead>
                         <TableHead>Numéro de téléphone</TableHead>
+                        <TableHead>Specialité</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -32,6 +34,7 @@ export default function MedecinTable({ medecins }: { medecins: MedecinType[] }) 
                             <TableCell>{medecin.prenom}</TableCell>
                             <TableCell>{medecin.num_rpps}</TableCell>
                             <TableCell>{medecin.num_tel}</TableCell>
+                            <TableCell>{medecin.specialite}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
