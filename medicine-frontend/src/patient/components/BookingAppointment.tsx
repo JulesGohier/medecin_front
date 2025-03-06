@@ -65,27 +65,22 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
         const disponibilite: dayObject[] = Array.from({ length: 5 }, (_, index) => {
             const currentDay = new Date(lundi);
             currentDay.setDate(lundi.getDate() + index);
+            const currentDayFr = currentDay.toLocaleDateString('fr-CA');
+
             const horairesReserveDuJour = rdvsReserves
                 .filter((rdv: any) => {
                     const rdvDate = new Date(rdv.date);
-                    return rdvDate.toLocaleDateString("fr-FR") === currentDay.toLocaleDateString("fr-FR");
+                    return rdvDate.toLocaleDateString('fr-CA') === currentDayFr;
                 })
                 .map((rdv: any) => {
-                    const heure = rdv.date.split('T')[1].split('+')[0];
-                    const heureFormattee = heure.substring(0, 5);
-                    return heureFormattee;
+                    return rdv.date.split('T')[1].substring(0, 5);
                 });
 
             const disponibilites = horairesBase.filter((horaire) => !horairesReserveDuJour.includes(horaire));
 
             return {
                 ...defaultObject,
-                date: currentDay.toLocaleDateString("fr-FR", {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                }),
+                date: currentDayFr,
                 horaires: disponibilites
             };
         });
@@ -119,14 +114,22 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
                     {jourDeLaSemaine.map(({ date, horaires }, index) => {
                         return (
                             <AccordionItem key={index} value={`item-${index + 1}`}>
-                                <AccordionTrigger>{date}</AccordionTrigger>
+                                <AccordionTrigger>{new Date(date).toLocaleDateString("fr-FR", {
+                                    weekday: "long",
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric"
+                                })}</AccordionTrigger>
                                 <AccordionContent className="flex flex-wrap gap-1">
                                     {horaires.length > 0 ? (
                                         (() => {
+
+                                            const now = new Date();
+
                                             const validHoraires = horaires.filter((heure) => {
                                                 const rdvDateTime = new Date(`${date} ${heure}`);
 
-                                                return rdvDateTime >= new Date();;
+                                                return rdvDateTime > now;
                                             });
 
                                             if (validHoraires.length === 0) {
@@ -147,7 +150,6 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
                                         <p>Aucun créneau disponible</p>
                                     )}
                                 </AccordionContent>
-
                             </AccordionItem>
                         );
                     })}

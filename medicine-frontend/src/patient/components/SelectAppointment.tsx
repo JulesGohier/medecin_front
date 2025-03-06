@@ -19,6 +19,13 @@ export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: strin
 
 
     const dateRDV = new Date(date);
+    const formattedDate = dateRDV.toLocaleDateString("fr-FR", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    });
+
     const year = dateRDV.getFullYear();
     const month = dateRDV.getMonth()+1;
     const day = dateRDV.getDate();
@@ -62,7 +69,7 @@ export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: strin
                     <DialogTitle>Votre rendez-vous</DialogTitle>
                 </DialogHeader>
                 <div className="mt-5 mb-5">
-                    <p>Votre rendez-vous est programmé pour le <br /> {date} à {heure}</p>
+                    <p>Votre rendez-vous est programmé pour le <br /> {formattedDate} à {heure}</p>
                 </div>
                 <DialogFooter>
                     <Button
