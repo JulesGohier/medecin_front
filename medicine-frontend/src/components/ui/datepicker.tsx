@@ -23,7 +23,7 @@ import {fr} from "date-fns/locale";
 
 export function DatePicker({ onDateChange, className }: { onDateChange: (date: Date | undefined) => void, className: string }) {
     const [date, setDate] = React.useState<Date>()
-
+    const [option,setOption] = React.useState("0")
     const handleDateChange = (newDate: Date | undefined) => {
         setDate(newDate)
         onDateChange(newDate)
@@ -47,18 +47,20 @@ export function DatePicker({ onDateChange, className }: { onDateChange: (date: D
             <PopoverContent
                 side="top"
                 align="end"
-                className="w-auto flex flex-col space-y-2 p-2 z-[99999] pointer-events-auto"
+                className="w-auto flex flex-col space-y-2 p-2 z-[60] pointer-events-auto"
             >
                 <Select
+                    value={option}
                     onValueChange={(value) => {
                         setDate(addDays(new Date(), parseInt(value)))
+                        setOption(value);
                         onDateChange(addDays(new Date(), parseInt(value)))
                     }}
                 >
                     <SelectTrigger>
                         <SelectValue placeholder="Select" />
                     </SelectTrigger>
-                    <SelectContent position="popper">
+                    <SelectContent position="popper" className={"z-[60]"}>
                         <SelectItem value="0">Aujourd'hui</SelectItem>
                         <SelectItem value="1">Demain</SelectItem>
                         <SelectItem value="3">Dans 3 jours</SelectItem>

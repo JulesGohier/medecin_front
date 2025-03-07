@@ -31,14 +31,11 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
         queryFn: async () => {
             return await fetchMedecinsRDV(numRpps);
         },
-        staleTime: 0,
-        refetchOnMount: true,
-        refetchOnWindowFocus: true,
     });
 
     const generateHoraires = (): string[] => {
         const horaires = [];
-        for (let i = 9; i <= 18; i++) {
+        for (let i = 9; i <= 19; i++) {
             const hour = i < 10 ? `0${i}:00` : `${i}:00`;
             horaires.push(hour);
             horaires.push(hour.replace(':00', ':30'));
@@ -61,7 +58,7 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
             horaires: [],
         };
 
-        const disponibilite: dayObject[] = Array.from({ length: 5 }, (_, index) => {
+        const disponibilite: dayObject[] = Array.from({ length: 7 }, (_, index) => {
             const currentDay = new Date(lundi);
             currentDay.setDate(lundi.getDate() + index);
             const currentDayFr = currentDay.toLocaleDateString('fr-CA');

@@ -1,16 +1,26 @@
 import { useState, useEffect } from "react";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {authenticateMedecin, fetchAllMedecins, updateInformationPatient} from "@/patient/actions/patient-action.ts";
+import {
+    authenticateMedecin,
+    createNewRDV,
+    fetchAllMedecins,
+    updateInformationPatient
+} from "@/patient/actions/patient-action.ts";
 import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { LoaderSpinner } from "@/patient/components/LoaderSpinner.tsx";
 import { SelecteurMedecin } from "@/patient/components/SelecteurMedecin.tsx";
+import {useToast} from "@/hooks/use-toast.ts";
+import {Toaster} from "@/components/ui/toaster.tsx";
 
 export const PatientSettings = () => {
     // On initialise formData et originalData avec un objet vide
     const [formData, setFormData] = useState({});
     const [originalData, setOriginalData] = useState({});
+    const [modifiedFields, setModifiedFields] = useState({});
+    const [isOpen, setIsOpen] = useState(false);
+    const { toast } = useToast();
 
     const queryClient = useQueryClient();
     const mutation = useMutation({
@@ -19,11 +29,21 @@ export const PatientSettings = () => {
             return await updateInformationPatient(modifiedFields, patientData.num_secu_sociale);
         },
         onSuccess: async () => {
-            await queryClient.invalidateQueries(["authenticateMedecin"]);
-            console.log("Mise à jour réussie !");
+            await queryClient.invalidateQueries(["medicinAllRdv","nextRDV"]);
+            toast({
+                title: "Modification",
+                description: `Votre information on bien été modifier !`
+            });
+
+            setIsOpen(false);
+            setModifiedFields({});
         },
         onError: (error) => {
             console.error("Erreur lors de la mise à jour :", error);
+            toast({
+                title: "Modification",
+                description: `Erreur lors de la modification`
+            });
         }
     });
 
@@ -49,7 +69,6 @@ export const PatientSettings = () => {
         enabled: !!patientData,
         retry: 2,
     });
-    console.log(patientData);
 
     useEffect(() => {
         if (patientData) {
@@ -58,6 +77,7 @@ export const PatientSettings = () => {
 
             setFormData(informationPatient);
             setOriginalData(informationPatient);
+            setModifiedFields({});
         }
     }, [patientData]);
 
@@ -83,18 +103,10 @@ export const PatientSettings = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let modifiedFields = {};
-        for (const key in formData) {
-            if (formData[key] !== originalData[key]) {
-                modifiedFields[key] = formData[key];
-            }
-        }
 
-        if(!modifiedFields){
-            return;
+        if (Object.keys(modifiedFields).length != 0){
+            mutation.mutate(modifiedFields);
         }
-        console.log(modifiedFields);
-        mutation.mutate(modifiedFields);
     };
 
     const handleChange = (e) => {
@@ -103,6 +115,15 @@ export const PatientSettings = () => {
             ...prevData,
             [name]: value,
         }));
+
+        setModifiedFields((prev) => {
+            if (originalData[name] !== value) {
+                return { ...prev, [name]: value };
+            } else {
+                const { [name]: removed, ...rest } = prev;
+                return rest;
+            }
+        });
     };
 
     const handleMedecinChange = (value) => {
@@ -110,8 +131,18 @@ export const PatientSettings = () => {
             ...prevData,
             medecin_perso: value,
         }));
+
+        setModifiedFields((prev) => {
+            if (originalData[name] !== value) {
+                return { ...prev, [name]: value };
+            } else {
+                const { [name]: removed, ...rest } = prev;
+                return rest;
+            }
+        });
     };
 
+    console.log()
     return (
         <DashboardWrapper user={patientData}>
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4 p-6">
@@ -240,9 +271,10 @@ export const PatientSettings = () => {
                     />
                 </div>
 
-                <Button type="submit" variant="themed">
-                    Enregistrer les modifications
+                <Button type="submit" variant="themed" disabled={Object.keys(modifiedFields).length === 0}>
+                    {mutation.isPending ? "Modification en cours..." : "Enregistrer les modifications"}
                 </Button>
+                <Toaster />
             </form>
         </DashboardWrapper>
     );

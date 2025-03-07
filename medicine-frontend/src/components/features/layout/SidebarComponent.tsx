@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar.tsx";
-import {CircleHelp, LayoutDashboard, Settings, UsersRound} from "lucide-react";
+import {CalendarIcon, LayoutDashboard, Settings, UsersRound} from "lucide-react";
 
 export const SidebarComponent = () => {
   const items = [
@@ -27,6 +27,11 @@ export const SidebarComponent = () => {
       url: "/medecins",
       icon: UsersRound,
     },
+    {
+      title: "Mes rendez-vous",
+      url: "/mes_rendez_vous",
+      icon: CalendarIcon,
+    },
   ]
 
   const tools = [
@@ -35,12 +40,6 @@ export const SidebarComponent = () => {
       url: "/settings",
       icon: Settings,
     },
-    {
-      title: "Assistance",
-      url: "/help",
-      icon: CircleHelp,
-    },
-
   ]
 
   return (

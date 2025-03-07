@@ -111,6 +111,23 @@ export const fetchProchainRDVPatient = async (num_secu_sociale: string) => {
     }
 };
 
+export const fetctWithId = async (id: string) => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await axios.get(`${API_URL}/api/rendez_vouses/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+        throw new Error("Impossible de récupérer les informations.");
+    }
+};
+
 export const createNewRDV = async (ObjectRDV: object) => {
     const API_URL = import.meta.env.VITE_API_URL;
     const token = localStorage.getItem("token");
@@ -152,6 +169,24 @@ export const fetchData = async (route: string) => {
     try {
         const response = await axios.get(`${API_URL}${route}`, {
             headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+        throw new Error("Impossible de récupérer les informations.");
+    }
+};
+
+
+export const annuleAppointement = async (ObjectRDV: object,appointmentId: string) => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const token = localStorage.getItem("token");
+    try {
+        const response = await axios.patch(`${API_URL}/api/rendez_vouses/${appointmentId}`, JSON.stringify(ObjectRDV), {
+            headers: {
+                "Content-Type": "application/merge-patch+json",
                 Authorization: `Bearer ${token}`,
             },
         });

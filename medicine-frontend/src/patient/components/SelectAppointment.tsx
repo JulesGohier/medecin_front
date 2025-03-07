@@ -60,28 +60,30 @@ export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: strin
     });
 
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogTrigger asChild>
-                <Button variant="outline" className={"bg-red-500 hover:bg-red-600 hover:text-white text-white w-14"}>{heure}</Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] z-[99999] pointer-events-auto">
-                <DialogHeader>
-                    <DialogTitle>Votre rendez-vous</DialogTitle>
-                </DialogHeader>
-                <div className="mt-5 mb-5">
-                    <p>Votre rendez-vous est programmé pour le <br /> {formattedDate} à {heure}</p>
-                </div>
-                <DialogFooter>
-                    <Button
-                        onClick={() => mutation.mutate()}
-                        className={"bg-red-500 hover:bg-red-600 w-full flex items-center gap-4"}
-                        disabled={mutation.isPending}
-                    >
-                        {mutation.isPending ? "Réservation..." : "Confirmer le RDV"}
-                    </Button>
-                </DialogFooter>
-            </DialogContent>
+        <>
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                <DialogTrigger asChild>
+                    <Button variant="outline" className={"bg-red-500 hover:bg-red-600 hover:text-white text-white w-14"}>{heure}</Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px] z-[99999] pointer-events-auto">
+                    <DialogHeader>
+                        <DialogTitle>Votre rendez-vous</DialogTitle>
+                    </DialogHeader>
+                    <div className="mt-5 mb-5">
+                        <p>Votre rendez-vous est programmé pour le <br /> {formattedDate} à {heure}</p>
+                    </div>
+                    <DialogFooter>
+                        <Button
+                            onClick={() => mutation.mutate()}
+                            className={"bg-red-500 hover:bg-red-600 w-full flex items-center gap-4"}
+                            disabled={mutation.isPending}
+                        >
+                            {mutation.isPending ? "Réservation..." : "Confirmer le RDV"}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
             <Toaster />
-        </Dialog>
+        </>
     );
 }

@@ -11,14 +11,13 @@ import {
 } from "@/components/ui/avatar"
 import {Mails, Phone} from "lucide-react";
 import {ContactButton} from "@/patient/components/ContactButton.tsx";
+import {formatPhoneNumber} from "@/patient/components/format.ts";
 
 
 export const YourMedecinCard = ({ className, medecin }: {className?: string, medecin: any}) => {
     const MedecinInfo = {
         image: "src/assets/medecin-300x300.jpg",
     };
-
-    const PhoneWithSpace = medecin.numTel.replace(/(\d{2})/g, '$1 ');
 
     return (
         <div className={className}>
@@ -36,7 +35,7 @@ export const YourMedecinCard = ({ className, medecin }: {className?: string, med
                 </CardHeader>
                 <hr />
                 <CardFooter className={"flex flex-col mt-5 gap-3"}>
-                    <ContactButton Icon={Phone} href={"tel:+33" + medecin.numTel} label={PhoneWithSpace} />
+                    <ContactButton Icon={Phone} href={"tel:+33" + medecin.numTel} label={formatPhoneNumber(medecin.numTel)} />
                     <ContactButton Icon={Mails} href={"mailto:" + medecin.email} label={medecin.email} />
                 </CardFooter>
             </Card>

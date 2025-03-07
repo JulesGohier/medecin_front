@@ -89,6 +89,7 @@ export const PatientDashboard = () => {
             </DashboardWrapper>
         );
     }
+
     if (authError || medecinError || nextRDVError) {
         return <p className="text-red-500">Erreur lors de la récupération des données.</p>;
     }

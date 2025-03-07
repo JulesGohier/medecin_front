@@ -32,7 +32,6 @@ export const NextAppointement = ({ className, medecin, date, time }: {className:
     let dateYear = dateTMP.getFullYear();
     let formattedTime = time.split(":").slice(0, 2).join("h")
 
-
     let formattedDate = `${dateDay} ${dateMonth} ${dateYear}`;
 
     return (

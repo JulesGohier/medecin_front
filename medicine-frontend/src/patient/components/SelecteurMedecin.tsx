@@ -14,7 +14,9 @@ export function SelecteurMedecin({ options, label, value, onChange }: {
     value?: string,
     onChange: any
 }) {
-    console.log(options);
+
+    const medecinGeneralisteList = options.filter((medecin)=>{return medecin.specialite.toLowerCase()=="medecin généraliste"})
+
     return (
         <div className="flex flex-col">
             <Select value={value} onValueChange={onChange} name="medecin_perso">
@@ -24,9 +26,9 @@ export function SelecteurMedecin({ options, label, value, onChange }: {
                 <SelectContent>
                     <SelectGroup>
                         <SelectLabel>{label}</SelectLabel>
-                        {options.map((option: any) => (
+                        {medecinGeneralisteList.map((option: any) => (
                             <SelectItem  key={option.numRpps} value={option.numRpps}>
-                                {option.nom}
+                                {`Dr. ${option.nom} ${option.prenom} - ${option.specialite}`}
                             </SelectItem>
                         ))}
                     </SelectGroup>
