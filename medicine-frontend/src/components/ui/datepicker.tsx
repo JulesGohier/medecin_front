@@ -44,7 +44,11 @@ export function DatePicker({ onDateChange, className }: { onDateChange: (date: D
                     {date ? format(date, "d MMMM yyyy", { locale: fr }) : <span>Selectioner une date</span>}
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="flex w-auto flex-col space-y-2 p-2">
+            <PopoverContent
+                side="top"
+                align="end"
+                className="w-auto flex flex-col space-y-2 p-2 z-[99999] pointer-events-auto"
+            >
                 <Select
                     onValueChange={(value) => {
                         setDate(addDays(new Date(), parseInt(value)))

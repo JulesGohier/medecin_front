@@ -26,7 +26,6 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
     const {
         data: medicinAllRdv,
         isLoading: isMedecinLoading,
-        error: medecinError,
     } = useQuery({
         queryKey: ["medicinAllRdv"],
         queryFn: async () => {
@@ -107,7 +106,7 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
     return (
         <Card className={className}>
             <CardTitle className={"text-black flex justify-self-center m-3"}>Prendre un rendez-vous</CardTitle>
-            <hr />
+            <hr/>
             <CardContent className="flex flex-col ">
                 <DatePicker onDateChange={setDate} className={"my-3"} />
                 <Accordion type="single" collapsible>
@@ -123,12 +122,10 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
                                 <AccordionContent className="flex flex-wrap gap-1">
                                     {horaires.length > 0 ? (
                                         (() => {
-
                                             const now = new Date();
 
                                             const validHoraires = horaires.filter((heure) => {
                                                 const rdvDateTime = new Date(`${date} ${heure}`);
-
                                                 return rdvDateTime > now;
                                             });
 
