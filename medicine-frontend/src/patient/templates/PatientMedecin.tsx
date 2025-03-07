@@ -23,10 +23,6 @@ export const PatientMedecin = () => {
         queryFn: async () => {
             const tmp = await fetchAllMedecins();
 
-            if (!Array.isArray(tmp)) {
-                throw new Error("Données invalides reçues");
-            }
-
             return tmp;
         },
         enabled: !!patientData,
@@ -51,7 +47,7 @@ export const PatientMedecin = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
                 {medecins.length > 0 ? (
                     medecins
-                        .filter(medecin => medecin.nom !== "admin") // Filtrer avant d'afficher
+                        .filter(medecin => medecin.nom !== "admin")
                         .map((medecin, index) => (
                             <MedecinCard
                                 key={index}

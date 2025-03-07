@@ -23,6 +23,7 @@ export const authenticateMedecin = async () => {
         if (patient) {
             localStorage.setItem("patient", patient);
         }
+
         return { token, roles, patient };
     } catch (error) {
         console.error("Erreur lors de l'authentification :", error);
@@ -117,6 +118,23 @@ export const createNewRDV = async (ObjectRDV: object) => {
         const response = await axios.post(`${API_URL}/api/rendez_vouses`, JSON.stringify(ObjectRDV), {
             headers: {
                 "Content-Type": "application/ld+json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+        throw new Error("Impossible de récupérer les informations.");
+    }
+};
+
+export const updateInformationPatient = async (ObjectRDV: object,num_secu_sociale: string) => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const token = localStorage.getItem("token");
+    try {
+        const response = await axios.patch(`${API_URL}/api/patients/${num_secu_sociale}`, JSON.stringify(ObjectRDV), {
+            headers: {
+                "Content-Type": "application/merge-patch+json",
                 Authorization: `Bearer ${token}`,
             },
         });
