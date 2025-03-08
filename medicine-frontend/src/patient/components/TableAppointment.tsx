@@ -82,7 +82,7 @@ export const TableAppointment = ({ appointments }: {appointments: Appointment[]}
                     )}
                 </TableLayout>
             )}
-            <div className="mt-4">
+            <div className="mt-4 w-full">
                 {totalPages === 1 ? null : (
                     <PaginationComponent
                         currentPage={currentPage}

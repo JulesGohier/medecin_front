@@ -32,6 +32,7 @@ export const AnnuleAppointmentModal = ({ children, appointmentId }: { children: 
                 description: "Votre rendez-vous a bien été annulé !",
             });
 
+
             setIsOpen(false);
         },
         onError: () => {
@@ -43,16 +44,6 @@ export const AnnuleAppointmentModal = ({ children, appointmentId }: { children: 
     });
 
 
-    const closeModal = () => {
-        setIsOpen(false);
-    };
-
-
-    const handleClickConfirm = () => {
-
-        mutation.mutate(appointmentId);
-        closeModal();
-    }
 
     return (
         <>
@@ -72,20 +63,17 @@ export const AnnuleAppointmentModal = ({ children, appointmentId }: { children: 
                         <Button
                             type="submit"
                             className={"bg-red-800 hover:bg-red-700 w-full flex items-center gap-2"}
-                            onClick={()=>{
-                                handleClickConfirm();
-                            }}
-                        >
+                            onClick={()=>{mutation.mutate(appointmentId)}}
+                            disabled={mutation.isPending}>
                             {mutation.isPending ? "Annulation en cours..." : "Confirmer"}
+
                         </Button>
 
                         <Button
                             type="submit"
                             className={"bg-red-800 hover:bg-red-700 w-full flex items-center gap-2"}
-                            onClick={() => {
-                                closeModal();
-                            }}
-                        >
+                            onClick={()=>{setIsOpen(false)}}
+                            disabled={mutation.isPending}>
                             Annuler
                         </Button>
                     </DialogFooter>

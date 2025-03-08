@@ -17,38 +17,41 @@ export const PaginationComponent = ({ currentPage, totalPages, onPageChange }: P
     };
 
     return (
-        <Pagination className="flex justify-center items-center space-x-2 mt-4">
-            {currentPage === 1 ? null : (
+        <div className="w-full flex justify-center mt-4">
+            <Pagination className="flex justify-center items-center space-x-2 w-auto">
                 <PaginationPrevious
                     onClick={handlePrevious}
-                    className="flex items-center cursor-pointer border border-gray-200 bg-gray-200"
+                    className={cn(
+                        "flex items-center cursor-pointer border border-gray-200 bg-gray-200 px-3 py-1 rounded-md",
+                        currentPage === 1 && "visibility-hidden opacity-0"
+                    )}
                 >
                     Précédent
                 </PaginationPrevious>
-            )}
 
-            {Array.from({ length: totalPages }, (_, index) => (
-                <PaginationLink
-                    key={index}
-                    onClick={() => onPageChange(index + 1)}
-                    className={cn(
-                        "px-3 py-1.5 cursor-pointer border border-gray-200",
-                        currentPage === index + 1 && "bg-gray-200"
-                    )}
-                >
-                    {index + 1}
-                </PaginationLink>
-            ))}
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <PaginationLink
+                        key={index}
+                        onClick={() => onPageChange(index + 1)}
+                        className={cn(
+                            "px-3 py-1.5 cursor-pointer border border-gray-200 rounded-md",
+                            currentPage === index + 1 && "bg-gray-200"
+                        )}
+                    >
+                        {index + 1}
+                    </PaginationLink>
+                ))}
 
-            {currentPage === totalPages ? null : (
                 <PaginationNext
                     onClick={handleNext}
-                    className="flex items-center cursor-pointer border border-gray-200 bg-gray-200 disabled:bg-green-500"
+                    className={cn(
+                        "flex items-center cursor-pointer border border-gray-200 bg-gray-200 px-3 py-1 rounded-md",
+                        currentPage === totalPages && "visibility-hidden opacity-0"
+                    )}
                 >
                     Suivant
                 </PaginationNext>
-            )}
-
-        </Pagination>
+            </Pagination>
+        </div>
     );
 };
