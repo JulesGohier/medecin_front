@@ -7,7 +7,7 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog.tsx";
-import {deleteAppointement} from "@/medecin/actions/medecin-action.ts";
+import {annulerAppointement, deleteAppointement} from "@/medecin/actions/medecin-action.ts";
 import {LoaderSpinner} from "@/medecin/components/LoaderSpinner.tsx";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import { Paperclip } from "lucide-react";
@@ -24,7 +24,7 @@ export const DeleteAppointmentModal = ({ children, appointmentId }: { children: 
     
     const mutation = useMutation({
         mutationFn: (id: string) => {
-            return deleteAppointement(id);
+            return annulerAppointement(id);
         },
         onSuccess: () => {
             query.invalidateQueries(['patient', 'appointment']);

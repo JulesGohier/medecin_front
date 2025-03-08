@@ -1,11 +1,10 @@
 import axios from "axios";
 
-//Permet d'authentifier le médecin et sauvegarder le JWT.
 export const authenticateMedecin = async () => {
     const API_URL = import.meta.env.VITE_API_URL;
     try {
         const response = await axios.post(`${API_URL}/api/login_token`, {
-            username: "medecin3",
+            email: "medecin3@medecin.com",
             password: "password123"
         });
         
@@ -65,3 +64,26 @@ export const deleteAppointement = async (appointmentId: string) => {
         throw new Error("Impossible de récupérer les informations.");
     }
 }
+
+export const annulerAppointement = async (appointmentId: string) => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const token = localStorage.getItem("token");
+    
+    try {
+        const response = await axios.patch(
+            `${API_URL}/api/rendez_vouses/${appointmentId}`,
+            { state: "annulé" },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/merge-patch+json",
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Erreur lors de l'annulation du rendez-vous :", error);
+        throw new Error("Impossible d'annuler le rendez-vous.");
+    }
+};
+
