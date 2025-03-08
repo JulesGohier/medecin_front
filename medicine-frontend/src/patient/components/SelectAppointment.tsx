@@ -81,6 +81,13 @@ export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: strin
                         >
                             {mutation.isPending ? "Réservation..." : "Confirmer le RDV"}
                         </Button>
+                        <Button
+                            onClick={() => setIsOpen(false)}
+                            className={"bg-red-500 hover:bg-red-600 w-full flex items-center gap-4"}
+                            disabled={mutation.isPending}
+                        >
+                            Annulé
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
