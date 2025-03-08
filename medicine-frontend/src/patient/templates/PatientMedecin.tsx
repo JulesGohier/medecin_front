@@ -8,7 +8,6 @@ export const PatientMedecin = () => {
     const {
         data: patientData,
         isLoading: isAuthLoading,
-        error: authError
     } = useQuery({
         queryKey: ["authenticateMedecin"],
         queryFn: async () => {
@@ -18,7 +17,7 @@ export const PatientMedecin = () => {
         retry: 2,
     });
 
-    const { data: medecins, isLoading, error } = useQuery({
+    const { data: medecins, isLoading } = useQuery({
         queryKey: ["medecins"],
         queryFn: async () => {
             const tmp = await fetchAllMedecins();
@@ -42,13 +41,10 @@ export const PatientMedecin = () => {
     return (
         <DashboardWrapper user={patientData}>
             <h2 className="text-xl font-bold mb-4">Liste des Médecins</h2>
-            {error && <p className="text-red-500">{error}</p>}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
                 {medecins.length > 0 ? (
-                    medecins
-                        .filter(medecin => medecin.nom !== "admin")
-                        .map((medecin, index) => (
+                    medecins.map((medecin: object, index: string) => (
                             <MedecinCard
                                 key={index}
                                 medecin={medecin}

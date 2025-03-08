@@ -1,7 +1,6 @@
 import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
-import { Button } from "@/components/ui/button.tsx";
 import {useQuery} from "@tanstack/react-query";
-import {authenticateMedecin, fetchMedecinsRDV, fetchRDVPatient} from "@/patient/actions/patient-action.ts";
+import {authenticateMedecin, fetchRDVPatient} from "@/patient/actions/patient-action.ts";
 import {LoaderSpinner} from "@/patient/components/LoaderSpinner.tsx";
 import {TableAppointment} from "@/patient/components/TableAppointment.tsx";
 
@@ -9,7 +8,6 @@ export const PatientRdv = () => {
     const {
         data: patientData,
         isLoading: isAuthLoading,
-        error: authError
     } = useQuery({
         queryKey: ["authenticateMedecin"],
         queryFn: async () => {
@@ -22,7 +20,6 @@ export const PatientRdv = () => {
     const {
         data: patientAllRdv,
         isLoading: isPatientLoading,
-        error: patientError
     } = useQuery({
         queryKey: ["patientAllRdv"],
         queryFn: async () => {
@@ -30,7 +27,7 @@ export const PatientRdv = () => {
         },
     });
 
-    if (isPatientLoading) {
+    if (isPatientLoading || isAuthLoading) {
         return (
             <DashboardWrapper user={patientData}>
                 <div className="flex w-full h-screen items-center justify-center">

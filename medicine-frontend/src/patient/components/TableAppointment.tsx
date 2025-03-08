@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label.tsx";
 import { TableCell, TableRow } from "@/components/ui/table.tsx";
-import {fetchData, fetctWithId} from "@/patient/actions/patient-action.ts";
+import {fetchData} from "@/patient/actions/patient-action.ts";
 import { LoaderSpinner } from "@/patient/components/LoaderSpinner.tsx"
 import { AnnuleAppointmentModal } from "@/patient/components/modal/AnnuleAppointmentModal.tsx";
 import { PaginationComponent } from "@/patient/components/table/PaginationComponent.tsx";
@@ -10,7 +10,14 @@ import { CircleX } from "lucide-react";
 import { useState } from "react";
 import { formatDate } from "@/patient/components/format.ts";
 
-export const TableAppointment = ({ appointments }: { appointments: string[] }) => {
+interface Appointment {
+    id: string;
+    state: string;
+    date: string;
+    idMedecin: string;
+}
+
+export const TableAppointment = ({ appointments }: {appointments: Appointment[]}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12;
 

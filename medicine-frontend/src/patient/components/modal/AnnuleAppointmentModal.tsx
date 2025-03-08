@@ -7,11 +7,9 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog.tsx";
-import {annuleAppointement, deleteAppointement, updateInformationPatient} from "@/patient/actions/patient-action.ts";
+import {annuleAppointement} from "@/patient/actions/patient-action.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import { Paperclip } from "lucide-react";
-import React, {useState, useTransition} from "react";
-import {LoaderSpinner} from "@/patient/components/LoaderSpinner.tsx";
+import React, {useState} from "react";
 import {useToast} from "@/hooks/use-toast.ts";
 import {Toaster} from "@/components/ui/toaster.tsx";
 
@@ -23,11 +21,12 @@ export const AnnuleAppointmentModal = ({ children, appointmentId }: { children: 
 
     const queryClient = useQueryClient();
     const mutation = useMutation({
-        mutationFn: async (id) => {
+        mutationFn: async (id: string) => {
             await annuleAppointement({ state: "annulé" }, id);
         },
         onSuccess: async () => {
-            await queryClient.invalidateQueries(["medecinRDV"]);
+            await queryClient.invalidateQueries({ queryKey: ['medecinRDV'] });
+
             toast({
                 title: "Modification",
                 description: "Votre rendez-vous a bien été annulé !",

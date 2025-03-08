@@ -10,7 +10,7 @@ import {
 import {useState} from "react";
 import { useToast } from "@/hooks/use-toast.ts";
 import {Toaster} from "@/components/ui/toaster.tsx";
-import {createNewRDV, fetchMedecinsRDV} from "@/patient/actions/patient-action.ts";
+import {createNewRDV} from "@/patient/actions/patient-action.ts";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: string, date: string, patient: any, numRpps: string})=> {
@@ -41,7 +41,8 @@ export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: strin
     const mutation = useMutation({
         mutationFn: async () => await createNewRDV(rdvObject),
         onSuccess: async () => {
-            await queryClient.invalidateQueries(["medicinAllRdv","nextRDV"]);
+            await queryClient.invalidateQueries({queryKey: ["medicinAllRdv"]});
+            await queryClient.invalidateQueries({queryKey: ["nextRDV"]});
 
             toast({
                 title: "Rendez-vous confirmé",

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {
     authenticateMedecin,
-    createNewRDV,
     fetchAllMedecins,
     updateInformationPatient
 } from "@/patient/actions/patient-action.ts";
@@ -14,28 +13,45 @@ import { SelecteurMedecin } from "@/patient/components/SelecteurMedecin.tsx";
 import {useToast} from "@/hooks/use-toast.ts";
 import {Toaster} from "@/components/ui/toaster.tsx";
 
+interface Patient {
+    nom?: string;
+    prenom?: string;
+    num_secu_sociale?: string;
+    email?: string;
+    medecin_perso?: string;
+    num_tel?: string;
+    sexe?: string;
+    date_naissance?: string;
+}
+
+interface Medecin {
+    numRpps: string;
+    nom: string;
+    prenom: string;
+    specialite: string;
+}
+
 export const PatientSettings = () => {
-    // On initialise formData et originalData avec un objet vide
-    const [formData, setFormData] = useState({});
-    const [originalData, setOriginalData] = useState({});
-    const [modifiedFields, setModifiedFields] = useState({});
-    const [isOpen, setIsOpen] = useState(false);
+    const [formData, setFormData] = useState<Patient>({});
+    const [originalData, setOriginalData] = useState<Patient>({});
+    const [modifiedFields, setModifiedFields] = useState<Patient>({});
+    //const [isOpen, setIsOpen] = useState(false);
     const { toast } = useToast();
 
     const queryClient = useQueryClient();
     const mutation = useMutation({
-        mutationFn: async (modifiedFields) => {
-            console.log(modifiedFields);
+        mutationFn: async (modifiedFields: Patient) => {
             return await updateInformationPatient(modifiedFields, patientData.num_secu_sociale);
         },
         onSuccess: async () => {
-            await queryClient.invalidateQueries(["medicinAllRdv","nextRDV"]);
+            await queryClient.invalidateQueries({ queryKey: ['authenticateMedecin'] });
+
             toast({
                 title: "Modification",
                 description: `Votre information on bien été modifier !`
             });
 
-            setIsOpen(false);
+            //setIsOpen(false);
             setModifiedFields({});
         },
         onError: (error) => {
@@ -60,7 +76,7 @@ export const PatientSettings = () => {
         retry: 2,
     });
 
-    const { data: medecins, isLoading, error } = useQuery({
+    const { data: medecins, isLoading } = useQuery<Medecin[]>({
         queryKey: ["medecins"],
         queryFn: async () => {
             const tmp = await fetchAllMedecins();
@@ -101,7 +117,7 @@ export const PatientSettings = () => {
         );
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (Object.keys(modifiedFields).length != 0){
@@ -109,40 +125,43 @@ export const PatientSettings = () => {
         }
     };
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
+
+        setFormData({
+            ...formData,
             [name]: value,
-        }));
-
-        setModifiedFields((prev) => {
-            if (originalData[name] !== value) {
-                return { ...prev, [name]: value };
-            } else {
-                const { [name]: removed, ...rest } = prev;
-                return rest;
-            }
         });
+
+        if (originalData[name as keyof Patient] !== value) {
+            setModifiedFields({
+                ...modifiedFields,
+                [name]: value,
+            });
+        } else {
+            const { [name]: _, ...rest } = modifiedFields;
+            setModifiedFields(rest);
+        }
     };
 
-    const handleMedecinChange = (value) => {
-        setFormData((prevData) => ({
-            ...prevData,
+    const handleMedecinChange = (value: string) => {
+        setFormData({
+            ...formData,
             medecin_perso: value,
-        }));
-
-        setModifiedFields((prev) => {
-            if (originalData[name] !== value) {
-                return { ...prev, [name]: value };
-            } else {
-                const { [name]: removed, ...rest } = prev;
-                return rest;
-            }
         });
+
+        if (originalData.medecin_perso !== value) {
+            setModifiedFields({
+                ...modifiedFields,
+                medecin_perso: value,
+            });
+        } else {
+            const { medecin_perso, ...rest } = modifiedFields;
+            setModifiedFields(rest);
+        }
     };
 
-    console.log()
+
     return (
         <DashboardWrapper user={patientData}>
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4 p-6">

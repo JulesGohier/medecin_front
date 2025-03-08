@@ -21,7 +21,6 @@ export const PaginationComponent = ({ currentPage, totalPages, onPageChange }: P
             {currentPage === 1 ? null : (
                 <PaginationPrevious
                     onClick={handlePrevious}
-                    disabled={currentPage === 1}
                     className="flex items-center cursor-pointer border border-gray-200 bg-gray-200"
                 >
                     Précédent
@@ -44,7 +43,6 @@ export const PaginationComponent = ({ currentPage, totalPages, onPageChange }: P
             {currentPage === totalPages ? null : (
                 <PaginationNext
                     onClick={handleNext}
-                    disabled={currentPage === totalPages}
                     className="flex items-center cursor-pointer border border-gray-200 bg-gray-200 disabled:bg-green-500"
                 >
                     Suivant

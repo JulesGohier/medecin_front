@@ -35,10 +35,13 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
 
     const generateHoraires = (): string[] => {
         const horaires = [];
-        for (let i = 9; i <= 19; i++) {
+        for (let i = 9; i <= 18; i++) {
             const hour = i < 10 ? `0${i}:00` : `${i}:00`;
             horaires.push(hour);
-            horaires.push(hour.replace(':00', ':30'));
+            if(i != 18){
+                horaires.push(hour.replace(':00', ':30'));
+            }
+
         }
         return horaires;
     };
@@ -53,12 +56,7 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
         const lundi = new Date(date);
         lundi.setDate(date?.getDate()-date.getDay()+ 1);
 
-        const defaultObject: dayObject = {
-            date: "",
-            horaires: [],
-        };
-
-        const disponibilite: dayObject[] = Array.from({ length: 7 }, (_, index) => {
+        const disponibilite: dayObject[] = Array.from({ length: 5 }, (_, index) => {
             const currentDay = new Date(lundi);
             currentDay.setDate(lundi.getDate() + index);
             const currentDayFr = currentDay.toLocaleDateString('fr-CA');
@@ -75,7 +73,6 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
             const disponibilites = horairesBase.filter((horaire) => !horairesReserveDuJour.includes(horaire));
 
             return {
-                ...defaultObject,
                 date: currentDayFr,
                 horaires: disponibilites
             };
@@ -98,7 +95,6 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
             </Card>
         );
     }
-
 
     return (
         <Card className={className}>
