@@ -35,7 +35,6 @@ export const PatientSettings = () => {
     const [formData, setFormData] = useState<Patient>({});
     const [originalData, setOriginalData] = useState<Patient>({});
     const [modifiedFields, setModifiedFields] = useState<Patient>({});
-    //const [isOpen, setIsOpen] = useState(false);
     const { toast } = useToast();
 
     const queryClient = useQueryClient();
@@ -51,7 +50,6 @@ export const PatientSettings = () => {
                 description: `Votre information on bien été modifier !`
             });
 
-            //setIsOpen(false);
             setModifiedFields({});
         },
         onError: (error) => {
@@ -66,7 +64,6 @@ export const PatientSettings = () => {
     const {
         data: patientData,
         isLoading: isAuthLoading,
-        error: authError
     } = useQuery({
         queryKey: ["authenticateMedecin"],
         queryFn: async () => {
@@ -100,18 +97,8 @@ export const PatientSettings = () => {
     if (isAuthLoading || isLoading ||!formData) {
         return (
             <DashboardWrapper user={patientData}>
-                <div className="flex w-full h-screen items-center justify-center">
+                <div className="flex w-full h-[80vh] items-center justify-center">
                     <LoaderSpinner />
-                </div>
-            </DashboardWrapper>
-        );
-    }
-
-    if (authError) {
-        return (
-            <DashboardWrapper user={patientData}>
-                <div className="text-red-500">
-                    Une erreur est survenue lors de la récupération des données.
                 </div>
             </DashboardWrapper>
         );
@@ -290,7 +277,7 @@ export const PatientSettings = () => {
                     />
                 </div>
 
-                <Button type="submit" variant="themed" disabled={Object.keys(modifiedFields).length === 0}>
+                <Button type="submit" variant="themed" disabled={Object.keys(modifiedFields).length === 0 || mutation.isPending}>
                     {mutation.isPending ? "Modification en cours..." : "Enregistrer les modifications"}
                 </Button>
                 <Toaster />

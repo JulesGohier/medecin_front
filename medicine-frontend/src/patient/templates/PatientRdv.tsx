@@ -30,7 +30,7 @@ export const PatientRdv = () => {
     if (isPatientLoading || isAuthLoading) {
         return (
             <DashboardWrapper user={patientData}>
-                <div className="flex w-full h-screen items-center justify-center">
+                <div className="flex w-full h-[80vh] items-center justify-center">
                     <LoaderSpinner />
                 </div>
             </DashboardWrapper>

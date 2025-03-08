@@ -16,7 +16,6 @@ export const PatientDashboard = () => {
     const {
         data: patientData,
         isLoading: isAuthLoading,
-        error: authError
     } = useQuery({
         queryKey: ["authenticateMedecin"],
         queryFn: async () => {
@@ -29,7 +28,6 @@ export const PatientDashboard = () => {
     const {
         data: medecinData,
         isLoading: isMedecinLoading,
-        error: medecinError
     } = useQuery({
         queryKey: ["medecinData"],
         queryFn: async () => {
@@ -42,7 +40,6 @@ export const PatientDashboard = () => {
     const {
         data: nextRDV,
         isLoading: isNextRDVLoading,
-        error: nextRDVError
     } = useQuery({
         queryKey: ["nextRDV"],
         queryFn: async () => {
@@ -83,15 +80,11 @@ export const PatientDashboard = () => {
     if (isMedecinLoading || isNextRDVLoading) {
         return (
             <DashboardWrapper user={patientData}>
-                <div className="flex w-full h-screen items-center justify-center">
+                <div className="flex w-full h-[80vh] items-center justify-center">
                     <LoaderSpinner />
                 </div>
             </DashboardWrapper>
         );
-    }
-
-    if (authError || medecinError || nextRDVError) {
-        return <p className="text-red-500">Erreur lors de la récupération des données.</p>;
     }
 
     return (

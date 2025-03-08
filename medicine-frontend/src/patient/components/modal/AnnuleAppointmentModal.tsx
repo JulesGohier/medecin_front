@@ -32,7 +32,6 @@ export const AnnuleAppointmentModal = ({ children, appointmentId }: { children: 
                 description: "Votre rendez-vous a bien été annulé !",
             });
 
-
             setIsOpen(false);
         },
         onError: () => {
@@ -42,8 +41,6 @@ export const AnnuleAppointmentModal = ({ children, appointmentId }: { children: 
             });
         }
     });
-
-
 
     return (
         <>

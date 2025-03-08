@@ -11,6 +11,7 @@ import {useEffect, useState} from "react";
 import {useQuery} from "@tanstack/react-query";
 import {fetchMedecinsRDV} from "@/patient/actions/patient-action.ts";
 import {LoaderSpinner} from "@/patient/components/LoaderSpinner.tsx";
+import { formatDate} from "@/patient/components/format.ts";
 
 type dayObject = {
     date: string;
@@ -19,9 +20,7 @@ type dayObject = {
 
 export const BookingAppointment = ({ className, patient, numRpps }: { className?: string, patient: object,numRpps: string}) => {
     const [date, setDate] = useState<Date | any>(new Date())
-    const [jourDeLaSemaine, setJourDeLaSemaine] = useState<
-        { date: string; horaires: string[] }[]
-    >([]);
+    const [jourDeLaSemaine, setJourDeLaSemaine] = useState<dayObject[]>([]);
 
     const {
         data: medicinAllRdv,
@@ -81,21 +80,20 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
         setJourDeLaSemaine(disponibilite);
     },[medicinAllRdv,isMedecinLoading,date])
 
-    if(isMedecinLoading){
+    if (isMedecinLoading) {
         return (
             <Card className={className}>
                 <CardTitle className={"text-black flex justify-self-center m-3"}>Prendre un rendez-vous</CardTitle>
-                <hr/>
-                <CardContent className="flex flex-col ">
-                    <DatePicker onDateChange={setDate} className={"my-3"}/>
-                    <div className="flex w-full h-screen items-center justify-center">
+                <hr />
+                <CardContent className="flex flex-col">
+                    <DatePicker onDateChange={setDate} className={"my-3"} />
+                    <div className="flex min-h-[200px] items-center justify-center"> {/* Remplacer h-screen par min-h-[200px] */}
                         <LoaderSpinner />
                     </div>
                 </CardContent>
             </Card>
         );
     }
-
     return (
         <Card className={className}>
             <CardTitle className={"text-black flex justify-self-center m-3"}>Prendre un rendez-vous</CardTitle>
@@ -104,14 +102,10 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
                 <DatePicker onDateChange={setDate} className={"my-3"} />
                 <Accordion type="single" collapsible>
                     {jourDeLaSemaine.map(({ date, horaires }, index) => {
+
                         return (
                             <AccordionItem key={index} value={`item-${index + 1}`}>
-                                <AccordionTrigger>{new Date(date).toLocaleDateString("fr-FR", {
-                                    weekday: "long",
-                                    day: "numeric",
-                                    month: "long",
-                                    year: "numeric"
-                                })}</AccordionTrigger>
+                                <AccordionTrigger>{formatDate(date,"short")}</AccordionTrigger>
                                 <AccordionContent className="flex flex-wrap gap-1">
                                     {horaires.length > 0 ? (
                                         (() => {
