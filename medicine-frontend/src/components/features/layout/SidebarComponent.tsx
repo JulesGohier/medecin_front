@@ -10,28 +10,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar.tsx";
-import {CalendarIcon, LayoutDashboard, Settings, UsersRound} from "lucide-react";
+import {Calendar, CalendarIcon, LayoutDashboard, Settings, UsersRound} from "lucide-react";
 import {parseurJSON} from "@/parseurJson.ts";
 
 export const SidebarComponent = () => {
   const role = parseurJSON('role')
-
-  let link = "";
-  if (role === "ROLE_MEDECIN") {
-    link = "/dashboard_medecin"
-  } else if (role === "ROLE_PATIENT") {
-    link = "/dashboard_patient"
-  } else if (role === "ROLE_ADMIN"){
-    link = "/dashboard_admin"
-  }
-
-  const items = [
-    {
-      title: "Tableau de bord",
-      url: `${link}`,
-      icon: LayoutDashboard,
-    },
-  ];
+  let user_items: { title: string; url: string; icon: any }[] = [];
 
   const patient_items = [
     {
@@ -53,6 +37,42 @@ export const SidebarComponent = () => {
       icon: Settings,
     },
   ]
+
+  const medecine_items = [
+    {
+      title: "Patients",
+      url: "/mes_patients",
+      icon: UsersRound,
+    },
+    {
+      title: "Rendez-vous",
+      url: "/mes_consultations",
+      icon: Calendar,
+    },
+
+  ]
+
+  let link = "";
+  if (role === "ROLE_MEDECIN") {
+    link = "/dashboard_medecin"
+    user_items = medecine_items;
+  } else if (role === "ROLE_PATIENT") {
+    link = "/dashboard_patient"
+    user_items = patient_items
+  } else if (role === "ROLE_ADMIN"){
+    link = "/dashboard_admin"
+  }
+
+  const items = [
+    {
+      title: "Tableau de bord",
+      url: `${link}`,
+      icon: LayoutDashboard,
+    },
+  ];
+
+
+
 
   return (
       <Sidebar variant={"sidebar"}>
@@ -91,7 +111,7 @@ export const SidebarComponent = () => {
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                 ))}
-                {patient_items.map((item) => (
+                {user_items.map((item) => (
                     <SidebarMenuItem
                         key={item.title}
                         className={"py-3"}

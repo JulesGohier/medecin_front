@@ -10,6 +10,9 @@ import {PatientMedecin} from "@/patientPage/templates/PatientMedecin.tsx";
 import {PatientSettings} from "@/patientPage/templates/PatientSettings.tsx";
 import {PatientRdv} from "@/patientPage/templates/PatientRdv.tsx";
 
+import MedecinDashboard from "@/medecin/templates/MedecinDashboard.tsx";
+import MedecinAppointments from "@/medecin/templates/MedecinAppointments.tsx";
+import MedecinPatients from "@/medecin/templates/MedecinPatients.tsx";
 
 import { SessionExpire } from "@/templates/SessionExpire.tsx";
 
@@ -26,6 +29,9 @@ function App() {
             <Route path={"/medecins"} element={<PatientMedecin/>}/>
             <Route path={"/settings"} element={<PatientSettings/>}/>
 
+            <Route path={"/dashboard_medecin"} element={<MedecinDashboard />} />
+            <Route path={"/mes_patients"} element={<MedecinPatients />} />
+            <Route path={"/mes_consultations"} element={<MedecinAppointments />} />
 
             <Route path={"/session_expire"} element={<SessionExpire/>}/>
         </Routes>

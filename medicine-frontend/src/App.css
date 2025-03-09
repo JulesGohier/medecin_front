@@ -1,0 +1,9 @@
+@media (max-width: 640px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
