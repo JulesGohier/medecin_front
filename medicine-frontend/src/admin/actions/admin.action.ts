@@ -95,3 +95,30 @@ export const postMedecin = async (medecin) => {
         throw error;
     }
 }
+
+export const editMedecin = async (medecinRpps: string, medecin) => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const token = localStorage.getItem("token");
+    
+    try {
+        const data = {
+            email: medecin.email,
+            nom: medecin.nom,
+            prenom: medecin.prenom,
+            password: medecin.password,
+            num_rpps: medecin.num_rpps,
+            num_tel: medecin.num_tel,
+            specialite: medecin.specialite,
+        };
+        
+        await axios.patch(`${API_URL}/api/medecins/${medecinRpps}`, data, {
+            headers: {
+                "Content-Type": "application/merge-patch+json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        console.error("Erreur lors d'ajout du médecin :", error.response.data.error);
+        throw error;
+    }
+}

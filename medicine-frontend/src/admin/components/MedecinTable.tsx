@@ -1,6 +1,7 @@
+import {EditMedecinFormDialog} from "@/admin/components/EditMedecinFormDialog.tsx";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-type MedecinType = {
+export type MedecinType = {
     email: string
     nom: string
     prenom: string
@@ -10,8 +11,6 @@ type MedecinType = {
 }
 
 export default function MedecinTable({ medecins }: { medecins: MedecinType[] }) {
- 
-    
     return (
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Liste des Médecins</h1>
@@ -24,6 +23,7 @@ export default function MedecinTable({ medecins }: { medecins: MedecinType[] }) 
                         <TableHead>Numéro RPPS</TableHead>
                         <TableHead>Numéro de téléphone</TableHead>
                         <TableHead>Specialité</TableHead>
+                        <TableHead>Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -35,6 +35,9 @@ export default function MedecinTable({ medecins }: { medecins: MedecinType[] }) 
                             <TableCell>{medecin.num_rpps}</TableCell>
                             <TableCell>{medecin.num_tel}</TableCell>
                             <TableCell>{medecin.specialite}</TableCell>
+                            <TableCell>
+                                <EditMedecinFormDialog data={medecin} />
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

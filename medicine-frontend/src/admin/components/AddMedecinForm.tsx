@@ -6,7 +6,7 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage, useZodF
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-const medecinSchema = z.object({
+export const medecinSchema = z.object({
     email: z.string().min(1, "L'email est requis"),
     nom: z.string().min(1, "Le nom est requis"),
     prenom: z.string().min(1, "Le prénom est requis"),
