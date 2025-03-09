@@ -36,6 +36,8 @@ export const NextAppointmentCard = ({ appointments }: { appointments: string[] }
     
     const isLoading = queriesAppointmentData.some(query => query.isLoading) || queriesAppointmentPatientData.some(query => query.isLoading);
     
+    const limitedAppointments = queriesAppointmentData.slice(-4);
+    
     return (
         <Card className={"w-full sm:w-1/2 mx-0 sm:mx-6 border-2 border-gray-200 mt-5 sm:mt-0 md:max-h-[1000px] xl:max-h-[400px]"}>
             <CardHeader>
@@ -46,8 +48,8 @@ export const NextAppointmentCard = ({ appointments }: { appointments: string[] }
                     <div className="flex justify-center items-center w-full h-full mt-12">
                         <LoaderSpinner/>
                     </div>
-                ) : queriesAppointmentData.length > 0 ? (
-                    queriesAppointmentData.map((item, key) => {
+                ) : limitedAppointments.length > 0 ? (
+                    limitedAppointments.map((item, key) => {
                         const patientData = queriesAppointmentPatientData[key]?.data;
                         const appointmentDate = item.data?.date;
                         
@@ -77,7 +79,7 @@ export const NextAppointmentCard = ({ appointments }: { appointments: string[] }
                                     </div>
                                 </div>
                                 
-                                {key < queriesAppointmentData.length - 1 && (
+                                {key < limitedAppointments.length - 1 && (
                                     <Separator className={"mt-2 border-gray-300 md:flex"}/>
                                 )}
                             </div>

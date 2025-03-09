@@ -12,7 +12,7 @@ import {Edit, Eye, Trash} from "lucide-react";
 import  { useState } from "react";
 
 
-export const TableAppointment = ({ appointments } :  { appointments: string[]  }) => {
+export const TableAppointment = ({ appointments }: { appointments: string[] }) => {
     const queriesAppointmentData = useQueries({
         queries: appointments.map((appointment) => ({
             queryKey: ['appointment', appointment],
@@ -32,17 +32,19 @@ export const TableAppointment = ({ appointments } :  { appointments: string[]  }
     const isLoading = queriesAppointmentData.some(query => query.isLoading) || queriesAppointmentPatientData.some(query => query.isLoading);
     
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 12;
+    const itemsPerPage = 2;
     
-    const tableHeader = ["Prénom", "Nom", "Sexe", "Date Rendez-Vous", "État", "Actions"];
+    const totalPages = Math.ceil(queriesAppointmentData.length / itemsPerPage);
     
-    
-    
-    const totalPages = Math.ceil(queriesAppointmentPatientData.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const appointmentsToShow = queriesAppointmentData.slice(startIndex, endIndex);
     
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
+    
+    const tableHeader = ["Prénom", "Nom", "Sexe", "Date Rendez-Vous", "État", "Actions"];
     
     return (
         <div className="w-full">
@@ -52,7 +54,7 @@ export const TableAppointment = ({ appointments } :  { appointments: string[]  }
                 </div>
             ) : (
                 <TableLayout header={tableHeader}>
-                    {queriesAppointmentData.length > 0 ? queriesAppointmentData.map((item, key) => {
+                    {appointmentsToShow.length > 0 ? appointmentsToShow.map((item, key) => {
                         const patientData = queriesAppointmentPatientData[key]?.data;
                         const appointmentDate = item.data?.date;
                         const appointmentState = item.data?.state;

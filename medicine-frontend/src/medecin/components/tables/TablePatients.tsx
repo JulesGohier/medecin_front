@@ -1,26 +1,34 @@
-import {Label} from "@/components/ui/label.tsx";
+import { Label } from "@/components/ui/label.tsx";
 import { TableCell, TableRow } from "@/components/ui/table.tsx";
-import {fetchData} from "@/medecin/actions/medecin-action.ts";
-import {Patient} from "@/medecin/components/cards/NextAppointmentCard.tsx";
+import { fetchData } from "@/medecin/actions/medecin-action.ts";
+import { Patient } from "@/medecin/components/cards/NextAppointmentCard.tsx";
 import { PaginationComponent } from "@/medecin/components/PaginationComponent.tsx";
 import { TableLayout } from "@/medecin/components/tables/TableLayout.tsx";
-import {useQueries} from "@tanstack/react-query";
-import  { useState } from "react";
+import { useQueries } from "@tanstack/react-query";
+import { useState } from "react";
 
-
-export const TablePatients = ({ patients }: {  patients: Patient[]  }) => {
+export const TablePatients = ({ patients }: { patients: Patient[] }) => {
     const [currentPage, setCurrentPage] = useState(1);
     
+    const itemsPerPage = 1;
+    
+    const totalPages = Math.ceil(patients.length / itemsPerPage);
+    
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    
+    const patientsToShow = patients.slice(startIndex, endIndex);
     
     const queriesPatient = useQueries({
-        queries: patients.map((patient) => ({
+        queries: patientsToShow.map((patient) => ({
             queryKey: ['patient', patient],
             queryFn: () => fetchData(patient),
         })),
     });
     
-    
-    const itemsPerPage = 12;
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
     
     const tableHeader = [
         "Prénom",
@@ -30,15 +38,6 @@ export const TablePatients = ({ patients }: {  patients: Patient[]  }) => {
         "Numéro de téléphone",
         "Actions",
     ];
-    
-    console.log(queriesPatient);
-    
-    
-    const totalPages = Math.ceil(patients.length / itemsPerPage);
-    
-    const handlePageChange = (page: number) => {
-        setCurrentPage(page);
-    };
     
     return (
         <div className="w-full">
@@ -62,10 +61,9 @@ export const TablePatients = ({ patients }: {  patients: Patient[]  }) => {
                     <div className="flex w-full h-full text-center mt-6 ml-64 items-center justify-center">
                         <Label>Aucun Patients</Label>
                     </div>
-                
                 )}
             </TableLayout>
-            
+
             <div className="mt-4">
                 <PaginationComponent
                     currentPage={currentPage}
