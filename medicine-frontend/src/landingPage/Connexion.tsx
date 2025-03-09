@@ -1,4 +1,3 @@
-
 import Footer from "./Footer";
 import { Tabs } from "@/components/ui/tabs"
 import {useMutation} from "@tanstack/react-query";
@@ -33,7 +32,6 @@ export function Connexion () {
       if (role === "ROLE_MEDECIN") {
         // window.location.href = "/estMedecin.html";
       } else if (role === "ROLE_PATIENT") {
-
         window.location.href = "/dashboard_patient";
       } else if (role === "ROLE_ADMIN"){
         // window.location.href = "/dashboard_patient";
@@ -98,6 +96,4 @@ export function Connexion () {
       <Toaster />
     </div>
   );
-};
-
-export default Connexion;
+}
