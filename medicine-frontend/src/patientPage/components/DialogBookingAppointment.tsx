@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogHeader } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import {BookingAppointment} from "@/patient/components/BookingAppointment.tsx";
+import {BookingAppointment} from "@/patientPage/components/BookingAppointment.tsx";
 
 export function DialogBookingAppointment({ patient, numRpps }: { patient: any, numRpps: any }) {
     const [isOpen, setIsOpen] = useState(false);

@@ -10,8 +10,8 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 import {Mails, Phone} from "lucide-react";
-import {ContactButton} from "@/patient/components/ContactButton.tsx";
-import {formatPhoneNumber} from "@/patient/components/format.ts";
+import {ContactButton} from "@/patientPage/components/ContactButton.tsx";
+import {formatPhoneNumber} from "@/patientPage/components/format.ts";
 
 
 export const YourMedecinCard = ({ className, medecin }: {className?: string, medecin: any}) => {

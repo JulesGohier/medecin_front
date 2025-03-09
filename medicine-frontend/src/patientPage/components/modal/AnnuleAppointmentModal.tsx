@@ -7,7 +7,7 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog.tsx";
-import {annuleAppointement} from "@/patient/actions/patient-action.ts";
+import {annuleAppointement} from "@/patientPage/actions/patient-action.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import React, {useState} from "react";
 import {useToast} from "@/hooks/use-toast.ts";

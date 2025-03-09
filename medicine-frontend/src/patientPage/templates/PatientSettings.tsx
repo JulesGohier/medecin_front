@@ -4,12 +4,12 @@ import {
     authenticateMedecin,
     fetchAllMedecins,
     updateInformationPatient
-} from "@/patient/actions/patient-action.ts";
+} from "@/patientPage/actions/patient-action.ts";
 import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
-import { LoaderSpinner } from "@/patient/components/LoaderSpinner.tsx";
-import { SelecteurMedecin } from "@/patient/components/SelecteurMedecin.tsx";
+import { LoaderSpinner } from "@/patientPage/components/LoaderSpinner.tsx";
+import { SelecteurMedecin } from "@/patientPage/components/SelecteurMedecin.tsx";
 import {useToast} from "@/hooks/use-toast.ts";
 import {Toaster} from "@/components/ui/toaster.tsx";
 
@@ -277,7 +277,7 @@ export const PatientSettings = () => {
                     />
                 </div>
 
-                <Button type="submit" variant="themed" disabled={Object.keys(modifiedFields).length === 0 || mutation.isPending}>
+                <Button type="submit" className={"bg-red-500 hover:bg-red-600 w-full flex items-center gap-4"} disabled={Object.keys(modifiedFields).length === 0 || mutation.isPending}>
                     {mutation.isPending ? "Modification en cours..." : "Enregistrer les modifications"}
                 </Button>
                 <Toaster />

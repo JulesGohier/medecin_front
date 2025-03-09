@@ -1,14 +1,14 @@
 import { Label } from "@/components/ui/label.tsx";
 import { TableCell, TableRow } from "@/components/ui/table.tsx";
-import {fetchData} from "@/patient/actions/patient-action.ts";
-import { LoaderSpinner } from "@/patient/components/LoaderSpinner.tsx"
-import { AnnuleAppointmentModal } from "@/patient/components/modal/AnnuleAppointmentModal.tsx";
-import { PaginationComponent } from "@/patient/components/table/PaginationComponent.tsx";
-import { TableLayout } from "@/patient/components/table/TableLayout.tsx";
+import {fetchData} from "@/patientPage/actions/patient-action.ts";
+import { LoaderSpinner } from "@/patientPage/components/LoaderSpinner.tsx"
+import { AnnuleAppointmentModal } from "@/patientPage/components/modal/AnnuleAppointmentModal.tsx";
+import { PaginationComponent } from "@/patientPage/components/table/PaginationComponent.tsx";
+import { TableLayout } from "@/patientPage/components/table/TableLayout.tsx";
 import { useQueries } from "@tanstack/react-query";
 import { CircleX } from "lucide-react";
 import { useState } from "react";
-import { formatDate } from "@/patient/components/format.ts";
+import { formatDate } from "@/patientPage/components/format.ts";
 
 interface Appointment {
     id: string;

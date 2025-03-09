@@ -1,13 +1,13 @@
 import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
-import { YourMedecinCard } from "@/patient/components/YourMedecinCard.tsx";
-import {BookingAppointment} from "@/patient/components/BookingAppointment.tsx";
-import {CabinetCard} from "@/patient/components/CabinetCard.tsx";
-import {NextAppointement} from "@/patient/components/NextAppointement.tsx";
-import { LoaderSpinner } from "@/patient/components/LoaderSpinner.tsx";
+import { YourMedecinCard } from "@/patientPage/components/YourMedecinCard.tsx";
+import {BookingAppointment} from "@/patientPage/components/BookingAppointment.tsx";
+import {CabinetCard} from "@/patientPage/components/CabinetCard.tsx";
+import {NextAppointement} from "@/patientPage/components/NextAppointement.tsx";
+import { LoaderSpinner } from "@/patientPage/components/LoaderSpinner.tsx";
 import {
     authenticateMedecin,
     fetchMedecinsId, fetchProchainRDVPatient
-} from "@/patient/actions/patient-action.ts";
+} from "@/patientPage/actions/patient-action.ts";
 import {useQuery} from "@tanstack/react-query";
 
 
@@ -71,16 +71,19 @@ export const PatientDashboard = () => {
 
     if (isAuthLoading) {
         return (
-            <div className="flex w-full h-screen items-center justify-center">
+            <div className="flex w-full h-screen items-center justify-center flex-col">
+                <p className="text-lg mb-4">Bienvenue ! Nous vous connectons...</p>
                 <LoaderSpinner />
             </div>
         );
     }
 
+
     if (isMedecinLoading || isNextRDVLoading) {
         return (
             <DashboardWrapper user={patientData}>
-                <div className="flex w-full h-[80vh] items-center justify-center">
+                <div className="flex flex-col w-full h-[80vh] items-center justify-center">
+                    <p className="text-lg mb-4">Bienvenue ! Nous vous connectons...</p>
                     <LoaderSpinner />
                 </div>
             </DashboardWrapper>

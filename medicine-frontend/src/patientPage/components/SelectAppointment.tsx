@@ -10,7 +10,7 @@ import {
 import {useState} from "react";
 import { useToast } from "@/hooks/use-toast.ts";
 import {Toaster} from "@/components/ui/toaster.tsx";
-import {createNewRDV} from "@/patient/actions/patient-action.ts";
+import {createNewRDV} from "@/patientPage/actions/patient-action.ts";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: string, date: string, patient: any, numRpps: string})=> {
@@ -52,7 +52,6 @@ export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: strin
             setIsOpen(false);
         },
         onError: () => {
-            console.log("Error");
             toast({
                 title: "Erreur lors de la réservation",
                 description: `Veuillez recommencer.`

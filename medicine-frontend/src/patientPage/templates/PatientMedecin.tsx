@@ -1,7 +1,7 @@
 import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
-import {MedecinCard} from "@/patient/components/MedecinCard.tsx";
-import {authenticateMedecin, fetchAllMedecins} from "@/patient/actions/patient-action.ts";
-import {LoaderSpinner} from "@/patient/components/LoaderSpinner.tsx";
+import {MedecinCard} from "@/patientPage/components/MedecinCard.tsx";
+import {authenticateMedecin, fetchAllMedecins} from "@/patientPage/actions/patient-action.ts";
+import {LoaderSpinner} from "@/patientPage/components/LoaderSpinner.tsx";
 import { useQuery } from "@tanstack/react-query";
 
 export const PatientMedecin = () => {

@@ -3,7 +3,7 @@ import {
     CardContent,
     CardTitle,
 } from "@/components/ui/card.tsx";
-import {InfoSection} from "@/patient/components/InfoSection.tsx";
+import {InfoSection} from "@/patientPage/components/InfoSection.tsx";
 
 
 export const CabinetCard = ({ className }: { className?: string }) => {

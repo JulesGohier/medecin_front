@@ -1,8 +1,8 @@
 import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
 import {useQuery} from "@tanstack/react-query";
-import {authenticateMedecin, fetchRDVPatient} from "@/patient/actions/patient-action.ts";
-import {LoaderSpinner} from "@/patient/components/LoaderSpinner.tsx";
-import {TableAppointment} from "@/patient/components/TableAppointment.tsx";
+import {authenticateMedecin, fetchRDVPatient} from "@/patientPage/actions/patient-action.ts";
+import {LoaderSpinner} from "@/patientPage/components/LoaderSpinner.tsx";
+import {TableAppointment} from "@/patientPage/components/TableAppointment.tsx";
 
 export const PatientRdv = () => {
     const {

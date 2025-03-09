@@ -5,13 +5,13 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import {Card, CardContent, CardTitle} from "@/components/ui/card.tsx";
-import {SelectAppointment} from "@/patient/components/SelectAppointment.tsx";
+import {SelectAppointment} from "@/patientPage/components/SelectAppointment.tsx";
 import { DatePicker } from "@/components/ui/datepicker";
 import {useEffect, useState} from "react";
 import {useQuery} from "@tanstack/react-query";
-import {fetchMedecinsRDV} from "@/patient/actions/patient-action.ts";
-import {LoaderSpinner} from "@/patient/components/LoaderSpinner.tsx";
-import { formatDate} from "@/patient/components/format.ts";
+import {fetchMedecinsRDV} from "@/patientPage/actions/patient-action.ts";
+import {LoaderSpinner} from "@/patientPage/components/LoaderSpinner.tsx";
+import { formatDate} from "@/patientPage/components/format.ts";
 
 type dayObject = {
     date: string;
@@ -94,6 +94,7 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
             </Card>
         );
     }
+
     return (
         <Card className={className}>
             <CardTitle className={"text-black flex justify-self-center m-3"}>Prendre un rendez-vous</CardTitle>

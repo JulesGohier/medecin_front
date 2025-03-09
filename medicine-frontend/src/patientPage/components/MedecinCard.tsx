@@ -10,8 +10,8 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 import {Mails, Phone} from "lucide-react";
-import {ContactButton} from "@/patient/components/ContactButton.tsx";
-import {DialogBookingAppointment} from "@/patient/components/DialogBookingAppointment.tsx";
+import {ContactButton} from "@/patientPage/components/ContactButton.tsx";
+import {DialogBookingAppointment} from "@/patientPage/components/DialogBookingAppointment.tsx";
 
 
 
