@@ -23,7 +23,7 @@ export const PaginationComponent = ({ currentPage, totalPages, onPageChange }: P
                     onClick={handlePrevious}
                     className={cn(
                         "flex items-center cursor-pointer border border-gray-200 bg-gray-200 px-3 py-1 rounded-md",
-                        currentPage === 1 && "visibility-hidden opacity-0"
+                        currentPage == 1 && "visibility-hidden opacity-0"
                     )}
                 >
                     Précédent
@@ -46,7 +46,7 @@ export const PaginationComponent = ({ currentPage, totalPages, onPageChange }: P
                     onClick={handleNext}
                     className={cn(
                         "flex items-center cursor-pointer border border-gray-200 bg-gray-200 px-3 py-1 rounded-md",
-                        currentPage === totalPages && "visibility-hidden opacity-0"
+                        currentPage == totalPages && "visibility-hidden opacity-0"
                     )}
                 >
                     Suivant

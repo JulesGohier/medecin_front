@@ -64,7 +64,7 @@ export const PatientSettings = () => {
             return await updateInformationPatient(modifiedFields, patientData.num_secu_sociale);
         },
         onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ['authenticateMedecin'] });
+            await queryClient.invalidateQueries({ queryKey: ['patientData'] });
 
             toast({
                 title: "Modification",
@@ -84,7 +84,6 @@ export const PatientSettings = () => {
     });
 
 
-
     const { data: medecins, isLoading } = useQuery<Medecin[]>({
         queryKey: ["medecins"],
         queryFn: async () => {
@@ -99,6 +98,8 @@ export const PatientSettings = () => {
         if (patientData) {
             const informationPatient = { ...patientData };
             delete informationPatient.rendez_vous;
+
+            console.log(patientData);
 
             setFormData(informationPatient);
             setOriginalData(informationPatient);
@@ -214,7 +215,7 @@ export const PatientSettings = () => {
                     <label htmlFor="medecin_perso" className="font-medium text-sm">Nom de votre médecin</label>
                     <SelecteurMedecin
                         options={medecins}
-                        value={formData.medecin_perso}
+                        value={formData.medecinPerso}
                         label="Sélectionnez votre médecin"
                         onChange={handleMedecinChange}
                     />

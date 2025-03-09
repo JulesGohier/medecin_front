@@ -98,7 +98,7 @@ export const createNewRDV = async (ObjectRDV: object) => {
     const API_URL = import.meta.env.VITE_API_URL;
     const token = localStorage.getItem("token");
     try {
-        const response = await axios.post(`${API_URL}/api/rendez_vouses`, JSON.stringify(ObjectRDV), {
+        const response = await axios.post(`${API_URL}/api/rendez_vouses`, ObjectRDV, {
             headers: {
                 "Content-Type": "application/ld+json",
                 Authorization: `Bearer ${token}`,
@@ -117,7 +117,7 @@ export const createNewRDV = async (ObjectRDV: object) => {
 export const updateInformationPatient = async (ObjectRDV: object,num_secu_sociale: string) => {
     const API_URL = import.meta.env.VITE_API_URL;
     const token = localStorage.getItem("token");
-    console.log("AXIOS : ", ObjectRDV);
+
     try {
         const response = await axios.patch(`${API_URL}/api/patients/${num_secu_sociale}`, ObjectRDV, {
             headers: {
@@ -125,6 +125,13 @@ export const updateInformationPatient = async (ObjectRDV: object,num_secu_social
                 Authorization: `Bearer ${token}`,
             },
         });
+
+        const responses = response.data;
+        const medecinId = responses.medecin_perso.split('/').pop();
+
+        const updatePatient = { ...responses, medecin_perso: medecinId };
+        localStorage.setItem("patient", JSON.stringify(updatePatient));
+
         return response.data;
     } catch (error) {
         if(error.response.data.message == "Expired JWT Token"){
