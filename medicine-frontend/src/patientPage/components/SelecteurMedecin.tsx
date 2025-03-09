@@ -23,7 +23,6 @@ export function SelecteurMedecin({ options, label, value, onChange }: {
 }) {
 
     const medecinGeneralisteList = options.filter((medecin: Medecin)=>{return medecin.specialite.toLowerCase()=="medecin généraliste"})
-
     return (
         <div className="flex flex-col">
             <Select value={value} onValueChange={onChange} name="medecin_perso">

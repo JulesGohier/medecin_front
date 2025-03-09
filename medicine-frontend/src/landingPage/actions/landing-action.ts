@@ -1,5 +1,5 @@
 import axios from "axios";
-import {registerPatientType} from "@/patientPage/actions/type.ts";
+import {registerPatientType} from "@/landingPage/actions/type.ts"
 
 export const authenticate = async ({email, password}:{email: string, password: string}) => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -13,15 +13,15 @@ export const authenticate = async ({email, password}:{email: string, password: s
         const { token, roles } = response.data;
 
         localStorage.setItem("token", token);
-        localStorage.setItem("role", roles);
+        localStorage.setItem("role", JSON.stringify(roles.toString()));
 
         if (roles == "ROLE_MEDECIN"){
             localStorage.setItem("id", response.data.id);
         }else if (roles == "ROLE_PATIENT"){
-            localStorage.setItem("patient", response.data.patient);
+            localStorage.setItem("patient", JSON.stringify(response.data.patient));
         }
 
-        return roles;
+        return roles.toString();
     } catch (error) {
         if (error.response) {
             if (error.response.status == 401) {
@@ -61,7 +61,7 @@ export const fetchAllMedecins = async () => {
     try {
         const response = await axios.get(`${API_URL}/api/medecins`);
 
-        return response.data;
+        return response.data.member;
     } catch (error) {
         throw new Error("Impossible de récupérer les médecins.");
     }

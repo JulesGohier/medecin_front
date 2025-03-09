@@ -37,6 +37,27 @@ export const PatientSettings = () => {
     const [modifiedFields, setModifiedFields] = useState<Patient>({});
     const { toast } = useToast();
 
+    const {
+        data: patientData,
+        isLoading: isAuthLoading,
+    } = useQuery({
+        queryKey: ["patientData"],
+        queryFn: async () => {
+            const patientDataString = localStorage.getItem('patient');
+
+            if (!patientDataString) {
+                throw new Error("Aucune donnée patient trouvée dans le localStorage.");
+            }
+
+            try {
+                const patient = JSON.parse(patientDataString);
+                return patient;
+            } catch (error) {
+                throw new Error("Les données du patient sont corrompues ou mal formatées.");
+            }
+        },
+    });
+
     const queryClient = useQueryClient();
     const mutation = useMutation({
         mutationFn: async (modifiedFields: Patient) => {
@@ -55,23 +76,14 @@ export const PatientSettings = () => {
         onError: (error) => {
             console.error("Erreur lors de la mise à jour :", error);
             toast({
+                variant: "destructive",
                 title: "Modification",
                 description: `Erreur lors de la modification`
             });
         }
     });
 
-    const {
-        data: patientData,
-        isLoading: isAuthLoading,
-    } = useQuery({
-        queryKey: ["authenticateMedecin"],
-        queryFn: async () => {
-            const { patient } = await authenticateMedecin();
-            return patient;
-        },
-        retry: 2,
-    });
+
 
     const { data: medecins, isLoading } = useQuery<Medecin[]>({
         queryKey: ["medecins"],
@@ -91,6 +103,7 @@ export const PatientSettings = () => {
             setFormData(informationPatient);
             setOriginalData(informationPatient);
             setModifiedFields({});
+
         }
     }, [patientData]);
 
@@ -147,7 +160,6 @@ export const PatientSettings = () => {
             setModifiedFields(rest);
         }
     };
-
 
     return (
         <DashboardWrapper user={patientData}>

@@ -25,7 +25,7 @@ export function Connexion () {
     mutationFn: async (formData: { email: string, password: string }) => {
       const response = await authenticate({ email: formData.email, password: formData.password });
 
-      return response[0];
+      return response;
     },
     onSuccess: (role) => {
 

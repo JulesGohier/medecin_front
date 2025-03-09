@@ -23,9 +23,9 @@ export const AnnuleAppointmentModal = ({ children, appointmentId }: { children: 
     const mutation = useMutation({
         mutationFn: async (id: string) => {
             await annuleAppointement({ state: "annulé" }, id);
+            onSuccess: async () => {
         },
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ['medecinRDV'] });
+            await queryClient.invalidateQueries({ queryKey: ['patientAllRdv'] });
 
             toast({
                 title: "Modification",

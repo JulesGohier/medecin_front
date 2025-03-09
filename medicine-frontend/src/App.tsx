@@ -11,6 +11,8 @@ import {PatientSettings} from "@/patientPage/templates/PatientSettings.tsx";
 import {PatientRdv} from "@/patientPage/templates/PatientRdv.tsx";
 
 
+import { SessionExpire } from "@/templates/SessionExpire.tsx";
+
 function App() {
     return (
         <Routes>
@@ -18,10 +20,14 @@ function App() {
             <Route path={"/connexion"} element={<Connexion/>}/>
             <Route path={"/inscription"} element={<Inscription/>}/>
 
+
             <Route path={"/dashboard_patient"} element={<PatientDashboard/>}/>
             <Route path={"/mes_rendez_vous"} element={<PatientRdv/>}/>
             <Route path={"/medecins"} element={<PatientMedecin/>}/>
             <Route path={"/settings"} element={<PatientSettings/>}/>
+
+
+            <Route path={"/session_expire"} element={<SessionExpire/>}/>
         </Routes>
     );
 }

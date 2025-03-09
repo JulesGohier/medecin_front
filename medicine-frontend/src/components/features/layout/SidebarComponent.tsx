@@ -11,12 +11,24 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar.tsx";
 import {CalendarIcon, LayoutDashboard, Settings, UsersRound} from "lucide-react";
+import {parseurJSON} from "@/parseurJson.ts";
 
 export const SidebarComponent = () => {
+  const role = parseurJSON('role')
+
+  let link = "";
+  if (role === "ROLE_MEDECIN") {
+    link = "/dashboard_medecin"
+  } else if (role === "ROLE_PATIENT") {
+    link = "/dashboard_patient"
+  } else if (role === "ROLE_ADMIN"){
+    link = "/dashboard_admin"
+  }
+
   const items = [
     {
       title: "Tableau de bord",
-      url: "/",
+      url: `${link}`,
       icon: LayoutDashboard,
     },
   ];

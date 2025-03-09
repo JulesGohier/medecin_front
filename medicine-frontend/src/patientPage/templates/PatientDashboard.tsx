@@ -17,19 +17,28 @@ export const PatientDashboard = () => {
         data: patientData,
         isLoading: isAuthLoading,
     } = useQuery({
-        queryKey: ["authenticateMedecin"],
+        queryKey: ["patientData"],
         queryFn: async () => {
-            const { patient } = await authenticateMedecin();
-            return patient;
+            const patientDataString = localStorage.getItem('patient');
+
+            if (!patientDataString) {
+                throw new Error("Aucune donnée patient trouvée dans le localStorage.");
+            }
+
+            try {
+                const patient = JSON.parse(patientDataString);
+                return patient;
+            } catch (error) {
+                throw new Error("Les données du patient sont corrompues ou mal formatées.");
+            }
         },
-        retry: 2,
     });
 
     const {
-        data: medecinData,
-        isLoading: isMedecinLoading,
+        data: yourMedecin,
+        isLoading: yourMedecinLoading,
     } = useQuery({
-        queryKey: ["medecinData"],
+        queryKey: ["yourMedecinData"],
         queryFn: async () => {
             const medecin = await fetchMedecinsId(patientData?.medecin_perso);
             return medecin;
@@ -78,8 +87,7 @@ export const PatientDashboard = () => {
         );
     }
 
-
-    if (isMedecinLoading || isNextRDVLoading) {
+    if (yourMedecinLoading || isNextRDVLoading) {
         return (
             <DashboardWrapper user={patientData}>
                 <div className="flex flex-col w-full h-[80vh] items-center justify-center">
@@ -95,7 +103,7 @@ export const PatientDashboard = () => {
             <div className="grid w-full gap-4 min-h-[500px] max-h-[80vh] grid-cols-1 md:grid-cols-[2fr_3fr]">
                 <div className="flex flex-col gap-4 h-full">
                     <YourMedecinCard
-                        medecin={medecinData}
+                        medecin={yourMedecin}
                         className="w-full flex-1"
                     />
                     <CabinetCard className="w-full flex-1" />

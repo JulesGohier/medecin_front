@@ -7,7 +7,7 @@ export function SelectMedecin({ informationInscription, handleInputChange }) {
         queryFn: fetchAllMedecins,
     });
 
-    const medecins = data?.member || [];
+    const medecins = data || [];
 
     return (
         <select

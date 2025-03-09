@@ -9,10 +9,20 @@ export const PatientMedecin = () => {
         data: patientData,
         isLoading: isAuthLoading,
     } = useQuery({
-        queryKey: ["authenticateMedecin"],
+        queryKey: ["patientData"],
         queryFn: async () => {
-            const { patient } = await authenticateMedecin();
-            return patient;
+            const patientDataString = localStorage.getItem('patient');
+
+            if (!patientDataString) {
+                throw new Error("Aucune donnée patient trouvée dans le localStorage.");
+            }
+
+            try {
+                const patient = JSON.parse(patientDataString);
+                return patient;
+            } catch (error) {
+                throw new Error("Les données du patient sont corrompues ou mal formatées.");
+            }
         },
         retry: 2,
     });
@@ -31,7 +41,8 @@ export const PatientMedecin = () => {
     if (isAuthLoading || isLoading) {
         return (
             <DashboardWrapper user={patientData}>
-                <div className={"flex w-full h-[80vh] items-center justify-center"}>
+                <div className={"flex w-full h-[80vh] items-center justify-center flex-col"}>
+                    <p className="text-lg mb-4">Chargement de la liste des medecins...</p>
                     <LoaderSpinner/>
                 </div>
             </DashboardWrapper>

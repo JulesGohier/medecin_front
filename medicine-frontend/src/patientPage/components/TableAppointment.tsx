@@ -27,10 +27,11 @@ export const TableAppointment = ({ appointments }: {appointments: Appointment[]}
         queries: appointments
             .filter((rdv) => rdv?.idMedecin)
             .map((rdv) => ({
-                queryKey: ["medecinRDV"],
+                queryKey: ["medecinRDV", rdv.idMedecin],
                 queryFn: () => fetchData(rdv?.idMedecin),
             })),
     });
+
 
     const isLoading = queriesMedecinData.some((rdv) => rdv.isLoading);
 
@@ -39,7 +40,6 @@ export const TableAppointment = ({ appointments }: {appointments: Appointment[]}
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
-
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
