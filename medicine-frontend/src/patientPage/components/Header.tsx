@@ -21,7 +21,7 @@ export const Header = ({ user }: { user?: any }) => {
             const allRdv = await fetchRDVPatient(patientData.num_secu_sociale);
 
             return allRdv.filter((rdv) =>
-                rdv.annulé_par === null && new Date(rdv.date) > new Date()
+                rdv.annule_par === 'medecin' && new Date(rdv.date) > new Date()
             );
         },
         enabled: !!patientData?.num_secu_sociale,
@@ -34,7 +34,7 @@ export const Header = ({ user }: { user?: any }) => {
             enabled: !!rdv.idMedecin,
         })),
     });
-
+    console.log(patientRdvAnnule);
     return (
         <div className="flex items-center w-full">
             <h1 className="text-3xl">{`Bonjour, ${user?.nom} ${user?.prenom}`}</h1>

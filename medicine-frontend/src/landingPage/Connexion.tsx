@@ -61,7 +61,7 @@ export function Connexion () {
             <input
               type="text"
               name="email"
-              placeholder="email"
+              placeholder="Email"
               value={formData.email}
               onChange={handleInputChange}
               required

@@ -56,7 +56,7 @@ export const TableAppointment = ({ appointments }: {appointments: Appointment[]}
                 <TableLayout header={tableHeader}>
                     {paginatedAppointments.length > 0 ? paginatedAppointments.map((appointmentQuery, key) => {
                         const medecinData = queriesMedecinData[key]?.data;
-
+                        console.log(appointmentQuery);
                         return (
                             <TableRow key={key} className={`text-center ${key % 2 === 1 ? "bg-gray-100" : "bg-white"}`}>
                                 <TableCell className="capitalize">{medecinData?.prenom || "-"}</TableCell>
