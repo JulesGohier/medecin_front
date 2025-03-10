@@ -3,6 +3,7 @@ import {useQuery} from "@tanstack/react-query";
 import {authenticateMedecin, fetchRDVPatient} from "@/patientPage/actions/patient-action.ts";
 import {LoaderSpinner} from "@/patientPage/components/LoaderSpinner.tsx";
 import {TableAppointment} from "@/patientPage/components/TableAppointment.tsx";
+import {parseurJSON} from "@/parseurJson.ts";
 
 export const PatientRdv = () => {
     const {
@@ -11,18 +12,8 @@ export const PatientRdv = () => {
     } = useQuery({
         queryKey: ["patientData"],
         queryFn: async () => {
-            const patientDataString = localStorage.getItem('patient');
-
-            if (!patientDataString) {
-                throw new Error("Aucune donnée patient trouvée dans le localStorage.");
-            }
-
-            try {
-                const patient = JSON.parse(patientDataString);
-                return patient;
-            } catch (error) {
-                throw new Error("Les données du patient sont corrompues ou mal formatées.");
-            }
+            const patientData = parseurJSON('patient')
+            return patientData
         },
     });
 
@@ -34,6 +25,7 @@ export const PatientRdv = () => {
         queryFn: async () => {
             return await fetchRDVPatient(patientData.num_secu_sociale);
         },
+        enabled: !!patientData
     });
 
     if (isPatientLoading || isAuthLoading) {

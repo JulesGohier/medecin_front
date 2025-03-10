@@ -8,6 +8,7 @@ export function DialogBookingAppointment({ patient, numRpps }: { patient: any, n
 
     const toggleDialog = () => setIsOpen(!isOpen);
 
+
     return (
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogTrigger asChild className={"w-full"}>
@@ -21,7 +22,7 @@ export function DialogBookingAppointment({ patient, numRpps }: { patient: any, n
 
                 <DialogContent className="max-w-[1000px] h-auto rounded-md p-4 flex flex-col justify-center items-center">
                     <DialogHeader>
-                        <DialogTitle>............</DialogTitle>
+                        <DialogTitle>{`\u00A0`}</DialogTitle>
                     </DialogHeader>
 
                     <BookingAppointment patient={patient} numRpps={numRpps} className="w-full"/>
@@ -29,4 +30,3 @@ export function DialogBookingAppointment({ patient, numRpps }: { patient: any, n
             </Dialog>
     );
 }
-

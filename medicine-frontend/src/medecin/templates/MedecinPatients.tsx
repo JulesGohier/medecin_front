@@ -3,21 +3,15 @@ import {authenticateMedecin, fetchMedecinByRpps} from "@/medecin/actions/medecin
 import {LoaderSpinner} from "@/medecin/components/LoaderSpinner.tsx";
 import {TablePatients} from "@/medecin/components/tables/TablePatients.tsx";
 import {useQuery} from "@tanstack/react-query";
+import {parseurJSON} from "@/parseurJson.ts";
 
 
 const MedecinPatients = () => {
-    const { data: medecin, isLoading } = useQuery({
+    const { data: medecin, isLoading: isLoading } = useQuery({
         queryKey: ["medecin"],
         queryFn: async () => {
-            let token = localStorage.getItem("token");
-            if (!token) {
-                const data = await authenticateMedecin();
-                localStorage.setItem("token", data.token);
-            }
-            else {
-                const data = await authenticateMedecin();
-                return fetchMedecinByRpps(data.id);
-            }
+            const idMedecin = parseurJSON('id');
+            return fetchMedecinByRpps(idMedecin);
         },
     });
     

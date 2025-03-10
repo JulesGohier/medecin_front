@@ -10,7 +10,7 @@ import { useState } from "react";
 export const TablePatients = ({ patients }: { patients: Patient[] }) => {
     const [currentPage, setCurrentPage] = useState(1);
     
-    const itemsPerPage = 1;
+    const itemsPerPage = 12;
     
     const totalPages = Math.ceil(patients.length / itemsPerPage);
     

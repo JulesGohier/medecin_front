@@ -32,7 +32,7 @@ export const TableAppointment = ({ appointments }: { appointments: string[] }) =
     const isLoading = queriesAppointmentData.some(query => query.isLoading) || queriesAppointmentPatientData.some(query => query.isLoading);
     
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 2;
+    const itemsPerPage = 12;
     
     const totalPages = Math.ceil(queriesAppointmentData.length / itemsPerPage);
     

@@ -30,7 +30,7 @@ export function Connexion () {
     onSuccess: (role) => {
 
       if (role === "ROLE_MEDECIN") {
-        // window.location.href = "/estMedecin.html";
+        window.location.href = "/dashboard_medecin";
       } else if (role === "ROLE_PATIENT") {
         window.location.href = "/dashboard_patient";
       } else if (role === "ROLE_ADMIN"){

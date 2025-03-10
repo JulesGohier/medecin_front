@@ -6,6 +6,7 @@ import { NextAppointmentCard } from "@/medecin/components/cards/NextAppointmentC
 import StatCard, { StatCardProps } from "@/medecin/components/cards/StatsCard.tsx";
 import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
 import { PatientsAreaChart } from "@/medecin/components/charts/PatientsAreaChart.tsx";
+import {parseurJSON} from "@/parseurJson.ts";
 
 const formatNumber = (num: number) => {
     return new Intl.NumberFormat('en-US').format(num);
@@ -13,21 +14,15 @@ const formatNumber = (num: number) => {
 
 
 const MedecinDashboard = () => {
-    const { data: medecin, isLoading } = useQuery({
+
+    const { data: medecin, isLoading: isLoading } = useQuery({
         queryKey: ["medecin"],
         queryFn: async () => {
-            let token = localStorage.getItem("token");
-            if (!token) {
-                const data = await authenticateMedecin();
-                localStorage.setItem("token", data.token);
-            }
-            else {
-                const data = await authenticateMedecin();
-                return fetchMedecinByRpps(data.id);
-            }
+            const idMedecin = parseurJSON('id');
+            return fetchMedecinByRpps(idMedecin);
         },
     });
-    
+
     if (isLoading) {
         return (
             <div className={"flex w-full h-screen items-center justify-center"}>
@@ -45,14 +40,14 @@ const MedecinDashboard = () => {
             title: "Patients",
             value: formatNumber(patientsCount),
             percentage: "+10",
-            linkTo: "/patients"
+            linkTo: "/mes_patients"
         },
         {
             icon: CalendarCheck,
             title: "RDV",
             value: formatNumber(rdvCount),
             percentage: "+10",
-            linkTo: "/appointments"
+            linkTo: "/mes_consultations"
         },
     ];
     

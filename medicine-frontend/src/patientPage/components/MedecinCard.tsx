@@ -22,7 +22,7 @@ export const MedecinCard = ({ className, medecin, patient }: {className?: string
 
     const PhoneWithSpace = medecin?.numTel.replace(/(\d{2})/g, '$1 ');
 
-
+    console.log(medecin);
     return (
         <div className={className}>
             <Card >

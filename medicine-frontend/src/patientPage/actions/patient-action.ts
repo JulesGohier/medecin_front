@@ -166,7 +166,7 @@ export const annuleAppointement = async (ObjectRDV: object,appointmentId: string
     const API_URL = import.meta.env.VITE_API_URL;
     const token = localStorage.getItem("token");
     try {
-        const response = await axios.patch(`${API_URL}/api/rendez_vouses/${appointmentId}`, JSON.stringify(ObjectRDV), {
+        const response = await axios.patch(`${API_URL}/api/rendez_vouses/${appointmentId}`, ObjectRDV, {
             headers: {
                 "Content-Type": "application/merge-patch+json",
                 Authorization: `Bearer ${token}`,
