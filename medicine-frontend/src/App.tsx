@@ -2,17 +2,19 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 
 import {Homepage} from "@/templates/Homepage.tsx";
-import {Connexion} from "@/landingPage/Connexion.tsx";
-import {Inscription} from "@/landingPage/Inscription.tsx";
+import {Connexion} from "@/templates/landingPage/Connexion.tsx";
+import {Inscription} from "@/templates/landingPage/Inscription.tsx";
 
-import {PatientDashboard} from "@/patientPage/templates/PatientDashboard.tsx";
-import {PatientMedecin} from "@/patientPage/templates/PatientMedecin.tsx";
-import {PatientSettings} from "@/patientPage/templates/PatientSettings.tsx";
-import {PatientRdv} from "@/patientPage/templates/PatientRdv.tsx";
+import {PatientDashboard} from "@/templates/patientPage/templates/PatientDashboard.tsx";
+import {PatientMedecin} from "@/templates/patientPage/templates/PatientMedecin.tsx";
+import {PatientSettings} from "@/templates/patientPage/templates/PatientSettings.tsx";
+import {PatientRdv} from "@/templates/patientPage/templates/PatientRdv.tsx";
 
-import MedecinDashboard from "@/medecin/templates/MedecinDashboard.tsx";
-import MedecinAppointments from "@/medecin/templates/MedecinAppointments.tsx";
-import MedecinPatients from "@/medecin/templates/MedecinPatients.tsx";
+import MedecinDashboard from "@/templates/medecinPage/templates/MedecinDashboard.tsx";
+import MedecinAppointments from "@/templates/medecinPage/templates/MedecinAppointments.tsx";
+import MedecinPatients from "@/templates/medecinPage/templates/MedecinPatients.tsx";
+
+import DashboardAdmin from "@/templates/adminPage/templates/DashboardAdmin.tsx";
 
 import { SessionExpire } from "@/templates/SessionExpire.tsx";
 
@@ -32,6 +34,8 @@ function App() {
             <Route path={"/dashboard_medecin"} element={<MedecinDashboard />} />
             <Route path={"/mes_patients"} element={<MedecinPatients />} />
             <Route path={"/mes_consultations"} element={<MedecinAppointments />} />
+
+            <Route path={"/dashboard_admin"} element={<DashboardAdmin />} />
 
             <Route path={"/session_expire"} element={<SessionExpire/>}/>
         </Routes>

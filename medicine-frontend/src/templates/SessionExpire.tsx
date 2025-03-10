@@ -1,4 +1,4 @@
-import { LoaderSpinner } from "@/patientPage/components/LoaderSpinner.tsx";
+import { LoaderSpinner } from "@/templates/patientPage/components/LoaderSpinner.tsx";
 import { useState, useEffect } from "react";
 
 export const SessionExpire = () => {

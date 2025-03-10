@@ -2,7 +2,7 @@ import {Separator} from "@/components/ui/separator.tsx";
 import React from "react";
 import { SidebarComponent } from "@/components/features/layout/SidebarComponent.tsx";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar.tsx";
-import { Header } from "@/patientPage/components/Header.tsx";
+import { Header } from "@/templates/patientPage/components/Header.tsx";
 
 export const DashboardWrapper = ({ children, user }: { children: React.ReactNode, user: any }) => {
     return (
