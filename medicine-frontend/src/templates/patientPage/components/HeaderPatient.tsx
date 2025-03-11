@@ -7,7 +7,7 @@ import { parseurJSON } from "@/parseurJson.ts";
 import { fetchData } from "@/templates/medecinPage/actions/medecin-action.ts"; // Fonction pour récupérer les infos du médecin
 import { LoaderSpinner } from "@/templates/medecinPage/components/LoaderSpinner.tsx";
 
-export const Header = ({ user }: { user?: any }) => {
+export const HeaderPatient = ({ user }: { user?: any }) => {
     const { data: patientData, isLoading: isAuthLoading } = useQuery({
         queryKey: ["patientData"],
         queryFn: async () => parseurJSON('patient'),

@@ -73,9 +73,9 @@ const DashboardAdmin = () => {
     if (admin.roles[0] !== "ROLE_ADMIN") {
         alert("Vous n'avez pas l'autorisation !");
     }
-    
+
     return (
-        <DashboardWrapper user={medecin}>
+        <DashboardWrapper>
             <div className={"mt-2 w-full"}>
                 <div className={"flex flex-col text-2xl text-black mb-6"}>
                     <h2 className={"text-xl font-semibold"}>Tableau de Bord</h2>
