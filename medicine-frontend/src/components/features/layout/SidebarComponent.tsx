@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sidebar.tsx";
 import {Calendar, CalendarIcon, LayoutDashboard, Settings, UsersRound, LogOut} from "lucide-react";
 import {parseurJSON} from "@/parseurJson.ts";
-import LogoutButton from "@/components/features/layout/LogoutButton.tsx";
+import {LogoutButton} from "@/components/features/layout/LogoutButton.tsx";
 
 export const SidebarComponent = () => {
   const role = parseurJSON('role')

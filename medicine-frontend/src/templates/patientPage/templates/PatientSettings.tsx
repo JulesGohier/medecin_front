@@ -140,18 +140,6 @@ export const PatientSettings = () => {
         }
     };
 
-    const handleDelete = async () => {
-        if (patientData?.num_secu_sociale) {
-            try {
-                await deletePatient(patientData.num_secu_sociale);
-                window.location.href = "/";
-            } catch (error) {
-                console.error("Erreur lors de la suppression du patient", error);
-            }
-        }
-    };
-
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
@@ -352,19 +340,11 @@ export const PatientSettings = () => {
                 <Button type="submit" className={"bg-red-500 hover:bg-red-600 w-full flex items-center gap-4"} disabled={Object.keys(modifiedFields).length === 0 || mutation.isPending}>
                     {mutation.isPending ? "Modification en cours..." : "Enregistrer les modifications"}
                 </Button>
-                <Button
-                    className={"bg-red-500 hover:bg-red-600 w-full flex items-center gap-4"}
-                    onClick={() => setDeleteDialog(true)}
-                >
-                    Supprimer le compte patient
-                </Button>
-                {deleteDialog && (
-                    <DeletePatientModal
-                        isOpen={deleteDialog}
-                        setIsOpen={setDeleteDialog}
-                        num_secu_sociale={patientData?.num_secu_sociale}
-                    />
-                )}
+                <DeletePatientModal
+                    isOpen={deleteDialog}
+                    setIsOpen={setDeleteDialog}
+                    num_secu_sociale={patientData?.num_secu_sociale}
+                />
                 <Toaster/>
             </form>
         </DashboardWrapper>

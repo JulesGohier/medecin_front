@@ -47,19 +47,19 @@ export const DeletePatientModal: React.FC<DeletePatientModalProps> = ({ isOpen, 
                 </DialogDescription>
                 <DialogFooter className="flex justify-end mt-4">
                     <Button
-                        variant="outline"
-                        onClick={() => setIsOpen(false)}
-                        className="bg-gray-300 hover:bg-gray-400"
-                    >
-                        Annuler
-                    </Button>
-                    <Button
-                        variant="destructive"
                         onClick={handleDelete}
-                        className="bg-red-500 hover:bg-red-600"
+                        className="bg-red-500 hover:bg-red-600 w-full flex items-center"
                     >
                         Supprimer
                     </Button>
+                    <Button
+                        variant="outline"
+                        onClick={() => setIsOpen(false)}
+                        className="w-full flex items-center bg-gray-300 hover:bg-gray-400"
+                    >
+                        Annuler
+                    </Button>
+
                 </DialogFooter>
             </DialogContent>
         </Dialog>

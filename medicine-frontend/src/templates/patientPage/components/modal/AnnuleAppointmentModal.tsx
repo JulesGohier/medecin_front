@@ -48,29 +48,29 @@ export const AnnuleAppointmentModal = ({ children, appointmentId }: { children: 
                 <DialogTrigger asChild>
                     {children}
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Confirmer Annulation</DialogTitle>
+                        <DialogTitle>Confirmer l'annulation</DialogTitle>
                     </DialogHeader>
                     <div className="my-2 flex items-center">
-                        <p>Etes-vous sur de vouloir annuler se rendez-vous ?</p>
+                        <p>Êtes-vous sûr de vouloir annuler ce rendez-vous ? Cette action est irréversible.</p>
                     </div>
 
-                    <DialogFooter>
+                    <DialogFooter className={"gap-3"}>
                         <Button
-                            type="submit"
-                            className={"bg-red-800 hover:bg-red-700 w-full flex items-center gap-2"}
-                            onClick={()=>{mutation.mutate(appointmentId)}}
-                            disabled={mutation.isPending}>
-                            {mutation.isPending ? "Annulation en cours..." : "Confirmer"}
-
+                            className={"bg-red-500 hover:bg-red-600 w-full flex items-center"}
+                            onClick={() => {mutation.mutate(appointmentId)}}
+                            disabled={mutation.isPending}
+                        >
+                            {mutation.isPending ? "Annulation en cours..." : "Confirmer l'annulation"}
                         </Button>
 
                         <Button
-                            type="submit"
-                            className={"bg-red-800 hover:bg-red-700 w-full flex items-center gap-2"}
-                            onClick={()=>{setIsOpen(false)}}
-                            disabled={mutation.isPending}>
+                            variant={"outline"}
+                            className={"w-full flex items-center bg-gray-300 hover:bg-gray-400"}
+                            onClick={() => {setIsOpen(false)}}
+                            disabled={mutation.isPending}
+                        >
                             Annuler
                         </Button>
                     </DialogFooter>

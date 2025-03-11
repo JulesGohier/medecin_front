@@ -63,29 +63,34 @@ export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: strin
         <>
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogTrigger asChild>
-                    <Button variant="outline" className={"bg-red-500 hover:bg-red-600 hover:text-white text-white w-14"}>{heure}</Button>
+                    <Button className={"bg-red-500 hover:bg-red-600 w-14"}>{heure}</Button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px] z-[99999] pointer-events-auto">
+                <DialogContent className="z-[99999] pointer-events-auto">
                     <DialogHeader>
-                        <DialogTitle>Votre rendez-vous</DialogTitle>
+                        <DialogTitle>Confirmation de votre rendez-vous</DialogTitle>
                     </DialogHeader>
                     <div className="mt-5 mb-5">
-                        <p>Votre rendez-vous est programmé pour le <br /> {formattedDate} à {heure}</p>
+                        <p>
+                            Vous avez un rendez-vous prévu pour le <strong>{formattedDate}</strong> à <strong>{heure}</strong>.
+                            <br />
+                            Veuillez confirmer si vous êtes disponible à ce moment.
+                        </p>
                     </div>
-                    <DialogFooter>
+                    <DialogFooter className={"gap-3"}>
                         <Button
                             onClick={() => mutation.mutate()}
-                            className={"bg-red-500 hover:bg-red-600 w-full flex items-center gap-4"}
+                            className={"bg-red-500 hover:bg-red-600 w-full flex items-center"}
                             disabled={mutation.isPending}
                         >
-                            {mutation.isPending ? "Réservation..." : "Confirmer le RDV"}
+                            {mutation.isPending ? "Confirmer..." : "Confirmer le rendez-vous"}
                         </Button>
                         <Button
+                            variant="outline"
                             onClick={() => setIsOpen(false)}
-                            className={"bg-red-500 hover:bg-red-600 w-full flex items-center gap-4"}
+                            className={"w-full flex items-center bg-gray-300 hover:bg-gray-400"}
                             disabled={mutation.isPending}
                         >
-                            Annulé
+                            Annuler
                         </Button>
                     </DialogFooter>
                 </DialogContent>

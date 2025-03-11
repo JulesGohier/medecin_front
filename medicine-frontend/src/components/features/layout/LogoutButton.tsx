@@ -3,7 +3,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogFooter } from
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 
-const LogoutButton = () => {
+export const LogoutButton = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     const handleLogout = () => {
@@ -24,16 +24,14 @@ const LogoutButton = () => {
                 <DialogHeader className="text-lg font-semibold">Déconnexion</DialogHeader>
                 <p className="text-gray-600">Vous allez être bientôt déconnecté. Voulez-vous continuer ?</p>
                 <DialogFooter className="flex justify-end mt-4">
-                    <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-                        Annuler
-                    </Button>
-                    <Button variant="destructive" onClick={handleLogout}>
+                    <Button className={"bg-red-500 hover:bg-red-600 w-full flex items-center"} onClick={handleLogout}>
                         Déconnexion
+                    </Button>
+                    <Button variant="outline" className={"w-full flex items-center bg-gray-300 hover:bg-gray-400"} onClick={() => setIsDialogOpen(false)}>
+                        Annuler
                     </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
     );
 };
-
-export default LogoutButton;
