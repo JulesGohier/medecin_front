@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-    authenticateMedecin,
+    deletePatient,
     fetchAllMedecins,
     updateInformationPatient
 } from "@/templates/patientPage/actions/patient-action.ts";
@@ -10,8 +10,10 @@ import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { LoaderSpinner } from "@/templates/patientPage/components/LoaderSpinner.tsx";
 import { SelecteurMedecin } from "@/templates/patientPage/components/SelecteurMedecin.tsx";
-import {useToast} from "@/hooks/use-toast.ts";
-import {Toaster} from "@/components/ui/toaster.tsx";
+import { useToast } from "@/hooks/use-toast.ts";
+import { Toaster } from "@/components/ui/toaster.tsx";
+import {parseurJSON} from "@/parseurJson.ts";
+import {DeletePatientModal} from "@/templates/patientPage/components/modal/DeletePatientModal.tsx";
 
 interface Patient {
     nom?: string;
@@ -22,6 +24,7 @@ interface Patient {
     num_tel?: string;
     sexe?: string;
     date_naissance?: string;
+    password?: string;
 }
 
 interface Medecin {
@@ -35,6 +38,8 @@ export const PatientSettings = () => {
     const [formData, setFormData] = useState<Patient>({});
     const [originalData, setOriginalData] = useState<Patient>({});
     const [modifiedFields, setModifiedFields] = useState<Patient>({});
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const [deleteDialog, setDeleteDialog] = useState(false);
     const { toast } = useToast();
 
     const {
@@ -43,18 +48,7 @@ export const PatientSettings = () => {
     } = useQuery({
         queryKey: ["patientData"],
         queryFn: async () => {
-            const patientDataString = localStorage.getItem('patient');
-
-            if (!patientDataString) {
-                throw new Error("Aucune donnée patient trouvée dans le localStorage.");
-            }
-
-            try {
-                const patient = JSON.parse(patientDataString);
-                return patient;
-            } catch (error) {
-                throw new Error("Les données du patient sont corrompues ou mal formatées.");
-            }
+            return parseurJSON('patient');
         },
     });
 
@@ -68,7 +62,7 @@ export const PatientSettings = () => {
 
             toast({
                 title: "Modification",
-                description: `Votre information on bien été modifier !`
+                description: `Votre information a bien été modifiée !`
             });
 
             setModifiedFields({});
@@ -82,7 +76,6 @@ export const PatientSettings = () => {
             });
         }
     });
-
 
     const { data: medecins, isLoading } = useQuery<Medecin[]>({
         queryKey: ["medecins"],
@@ -104,27 +97,60 @@ export const PatientSettings = () => {
             setFormData(informationPatient);
             setOriginalData(informationPatient);
             setModifiedFields({});
-
         }
     }, [patientData]);
 
-    if (isAuthLoading || isLoading ||!formData) {
-        return (
-            <DashboardWrapper user={patientData}>
-                <div className="flex w-full h-[80vh] items-center justify-center">
-                    <LoaderSpinner />
-                </div>
-            </DashboardWrapper>
-        );
-    }
+    const validateFields = () => {
+        let newErrors: { [key: string]: string } = {};
+
+        Object.keys(formData).forEach((key) => {
+            if (!formData[key as keyof Patient] && key !== 'password' && key !== 'antecedent') {
+                newErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)} est requis`;
+            }
+        });
+
+        if (formData.email && !formData.email.match(/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/)) {
+            newErrors.email = "Email invalide";
+        }
+
+        if (formData.num_tel && !formData.num_tel.match(/^\d{10}$/)) {
+            newErrors.num_tel = "Numéro de téléphone invalide (10 chiffres)";
+        }
+
+        if (formData.num_secu_sociale && !formData.num_secu_sociale.match(/^\d{15}$/)) {
+            newErrors.num_secu_sociale = "Numéro de sécurité sociale invalide (15 chiffres)";
+        }
+
+        if (formData.password && formData.password.length < 8) {
+            newErrors.password = "Le mot de passe doit contenir au moins 8 caractères";
+        }
+
+        setErrors(newErrors);
+        console.log(errors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (Object.keys(modifiedFields).length != 0){
+        if (!validateFields()) return;
+
+        if (Object.keys(modifiedFields).length !== 0) {
             mutation.mutate(modifiedFields);
         }
     };
+
+    const handleDelete = async () => {
+        if (patientData?.num_secu_sociale) {
+            try {
+                await deletePatient(patientData.num_secu_sociale);
+                window.location.href = "/";
+            } catch (error) {
+                console.error("Erreur lors de la suppression du patient", error);
+            }
+        }
+    };
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -162,6 +188,16 @@ export const PatientSettings = () => {
         }
     };
 
+    if (isAuthLoading || isLoading || !formData) {
+        return (
+            <DashboardWrapper user={patientData}>
+                <div className="flex w-full h-[80vh] items-center justify-center">
+                    <LoaderSpinner />
+                </div>
+            </DashboardWrapper>
+        );
+    }
+
     return (
         <DashboardWrapper user={patientData}>
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4 p-6">
@@ -172,67 +208,90 @@ export const PatientSettings = () => {
                     <Input
                         id="nom"
                         name="nom"
-                        value={formData.nom || ""}
+                        value={formData.nom}
                         onChange={handleChange}
                         placeholder="Votre nom"
                         type="text"
                     />
+                    {errors.nom && <p className="text-red-500 text-sm">{errors.nom}</p>}
                 </div>
+
                 <div className="flex flex-col">
                     <label htmlFor="prenom" className="font-medium text-sm">Prénom</label>
                     <Input
                         id="prenom"
                         name="prenom"
-                        value={formData.prenom || ""}
+                        value={formData.prenom}
                         onChange={handleChange}
                         placeholder="Votre prénom"
                         type="text"
                     />
+                    {errors.prenom && <p className="text-red-500 text-sm">{errors.prenom}</p>}
                 </div>
+
                 <div className="flex flex-col">
                     <label htmlFor="num_secu_sociale" className="font-medium text-sm">Numéro de sécurité sociale</label>
                     <Input
                         id="num_secu_sociale"
                         name="num_secu_sociale"
-                        value={formData.num_secu_sociale || ""}
+                        value={formData.num_secu_sociale}
                         onChange={handleChange}
                         placeholder="Votre numéro de sécurité sociale"
                         type="text"
                     />
+                    {errors.num_secu_sociale && <p className="text-red-500 text-sm">{errors.num_secu_sociale}</p>}
                 </div>
+
                 <div className="flex flex-col">
                     <label htmlFor="email" className="font-medium text-sm">Email</label>
                     <Input
                         id="email"
                         name="email"
-                        value={formData.email || ""}
+                        value={formData.email}
                         onChange={handleChange}
                         placeholder="Votre email"
                         type="email"
                     />
+                    {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                 </div>
+
+                <div className="flex flex-col">
+                    <label htmlFor="password" className="font-medium text-sm">Mot de passe</label>
+                    <Input
+                        id="password"
+                        name="password"
+                        type="password"
+                        onChange={handleChange}
+                        placeholder="Votre nouveau mot de passe"
+                    />
+                    {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                </div>
+
+
                 <div className="flex flex-col">
                     <label htmlFor="medecin_perso" className="font-medium text-sm">Nom de votre médecin</label>
                     <SelecteurMedecin
                         options={medecins}
-                        value={formData.medecinPerso}
+                        value={formData.medecin_perso}
                         label="Sélectionnez votre médecin"
                         onChange={handleMedecinChange}
                     />
                 </div>
 
-                {/* Téléphone */}
+
                 <div className="flex flex-col">
                     <label htmlFor="num_tel" className="font-medium text-sm">Téléphone</label>
                     <Input
                         id="num_tel"
                         name="num_tel"
-                        value={formData.num_tel || ""}
+                        value={formData.num_tel}
                         onChange={handleChange}
                         placeholder="Votre téléphone"
                         type="tel"
                     />
+                    {errors.num_tel && <p className="text-red-500 text-sm">{errors.num_tel}</p>}
                 </div>
+
 
                 <div className="flex flex-col">
                     <label className="font-medium text-sm">Sexe</label>
@@ -285,7 +344,7 @@ export const PatientSettings = () => {
                         id="date_naissance"
                         name="date_naissance"
                         type="date"
-                        value={formData.date_naissance || ""}
+                        value={formData.date_naissance}
                         onChange={handleChange}
                     />
                 </div>
@@ -293,7 +352,20 @@ export const PatientSettings = () => {
                 <Button type="submit" className={"bg-red-500 hover:bg-red-600 w-full flex items-center gap-4"} disabled={Object.keys(modifiedFields).length === 0 || mutation.isPending}>
                     {mutation.isPending ? "Modification en cours..." : "Enregistrer les modifications"}
                 </Button>
-                <Toaster />
+                <Button
+                    className={"bg-red-500 hover:bg-red-600 w-full flex items-center gap-4"}
+                    onClick={() => setDeleteDialog(true)}
+                >
+                    Supprimer le compte patient
+                </Button>
+                {deleteDialog && (
+                    <DeletePatientModal
+                        isOpen={deleteDialog}
+                        setIsOpen={setDeleteDialog}
+                        num_secu_sociale={patientData?.num_secu_sociale}
+                    />
+                )}
+                <Toaster/>
             </form>
         </DashboardWrapper>
     );

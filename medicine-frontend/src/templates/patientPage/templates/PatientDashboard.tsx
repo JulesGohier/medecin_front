@@ -5,7 +5,6 @@ import {CabinetCard} from "@/templates/patientPage/components/CabinetCard.tsx";
 import {NextAppointement} from "@/templates/patientPage/components/NextAppointement.tsx";
 import { LoaderSpinner } from "@/templates/patientPage/components/LoaderSpinner.tsx";
 import {
-    authenticateMedecin,
     fetchMedecinsId, fetchProchainRDVPatient
 } from "@/templates/patientPage/actions/patient-action.ts";
 import {useQuery} from "@tanstack/react-query";

@@ -181,3 +181,25 @@ export const annuleAppointement = async (ObjectRDV: object,appointmentId: string
         throw new Error("Impossible de récupérer les informations.");
     }
 };
+
+export const deletePatient = async (num_secu_sociale: string) => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const token = localStorage.getItem("token");
+
+    try {
+        const response = await axios.delete(`${API_URL}/api/patients/${num_secu_sociale}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+
+        return response;
+    } catch (error) {
+        if(error.response.data.message == "Expired JWT Token"){
+            window.location.href= "/session_expire";
+        }
+        console.error("Erreur lors de la récupération des données :", error);
+        throw new Error("Impossible de récupérer les informations.");
+    }
+};
