@@ -6,6 +6,9 @@ import { fetchRDVPatient } from "@/templates/patientPage/actions/patient-action.
 import { parseurJSON } from "@/parseurJson.ts";
 import { fetchData } from "@/templates/medecinPage/actions/medecin-action.ts"; // Fonction pour récupérer les infos du médecin
 import { LoaderSpinner } from "@/templates/medecinPage/components/LoaderSpinner.tsx";
+import HeaderMedecin from "@/templates/medecinPage/components/HeaderMedecin.tsx";
+import HeaderAdmin from "@/templates/adminPage/components/HeaderAdmin.tsx";
+import React from "react";
 
 export const HeaderPatient = ({ user }: { user?: any }) => {
     const { data: patientData, isLoading: isAuthLoading } = useQuery({
@@ -34,7 +37,7 @@ export const HeaderPatient = ({ user }: { user?: any }) => {
             enabled: !!rdv.idMedecin,
         })),
     });
-    console.log(patientRdvAnnule);
+
     return (
         <div className="flex items-center w-full">
             <h1 className="text-3xl">{`Bonjour, ${user?.nom} ${user?.prenom}`}</h1>
@@ -47,10 +50,17 @@ export const HeaderPatient = ({ user }: { user?: any }) => {
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <div className="relative inline-flex p-2.5 hover:bg-gray-100 transition-all duration-200 rounded-full ml-auto cursor-pointer">
-                        <Bell size={25} />
-                        <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full">
-                            {isPatientLoading ? <LoaderSpinner /> : patientRdvAnnule?.length || 0}
-                        </span>
+                        {isPatientLoading ? (
+                            <LoaderSpinner />
+                        ) : patientRdvAnnule?.length > 0 ? (
+                                <>
+                                    <Bell size={25} />
+                                    <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full">
+                                        {patientRdvAnnule?.length}
+                                    </span>
+                                </>
+                        ) : <Bell size={25} />
+                        }
                     </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="h-80 overflow-scroll">
