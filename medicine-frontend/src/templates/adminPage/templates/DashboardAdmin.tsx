@@ -11,39 +11,22 @@ import {parseurJSON} from "@/parseurJson.ts";
 
 
 const DashboardAdmin = () => {
-    const { data: admin, isLoading } = useQuery({
-        queryKey: ["admin"],
-        queryFn: async () => {
-            let token = localStorage.getItem("token");
-            if (!token) {
-                const data = await authenticateAdministrator("admin@admin.com", "password123");
-                localStorage.setItem("token", data.token);
-            }
-            else {
-                const data = await authenticateAdministrator("admin@admin.com", "password123");
-                return data;
-            }
-        },
-    });
 
-    
-    const { data: patient } = useQuery({
+    const { data: patient, isLoading: isLoadingPatient } = useQuery({
         queryKey: ["patients"],
         queryFn: getPatients
     });
     
-    const { data: medecin } = useQuery({
+    const { data: medecin, isLoading: isLoadingMedecin } = useQuery({
         queryKey: ["medecins"],
         queryFn: getMedecin
     });
     
-    const { data: appointment } = useQuery({
+    const { data: appointment, isLoading: isLoadingAppoitment } = useQuery({
         queryKey: ["appointments"],
         queryFn: getRendezVous
     });
-    
-    
-    
+
     const statsCards: StatCardProps[] = [
         {
             icon: User,
@@ -62,16 +45,12 @@ const DashboardAdmin = () => {
         },
     ];
     
-    if (isLoading) {
+    if (isLoadingAppoitment || isLoadingPatient || isLoadingMedecin) {
         return (
             <div className={"flex w-full h-screen items-center justify-center"}>
                 <LoaderSpinner />
             </div>
         );
-    }
-    
-    if (admin.roles[0] !== "ROLE_ADMIN") {
-        alert("Vous n'avez pas l'autorisation !");
     }
 
     return (
