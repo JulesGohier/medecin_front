@@ -46,11 +46,13 @@ export const registerPatient = async (informationInscription: registerPatientTyp
 
         if (error.response) {
             if (error.response.status === 401) {
-                throw new Error(`Erreur d'authentification : ${error.response.data.error || 'Identifiants invalides'}`);
+                throw new Error(`${error.response.data.error || 'Identifiants invalides'}`);
+            } else if (error.response.status === 409) {
+                throw new Error(`Utilsateur déjà existant`);
             }
-            throw new Error(`Erreur serveur : ${error.response.data.error || 'Veuillez réessayer plus tard'}`);
+            throw new Error(`${error.response.data.error || 'Veuillez réessayer plus tard'}`);
         } else {
-            throw new Error("Erreur de connexion : Vérifiez votre connexion et réessayez.");
+            throw new Error("Vérifiez votre connexion et réessayez.");
         }
     }
 };
