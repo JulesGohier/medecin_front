@@ -10,11 +10,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar.tsx";
-import {Calendar, CalendarIcon, LayoutDashboard, Settings, UsersRound} from "lucide-react";
+import {Calendar, CalendarIcon, LayoutDashboard, Settings, UsersRound, LogOut} from "lucide-react";
 import {parseurJSON} from "@/parseurJson.ts";
+import LogoutButton from "@/components/features/layout/LogoutButton.tsx";
 
 export const SidebarComponent = () => {
   const role = parseurJSON('role')
+
   let user_items: { title: string; url: string; icon: any }[] = [];
 
   const patient_items = [
@@ -30,7 +32,7 @@ export const SidebarComponent = () => {
     },
   ]
 
-  const tools = [
+  let tools = [
     {
       title: "Paramètres",
       url: "/settings",
@@ -55,12 +57,14 @@ export const SidebarComponent = () => {
   let link = "";
   if (role === "ROLE_MEDECIN") {
     link = "/dashboard_medecin"
+    tools = tools.slice(1);
     user_items = medecine_items;
   } else if (role === "ROLE_PATIENT") {
     link = "/dashboard_patient"
     user_items = patient_items
   } else if (role === "ROLE_ADMIN"){
     link = "/dashboard_admin"
+    tools = tools.slice(1);
   }
 
   const items = [
@@ -70,8 +74,6 @@ export const SidebarComponent = () => {
       icon: LayoutDashboard,
     },
   ];
-
-
 
 
   return (
@@ -150,6 +152,9 @@ export const SidebarComponent = () => {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
+        <div className="mt-auto p-4">
+          <LogoutButton />
+        </div>
       </Sidebar>
   );
 };
