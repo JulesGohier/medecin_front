@@ -11,6 +11,9 @@ export const authenticateMedecin = async () => {
     const data = response.data;
     return data;
   } catch (error) {
+    if (error.response.data.message == "Expired JWT Token") {
+      window.location.href = "/session_expire";
+    }
     console.error("Erreur lors de l'authentification :", error);
     throw new Error("Impossible d'authentifier le médecin");
   }
@@ -23,6 +26,9 @@ export const fetchMedecinByRpps = async (medecinRpps: number) => {
     const response = await axios.get(`${API_URL}/api/medecins/${medecinRpps}`);
     return response.data;
   } catch (error) {
+    if (error.response.data.message == "Expired JWT Token") {
+      window.location.href = "/session_expire";
+    }
     console.error(
       "Erreur lors de la récupération des données du médecin :",
       error
@@ -44,6 +50,9 @@ export const fetchData = async (route: string) => {
     });
     return response.data;
   } catch (error) {
+    if (error.response.data.message == "Expired JWT Token") {
+      window.location.href = "/session_expire";
+    }
     console.error("Erreur lors de la récupération des données :", error);
     throw new Error("Impossible de récupérer les informations.");
   }
@@ -64,6 +73,9 @@ export const deleteAppointement = async (appointmentId: string) => {
     );
     return response.data;
   } catch (error) {
+    if (error.response.data.message == "Expired JWT Token") {
+      window.location.href = "/session_expire";
+    }
     console.error("Erreur lors de la récupération des données :", error);
     throw new Error("Impossible de récupérer les informations.");
   }
@@ -86,6 +98,9 @@ export const annulerAppointement = async (appointmentId: string) => {
     );
     return response.data;
   } catch (error) {
+    if (error.response.data.message == "Expired JWT Token") {
+      window.location.href = "/session_expire";
+    }
     console.error("Erreur lors de l'annulation du rendez-vous :", error);
     throw new Error("Impossible d'annuler le rendez-vous.");
   }
