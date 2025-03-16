@@ -1,6 +1,6 @@
 import { DashboardWrapper } from "@/components/features/layout/DashboardWrapper.tsx";
 import {useQuery} from "@tanstack/react-query";
-import {authenticateMedecin, fetchRDVPatient} from "@/templates/patientPage/actions/patient-action.ts";
+import {fetchRDVPatient} from "@/templates/patientPage/actions/patient-action.ts";
 import {LoaderSpinner} from "@/templates/patientPage/components/LoaderSpinner.tsx";
 import {TableAppointment} from "@/templates/patientPage/components/TableAppointment.tsx";
 import {parseurJSON} from "@/parseurJson.ts";

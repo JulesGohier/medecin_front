@@ -9,7 +9,7 @@ import {SelectAppointment} from "@/templates/patientPage/components/SelectAppoin
 import { DatePicker } from "@/components/ui/datepicker";
 import {useEffect, useState} from "react";
 import {useQuery} from "@tanstack/react-query";
-import {fetchMedecinsRDV} from "@/templates/patientPage/actions/patient-action.ts";
+import {fetchMedecinsRDV, fetchRDVPatient} from "@/templates/patientPage/actions/patient-action.ts";
 import {LoaderSpinner} from "@/templates/patientPage/components/LoaderSpinner.tsx";
 import { formatDate} from "@/templates/patientPage/components/format.ts";
 
@@ -31,6 +31,7 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
             return await fetchMedecinsRDV(numRpps);
         },
     });
+
 
     const generateHoraires = (): string[] => {
         const horaires = [];

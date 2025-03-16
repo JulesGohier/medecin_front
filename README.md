@@ -36,3 +36,9 @@ Ce projet fonctionne uniquement sur des navigateurs basés sur Chromium, tels qu
    npm run dev
    ```
 3. Ouvrez votre navigateur et accédez à `http://localhost:5173` pour voir l'application en action.
+
+## Tester le côté Médecin et Patient simultanément
+
+Si vous souhaitez tester le côté médecin et patient en simultané sur deux pages différentes,
+il vous suffit de relancer la commande npm run dev dans un autre terminal. Vous aurez alors
+une url avec un port diffèrent.

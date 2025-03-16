@@ -7,27 +7,32 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import {useState} from "react";
+import { useState } from "react";
 import { useToast } from "@/hooks/use-toast.ts";
-import {Toaster} from "@/components/ui/toaster.tsx";
-import {createNewRDV} from "@/templates/patientPage/actions/patient-action.ts";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/toaster.tsx";
+import { createNewRDV, fetchRDVPatient } from "@/templates/patientPage/actions/patient-action.ts";
+import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { formatDate } from "@/templates/patientPage/components/format.ts";
 
-export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: string, date: string, patient: any, numRpps: string})=> {
+export const SelectAppointment = ({ heure, date, patient, numRpps }: { heure: string, date: string, patient: any, numRpps: string }) => {
     const [isOpen, setIsOpen] = useState(false);
     const { toast } = useToast();
 
-
-    const dateRDV = new Date(date);
-    const formattedDate = dateRDV.toLocaleDateString("fr-FR", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
+    const {
+        data: patientAllRdv,
+        isLoading: isPatientLoading,
+    } = useQuery({
+        queryKey: ["patientAllRdv"],
+        queryFn: async () => {
+            return await fetchRDVPatient(patient.num_secu_sociale);
+        },
     });
 
+    const dateRDV = new Date(date);
+    const formattedDate = formatDate(`${dateRDV}`,"short")
+
     const year = dateRDV.getFullYear();
-    const month = dateRDV.getMonth()+1;
+    const month = dateRDV.getMonth() + 1;
     const day = dateRDV.getDate();
 
     const rdvObject = {
@@ -39,10 +44,27 @@ export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: strin
 
     const queryClient = useQueryClient();
     const mutation = useMutation({
-        mutationFn: async () => await createNewRDV(rdvObject),
+        mutationFn: async () => {
+            const isAlreadyReserved = patientAllRdv
+                ?.filter((rdv: any) => rdv.state !== "annulé")
+                .some((rdv: any) => {
+                    const existingRdvDate = new Date(rdv.date).toLocaleString("fr-FR", { timeZone: "UTC" });
+                    const targetRdvDate = new Date(`${date} ${heure}`).toLocaleString("fr-FR");
+                    console.log(existingRdvDate, targetRdvDate);
+                    return existingRdvDate === targetRdvDate;
+                });
+
+            if(isAlreadyReserved){
+                setIsOpen(false);
+                throw new Error("Vous avez déjà un rendez-vous à cette date et heure.");
+            }
+
+
+            return await createNewRDV(rdvObject);
+        },
         onSuccess: async () => {
-            await queryClient.invalidateQueries({queryKey: ["medicinAllRdv"]});
-            await queryClient.invalidateQueries({queryKey: ["nextRDV"]});
+            await queryClient.invalidateQueries({ queryKey: ["medicinAllRdv"] });
+            await queryClient.invalidateQueries({ queryKey: ["nextRDV"] });
 
             toast({
                 title: "Rendez-vous confirmé",
@@ -51,10 +73,10 @@ export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: strin
 
             setIsOpen(false);
         },
-        onError: () => {
+        onError: (error: any) => {
             toast({
                 title: "Erreur lors de la réservation",
-                description: `Veuillez recommencer.`
+                description: error.message || `Veuillez recommencer.`
             });
         }
     });
@@ -98,4 +120,4 @@ export const SelectAppointment = ({heure, date, patient, numRpps}: {heure: strin
             <Toaster />
         </>
     );
-}
+};
