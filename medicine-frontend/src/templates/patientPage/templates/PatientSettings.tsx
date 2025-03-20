@@ -14,7 +14,6 @@ import { Toaster } from "@/components/ui/toaster.tsx";
 import { parseurJSON } from "@/parseurJson.ts";
 import { DeletePatientModal } from "@/templates/patientPage/components/modal/DeletePatientModal.tsx";
 import { RedirectionConnexion } from "@/templates/patientPage/components/RedirectionConnexion.tsx";
-import { set } from "date-fns";
 
 interface Patient {
   nom?: string;

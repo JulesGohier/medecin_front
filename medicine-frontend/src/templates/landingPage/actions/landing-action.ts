@@ -24,12 +24,9 @@ export const authenticate = async ({email, password}:{email: string, password: s
         return roles.toString();
     } catch (error) {
         if (error.response) {
-            if (error.response.status == 401) {
-                throw new Error(`Erreur d'authentification : ${error.response.data.error || 'Identifiants invalides'}`);
-            }
-            throw new Error(`Erreur serveur : ${error.response.data.error || 'Veuillez réessayer plus tard'}`);
+            throw new Error(error.response.data.error);
         } else {
-            throw new Error("Erreur de connexion : Vérifiez votre connexion et réessayez.");
+            throw new Error("Vérifiez votre connexion et réessayez.");
         }
     }
 };
@@ -44,12 +41,7 @@ export const registerPatient = async (informationInscription: registerPatientTyp
         }));
     } catch (error) {
         if (error.response) {
-            if (error.response.status === 401) {
-                throw new Error(`${error.response.data.error || 'Identifiants invalides'}`);
-            } else if (error.response.status === 409) {
-                throw new Error(`Utilsateur déjà existant`);
-            }
-            throw new Error(`${error.response.data.error || 'Veuillez réessayer plus tard'}`);
+            throw new Error(error.response.data.error);
         } else {
             throw new Error("Vérifiez votre connexion et réessayez.");
         }
