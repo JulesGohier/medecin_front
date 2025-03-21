@@ -97,7 +97,7 @@ export const PatientDashboard = () => {
 
         <div className="flex flex-col gap-4 h-full">
           <BookingAppointment
-            patient={patientData}
+            numSecuSocial={patientData.num_secu_sociale}
             numRpps={patientData.medecin_perso}
             className="w-full flex-1 min-h-[300px] md:min-h-[500px]"
           />

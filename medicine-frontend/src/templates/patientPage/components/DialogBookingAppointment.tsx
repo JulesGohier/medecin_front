@@ -3,7 +3,7 @@ import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogHeader } from 
 import { Button } from "@/components/ui/button";
 import {BookingAppointment} from "@/templates/patientPage/components/BookingAppointment.tsx";
 
-export function DialogBookingAppointment({ patient, numRpps }: { patient: any, numRpps: any }) {
+export function DialogBookingAppointment({ numSecuSocial, numRpps }: { patient: string, numRpps: string }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDialog = () => setIsOpen(!isOpen);
@@ -25,7 +25,7 @@ export function DialogBookingAppointment({ patient, numRpps }: { patient: any, n
                         <DialogTitle>{`\u00A0`}</DialogTitle>
                     </DialogHeader>
 
-                    <BookingAppointment patient={patient} numRpps={numRpps} className="w-full"/>
+                    <BookingAppointment numSecuSocial={numSecuSocial} numRpps={numRpps} className="w-full"/>
                 </DialogContent>
             </Dialog>
     );

@@ -18,7 +18,7 @@ type dayObject = {
     horaires: string[];
 };
 
-export const BookingAppointment = ({ className, patient, numRpps }: { className?: string, patient: object,numRpps: string}) => {
+export const BookingAppointment = ({ className, numSecuSocial, numRpps }: { className?: string, numSecuSocial: string,numRpps: string}) => {
     const [date, setDate] = useState<Date | any>(new Date())
     const [jourDeLaSemaine, setJourDeLaSemaine] = useState<dayObject[]>([]);
 
@@ -124,7 +124,7 @@ export const BookingAppointment = ({ className, patient, numRpps }: { className?
 
                                             return validHoraires.map((heure) => (
                                                 <SelectAppointment
-                                                    patient={patient}
+                                                    numSecuSocial={numSecuSocial}
                                                     numRpps={numRpps}
                                                     key={heure}
                                                     heure={heure}

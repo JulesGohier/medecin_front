@@ -6,7 +6,7 @@ export function SelectMedecin({ informationInscription, handleInputChange }) {
         queryKey: ["medecins"],
         queryFn: async()=> {
             const allMedecin = await fetchAllMedecins();
-            const medecinGeneraliste = allMedecin.filter((medecin)=> medecin.specialite == 'Medecin Généraliste')
+            const medecinGeneraliste = allMedecin.filter((medecin)=> medecin.specialite == 'Médecin Généraliste')
             return medecinGeneraliste;
         },
     });

@@ -14,7 +14,7 @@ import { createNewRDV, fetchRDVPatient } from "@/templates/patientPage/actions/p
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { formatDate } from "@/templates/patientPage/components/format.ts";
 
-export const SelectAppointment = ({ heure, date, patient, numRpps }: { heure: string, date: string, patient: any, numRpps: string }) => {
+export const SelectAppointment = ({ heure, date, numSecuSocial, numRpps }: { heure: string, date: string, numSecuSocial: string, numRpps: string }) => {
     const [isOpen, setIsOpen] = useState(false);
     const { toast } = useToast();
 
@@ -38,7 +38,7 @@ export const SelectAppointment = ({ heure, date, patient, numRpps }: { heure: st
     const rdvObject = {
         "date": `${year}-${month}-${day}T${heure}:00+00:00`,
         "idMedecin": `api/medecins/${numRpps}`,
-        "idPatient": `api/patients/${patient.num_secu_sociale}`,
+        "idPatient": `api/patients/${numSecuSocial}`,
         "state": "réservé"
     };
 

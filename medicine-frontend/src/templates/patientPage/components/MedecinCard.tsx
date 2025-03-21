@@ -38,7 +38,7 @@ export const MedecinCard = ({ className, medecin, patient }: {className?: string
                 <CardFooter className={"flex flex-col mt-5 gap-3"}>
                     <ContactButton Icon={Phone} href={"tel:+33" + PhoneWithSpace} label={PhoneWithSpace}/>
                     <ContactButton Icon={Mails} href={"mailto:" + medecin?.email} label={medecin?.email}/>
-                    <DialogBookingAppointment patient={patient} numRpps={medecin.numRpps}/>
+                    <DialogBookingAppointment numSecuSocial={patient.num_secu_sociale} numRpps={medecin.numRpps}/>
                 </CardFooter>
             </Card>
         </div>
